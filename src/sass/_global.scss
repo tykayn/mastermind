@@ -1,0 +1,28 @@
+.pion{
+  border-radius: 100%;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  background: $grey;
+  border: solid 5px $black;
+}
+
+.violet{
+  background: $violet;
+}
+.green{
+  background: $green;
+}
+.yellow{
+  background: $yellow;
+}
+.blue{
+  background: $blue;
+}
+.red{
+  background: $red;
+}.white{
+  background: $white;
+}.black{
+  background: $black;
+}

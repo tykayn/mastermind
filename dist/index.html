@@ -31,59 +31,42 @@
 <div class="container" ng-controller="MainCtrl">
     <h1>
         <i class="fa fa-book fa-3x"></i>
-        
+        Mastermind
+        <div class="pull-right">
+            <div class="pion violet"></div>
+            <div class="pion red"></div>
+            <div class="pion yellow"></div>
+            <div class="pion blue"></div>
+            <div class="pion green"></div>
+            <div class="pion white"></div>
+            <div class="pion black"></div>
+        </div>
+
     </h1>
+
+    <hr/>
+    <div class="alert-warning">
+        <div ng-include="'templates/parts/main.html'"></div>
+    </div>
+
+    <!-- Add your site or application content here -->
+    <div class="container" ng-view=""></div>
+
+    <h2 class="btn btn-primary">
+        <i class="fa fa-check-circle"></i>  Let's play</h2>
+
+<div class="row">
     <div class="author">
         <h2>
             {{demo + ' angular works ! '}}
         </h2>
-        made by <a href="http://github.com/tykayn">tykayn</a>
+        made by <a href="http://github.com/tykayn">tykayn</a> with the self made yeoman angular-jeej generator.
         {{demo}}
+        <small>
+            Visit me at <a href="http://twitter.com/tykayn"> <i class="fa fa-twitter"></i> @tykayn</a>
+        </small>
     </div>
-    <hr/>
-    <div ng-include="tpl/main.html"></div>
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
-    <div class="alert alert-info">
 
-        <h2><i class="fa fa-heart fa-2x"></i> This app includes : </h2>
-        Gulp, Angular, coffeescript, jquery, bootstrap, font awesome, commitement to open source.
-        <hr/>
-        <i class="fa fa-diamond fa-2x"></i>
-        karma, jasmine, jslint, uglify, coverall and more.
-    </div>
-    <h2><i class="fa fa-file fa-2x"></i> Getting started:</h2>
-
-    <div class="row">
-        <div class="col-lg-4">
-            <h3 class="text-center">Global use</h3>
-            <ul>
-                <li>run the default <strong>gulp</strong> command.</li>
-                <li>develop only into the src folder </li>
-                <li>deploy what is in the dist folder.</li>
-                <li>neat.</li>
-            </ul>
-        </div>
-        <div class="col-lg-4">
-            <h3 class="text-center">Ease of styling with SASS</h3>
-            <ul>
-                <li>scss splited in a gloabl to specific order, imported into <i>sass/main.scss</i></li>
-                <li>manage your colors, spacing, and other variables in <i>vars.scss</i></li>
-                <li>put your mixins and extendable helpers in <i>extendable.scss</i></li>
-                <li>organise yourself, you are a grown up coder.</li>
-                <li>neat.</li>
-            </ul>
-        </div>
-        <div class="col-lg-4">
-            <h3 class="text-center">Angular testing ready</h3>
-            <ul>
-                <li>yup. Go on, angularize the world</li>
-                <li>documentation made in <i>dist/doc/</i> with javascript comments</li>
-            </ul>
-        </div>
-    </div>
-<div class="row">
-    <small>thanks for using this generator. Visit me at <a href="http://twitter.com/tykayn"> <i class="fa fa-twitter"></i> @tykayn</a> </small>
 </div>
 </div>
 

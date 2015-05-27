@@ -74,15 +74,15 @@ $size-sm : '30em';
   background-color: $background;
 }
 
-/**
-  @while example
-
-  $i: 6;
-  @while $i > 0 {
-    .item-#{$i} { width: 2em * $i; }
-    $i: $i - 2;
-  }
-**/
+///**
+//  @while example
+//
+//  $i: 6;
+//  @while $i > 0 {
+//    .item-#{$i} { width: 2em * $i; }
+//    $i: $i - 2;
+//  }
+//**/
 
 // helpers
 

@@ -25,7 +25,7 @@ var testFiles = [
 var sources = {
     tests: "src/tests/*.js",
     sass: "src/sass/*.scss",
-    html: "src/html/*.html",
+    html: "src/html/**/*.html",
     js: "src/scripts/*.js",
     jsAll: "src/scripts/**/*.js",
     coffee: "src/coffee/*.coffee"
