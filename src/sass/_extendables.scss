@@ -1,0 +1,144 @@
+/**
+ use with @extend
+ percentage sign % are maks of sass's placeholder selectors.
+ they are rendered only if extended.
+ for example :
+ .my-container {
+    @extend %clearfix;
+  }
+**/
+%clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+/**
+  hide elements in an evil way
+**/
+%visuallyhidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+.visually-hidden {
+  @extend %visuallyhidden;
+}
+
+/**
+  to use with @include
+  media query mixin
+**/
+$size-lg : '60em';
+$size-md : '40em';
+$size-sm : '30em';
+
+// defaults are defined
+@mixin mq($min : '40em',$max : '60em') {
+  @media only screen and (min-width: #{$max}) and (max-width: #{$max}) {
+    @content;
+  }
+}
+@mixin mq-large {
+  @media only screen and (max-width: $size-lg) {
+    @content;
+  }
+}
+
+@mixin mq-medium {
+  @media only screen and (max-width: $size-md) {
+    @content;
+  }
+}
+
+@mixin mq-small {
+  @media only screen and (max-width: $size-sm) {
+    @content;
+  }
+}
+
+/**
+  set color and background color in one time
+**/
+@mixin color-and-bg($text, $background) {
+  color: $text;
+  background-color: $background;
+}
+
+/**
+  @while example
+
+  $i: 6;
+  @while $i > 0 {
+    .item-#{$i} { width: 2em * $i; }
+    $i: $i - 2;
+  }
+**/
+
+// helpers
+
+.padded {
+  padding: 1em;
+}
+
+.padded-sm {
+  padding: 0.5em;
+}
+
+// vertical padding only
+.padded-v {
+  padding: 1em 0;
+}
+
+.padded-h {
+  padding: 0 1em;
+}
+.absolutely {
+  position: absolute;
+}
+.block {
+  display: block;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.columned {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+}
+
+// transitions
+.slow-ease {
+  -webkit-transition: all ease 1s;
+  -moz-transition: all ease 1s;
+  -ms-transition: all ease 1s;
+  -o-transition: all ease 1s;
+  transition: all ease 1s;
+}
+.fast-ease {
+  -webkit-transition: all ease 0.4s;
+  -moz-transition: all ease 0.4s;
+  -ms-transition: all ease 0.4s;
+  -o-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+}
+
+.fastest-ease {
+  -webkit-transition: all ease 0s;
+  -moz-transition: all ease 0s;
+  -ms-transition: all ease 0s;
+  -o-transition: all ease 0s;
+  transition: all ease 0s;
+}

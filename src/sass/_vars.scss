@@ -1,0 +1,25 @@
+/**
+  maps are arrays, use it ! remember the @each directive.
+  @each $animal in puma, sea-slug, egret, salamander {
+    .#{$animal}-icon {
+      background-image: url('/images/#{$animal}.png');
+    }
+  }
+  $map: (key1: value1, key2: value2, key3: value3);
+**/
+$my-map: (key1: value1, key2: value2, key3: value3);
+// déclarer les variables ici
+$blue: #337ab7;
+$main-color: rgb(46, 109, 164);
+$grey: #ccc;
+$white: #fff;
+$black: #111;
+$dark: darken(mix($main-color, $grey), 70%);
+$light-main: mix($main-color, $white);
+
+// overrides of libraries vars
+$default: mix($white, $grey);
+$info: mix($main-color, $white);
+$success: mix(#B7FF80,#79bb92);
+$warning: #FFBA10;
+$danger: #CB2738;

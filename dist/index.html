@@ -1,0 +1,107 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <!--<link rel="stylesheet" href="styles/main.css">-->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
+</head>
+<body ng-app="myApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="container" ng-controller="MainCtrl">
+    <h1>
+        <i class="fa fa-book fa-3x"></i>
+        
+    </h1>
+    <div class="author">
+        <h2>
+            {{demo + ' angular works ! '}}
+        </h2>
+        made by <a href="http://github.com/tykayn">tykayn</a>
+        {{demo}}
+    </div>
+    <hr/>
+    <div ng-include="tpl/main.html"></div>
+    <!-- Add your site or application content here -->
+    <div class="container" ng-view=""></div>
+    <div class="alert alert-info">
+
+        <h2><i class="fa fa-heart fa-2x"></i> This app includes : </h2>
+        Gulp, Angular, coffeescript, jquery, bootstrap, font awesome, commitement to open source.
+        <hr/>
+        <i class="fa fa-diamond fa-2x"></i>
+        karma, jasmine, jslint, uglify, coverall and more.
+    </div>
+    <h2><i class="fa fa-file fa-2x"></i> Getting started:</h2>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <h3 class="text-center">Global use</h3>
+            <ul>
+                <li>run the default <strong>gulp</strong> command.</li>
+                <li>develop only into the src folder </li>
+                <li>deploy what is in the dist folder.</li>
+                <li>neat.</li>
+            </ul>
+        </div>
+        <div class="col-lg-4">
+            <h3 class="text-center">Ease of styling with SASS</h3>
+            <ul>
+                <li>scss splited in a gloabl to specific order, imported into <i>sass/main.scss</i></li>
+                <li>manage your colors, spacing, and other variables in <i>vars.scss</i></li>
+                <li>put your mixins and extendable helpers in <i>extendable.scss</i></li>
+                <li>organise yourself, you are a grown up coder.</li>
+                <li>neat.</li>
+            </ul>
+        </div>
+        <div class="col-lg-4">
+            <h3 class="text-center">Angular testing ready</h3>
+            <ul>
+                <li>yup. Go on, angularize the world</li>
+                <li>documentation made in <i>dist/doc/</i> with javascript comments</li>
+            </ul>
+        </div>
+    </div>
+<div class="row">
+    <small>thanks for using this generator. Visit me at <a href="http://twitter.com/tykayn"> <i class="fa fa-twitter"></i> @tykayn</a> </small>
+</div>
+</div>
+
+<!-- build:js scripts/plugins.js -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angularjs/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/**.js -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="js/main.js"></script>
+<!-- endbuild -->
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+</body>
+</html>

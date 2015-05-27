@@ -1,0 +1,42 @@
+
+
+// quand on survole hoverable,
+// on montre hover-show
+.hoverable {
+  .hover-show {
+    opacity: 0;
+    @extend .fast-ease;
+  }
+  &:hover .hover-show {
+    opacity: 1;
+    @extend .fast-ease;
+  }
+}
+
+.revealable {
+  opacity: 0;
+  @extend .fast-ease;
+  &:hover {
+    opacity: 1;
+    @extend .fast-ease;
+  }
+}
+
+.active {
+  .revealable {
+    opacity: 1;
+    color: $white;
+    @extend .fast-ease;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.hover-hl {
+  &:hover {
+    background: mix($dark, $white);
+    color: $white;
+  }
+}
