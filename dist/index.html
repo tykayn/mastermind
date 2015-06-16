@@ -73,8 +73,9 @@
 
                     <div class="text-center" data-toggle="tooltip"
                          data-tooltip="choisissez votre séquence de couleur en cliquant sur les pions">
-                        <div class="pion-line " ng-repeat="c in couleurs track by $index">
-                            <div class=" btn btn-primary pion pull-left {{c}}" ng-click="addColor(c)"></div>
+                        <div class="pion-line " ng-repeat="c in couleurs ">
+                            <div class=" btn btn-primary pion pull-left {{c.color}}" ng-click="addColor(c.color)"></div>
+                            c.color
                         </div>
                     </div>
 
@@ -83,11 +84,13 @@
                 <div class="row">
                     <div data-toggle="tooltip" data-tooltip="enlevez une couleur en cliquant dessus">
                         <button ng-show="sequence.length" class="pull-right btn btn-primary">
-                            <i class="fa  fa-trash " ng-click="sequence=[]"></i> vider
+                            <i class="fa  fa-trash " ng-click="sequence={}"></i> vider
                         </button>
+                        {{sequence}}
                         <div class="clearfix"></div>
-                        <div class="pion-line" ng-repeat="c in sequence track by $index ">
-                            <div class=" btn btn-primary pull-left pion {{c}}" ng-click="deleteColor($index)"></div>
+                        <div class="pion-line" ng-repeat="c in sequence ">
+                            <div class=" btn btn-primary pull-left pion {{c.color}}" ng-click="deleteColor(c.id)"></div>
+                            {{c.color}}
                         </div>
 
                     </div>
@@ -123,11 +126,11 @@
                         <div class="col-lg-2">{{ l.id }}</div>
                         <div class="col-lg-8">
                             <div class="pion-line" ng-repeat="p in l.pions track by $index">
-                                <div class="pull-left pion {{p}}"></div>
+                                <div class="pull-left pion {{p.color}}"></div>
                             </div>
                         </div>
                         <div class="col-lg-2">
-                            <div class="pion-line" ng-repeat="c in result(l.id) track by $index ">
+                            <div class="pion-line" ng-repeat="c in result(l.id) ">
                                 <div class=" btn btn-primary pull-left pion {{c}}"></div>
                             </div>
                         </div>
