@@ -45,15 +45,41 @@
     </h1>
 
     <hr/>
-    <div class="alert-warning">
-        <div ng-include="'templates/parts/main.html'"></div>
-    </div>
+    <!--<div class="row">-->
+        <!--<div ng-include="'tpl/main.html'"></div>-->
+    <!--</div>-->
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            My main template. Included by angular.
+            {{lines}}
 
+            <hr/>
+            construisez votre séquence de couleurs:
+            {{sequence}}
+        </div>
+        <div class="col-lg-9">
+            <ul>
+                <li ng-repeat="l in lines ">
+                    <div class="row">
+                        <div class="col-lg-2">{{ l.id }}</div>
+                        <div class="col-lg-8">
+                            <div class="pion-line"  ng-repeat="p in l.pions">
+                                <div class="pull-left pion {{p.color}}"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">result{{ result(l.id) }}</div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
     <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
 
     <h2 class="btn btn-primary">
-        <i class="fa fa-check-circle"></i>  Let's play</h2>
+        <i class="fa fa-check-circle"></i>  Let's play
+    </h2>
 
 <div class="row">
     <div class="author">
