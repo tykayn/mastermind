@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d49b8da-817b-4631-80fa-ed4a0955c428" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/js/main.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sass/_global.scss" afterPath="$PROJECT_DIR$/src/sass/_global.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sass/_pages.scss" afterPath="$PROJECT_DIR$/src/sass/_pages.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" afterPath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/index.html" afterPath="$PROJECT_DIR$/src/html/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coffee/main.coffee" afterPath="$PROJECT_DIR$/src/coffee/main.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/main.css" afterPath="$PROJECT_DIR$/dist/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tpl/main.html" afterPath="$PROJECT_DIR$/dist/tpl/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/tpl/main.html" afterPath="$PROJECT_DIR$/src/html/tpl/main.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/main.js" afterPath="$PROJECT_DIR$/dist/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mastermind.iws" />
@@ -41,11 +35,11 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/html/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21621622" vertical-offset="1312" max-vertical-offset="3872">
-              <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.6756757" vertical-offset="1984" max-vertical-offset="4960">
+              <caret line="87" column="22" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
               <folding>
-                <marker date="1434483315967" expanded="true" signature="1072:1225" placeholder="..." />
-                <marker date="1434483315967" expanded="true" signature="1165:1193" placeholder="..." />
+                <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
+                <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -54,9 +48,21 @@
       <file leaf-file-name="main.coffee" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.24" vertical-offset="0" max-vertical-offset="1568">
-              <caret line="8" column="17" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="17" />
+            <state vertical-scroll-proportion="-38.84" vertical-offset="309" max-vertical-offset="2080">
+              <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="14" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1728">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding>
+                <marker date="1434485077895" expanded="true" signature="1088:1112" placeholder="{&quot;id&quot;: 10...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,8 +116,8 @@
         <option value="$PROJECT_DIR$/src/html/tpl/main.html" />
         <option value="$PROJECT_DIR$/src/sass/_global.scss" />
         <option value="$PROJECT_DIR$/src/sass/_pages.scss" />
-        <option value="$PROJECT_DIR$/src/html/index.html" />
         <option value="$PROJECT_DIR$/src/coffee/main.coffee" />
+        <option value="$PROJECT_DIR$/src/html/index.html" />
       </list>
     </option>
   </component>
@@ -370,13 +376,20 @@
       <option name="project" value="LOCAL" />
       <updated>1432747006970</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="lignes et fonctions sur la séquence de pions">
+      <created>1434483543725</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1434483543725</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="2560" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -395,7 +408,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991317" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24979822" sideWeight="0.20584653" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33736885" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -419,7 +431,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="gulp works" />
-    <option name="LAST_COMMIT_MESSAGE" value="gulp works" />
+    <MESSAGE value="lignes et fonctions sur la séquence de pions" />
+    <option name="LAST_COMMIT_MESSAGE" value="lignes et fonctions sur la séquence de pions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -431,8 +444,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1216" max-vertical-offset="3040">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
-            <marker date="1434483315967" expanded="true" signature="1072:1225" placeholder="..." />
-            <marker date="1434483315967" expanded="true" signature="1165:1193" placeholder="..." />
+            <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
+            <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -514,8 +527,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1216" max-vertical-offset="3040">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
-            <marker date="1434483315967" expanded="true" signature="1072:1225" placeholder="..." />
-            <marker date="1434483315967" expanded="true" signature="1165:1193" placeholder="..." />
+            <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
+            <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -731,8 +744,8 @@
         <state vertical-scroll-proportion="-0.8918919" vertical-offset="1056" max-vertical-offset="3040">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1434483316079" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1434483316079" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434485172939" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434485172939" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -793,21 +806,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1728">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <marker date="1434485077895" expanded="true" signature="1088:1112" placeholder="{&quot;id&quot;: 10...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.24" vertical-offset="0" max-vertical-offset="1568">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="17" />
+        <state vertical-scroll-proportion="-38.84" vertical-offset="309" max-vertical-offset="2080">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/html/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21621622" vertical-offset="1312" max-vertical-offset="3872">
-          <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.6756757" vertical-offset="1984" max-vertical-offset="4960">
+          <caret line="87" column="22" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
           <folding>
-            <marker date="1434483315967" expanded="true" signature="1072:1225" placeholder="..." />
-            <marker date="1434483315967" expanded="true" signature="1165:1193" placeholder="..." />
+            <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
+            <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
           </folding>
         </state>
       </provider>

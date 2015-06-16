@@ -1,10 +1,33 @@
 (function() {
   angular.module("myApp", []).controller("MainCtrl", function($rootScope, $scope) {
     $scope.demo = 'WOHOOO';
-    $scope.line = [];
-    return $scope.lines = [
-      {
-        id: 0,
+    $scope.sequence = [];
+    $scope.sequenceAdverse = ['yellow', 'violet', 'green', 'green', 'red'];
+    $scope.addSequence = function() {
+      var obj;
+      obj = {
+        id: $scope.lines.length,
+        pions: [].concat($scope.sequence)
+      };
+      return $scope.lines.push(obj);
+    };
+    $scope.addColor = function(color) {
+      if ($scope.sequence > 4) {
+        $scope.sequence.splice(1, 1);
+      }
+      return $scope.sequence.push(color);
+    };
+    $scope.deleteColor = function(index) {
+      return $scope.sequence.splice(index, 1);
+    };
+    $scope.couleurs = ['yellow', 'violet', 'green', 'blue', 'red'];
+
+    /*
+    évaluer la séquence
+    et donner ses stats de réponse
+     */
+    $scope.result = function(id) {
+      return {
         pions: [
           {
             color: 'yellow'
@@ -14,42 +37,12 @@
             color: 'violet'
           }, {
             color: 'violet'
-          }, {
-            color: 'violet'
           }
         ]
-      }, {
-        id: 1,
-        pions: []
-      }, {
-        id: 2,
-        pions: []
-      }, {
-        id: 3,
-        pions: []
-      }, {
-        id: 4,
-        pions: []
-      }, {
-        id: 5,
-        pions: []
-      }, {
-        id: 6,
-        pions: []
-      }, {
-        id: 7,
-        pions: []
-      }, {
-        id: 8,
-        pions: []
-      }, {
-        id: 9,
-        pions: []
-      }, {
-        id: 10,
-        pions: []
-      }
-    ];
+      };
+    };
+    $scope.line = [];
+    return $scope.lines = [];
   });
 
 }).call(this);

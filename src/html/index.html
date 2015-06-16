@@ -45,26 +45,61 @@
     </h1>
 
     <hr/>
-    <!--<div class="row">-->
-        <!--<div ng-include="'tpl/main.html'"></div>-->
-    <!--</div>-->
+
     <div class="row-fluid">
         <div class="col-lg-3">
             My main template. Included by angular.
-            {{lines}}
+            <!--{{lines}}-->
 
             <hr/>
-            construisez votre séquence de couleurs:
-            {{sequence}}
+            <h2>debug</h2>
+            séquence à trouver:
+            <div class="row" data-toggle="tooltip">
+                <div class="pion-line" ng-repeat="c in sequenceAdverse track by $index">
+                    <div class=" btn btn-primary pull-left pion {{c}}"></div>
+                </div>
+            </div>
+            <div class="row">
+                <h2>à vous de jouer</h2>
+                construisez votre séquence de couleurs:
+                <hr/>
+                <div class="row">
+
+
+                    <div data-toggle="tooltip"
+                         data-tooltip="choisissez votre séquence de couleur en cliquant sur les pions">
+                        <div class="pion-line" ng-repeat="c in couleurs track by $index">
+                            <div class=" btn btn-primary pull-left pion {{c}}" ng-click="addColor(c)"></div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                </div>
+                <div class="row">
+                    <div data-toggle="tooltip" data-tooltip="enlevez une couleur en cliquant dessus">
+                        <div class="pion-line" ng-repeat="c in sequence track by $index ">
+                            <div class=" btn btn-primary pull-left pion {{c}}" ng-click="deleteColor($index)"></div>
+                        </div>
+                        <i class="fa btn btn-primary fa-trash" ng-click="sequence=[]"></i>
+                    </div>
+                    <h2 class="btn btn-primary" ng-click="addSequence()">
+                        <i class="fa fa-check-circle"></i> valider
+                    </h2>
+                    {{sequence.length}}
+                </div>
+
+            </div>
+
         </div>
         <div class="col-lg-9">
+            <h2>{{lines.length}} Essais sur 10</h2>
             <ul>
                 <li ng-repeat="l in lines ">
                     <div class="row">
                         <div class="col-lg-2">{{ l.id }}</div>
                         <div class="col-lg-8">
                             <div class="pion-line"  ng-repeat="p in l.pions">
-                                <div class="pull-left pion {{p.color}}"></div>
+                                <div class="pull-left pion {{p}}"></div>
                             </div>
                         </div>
                         <div class="col-lg-2">result{{ result(l.id) }}</div>
