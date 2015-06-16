@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d49b8da-817b-4631-80fa-ed4a0955c428" name="Default" comment="">
+    <list default="true" id="4d49b8da-817b-4631-80fa-ed4a0955c428" name="Default" comment="séquence de pions adverse affichée en debug">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sass/_overrides.scss" afterPath="$PROJECT_DIR$/src/sass/_overrides.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" afterPath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/index.html" afterPath="$PROJECT_DIR$/src/html/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coffee/main.coffee" afterPath="$PROJECT_DIR$/src/coffee/main.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/main.css" afterPath="$PROJECT_DIR$/dist/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/main.js" afterPath="$PROJECT_DIR$/dist/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -32,24 +34,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/html/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6756757" vertical-offset="1984" max-vertical-offset="4960">
-              <caret line="87" column="22" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
+            <state vertical-scroll-proportion="-11.194445" vertical-offset="1741" max-vertical-offset="5728">
+              <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
               <folding>
-                <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
-                <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
+                <marker date="1434486411167" expanded="true" signature="1072:1225" placeholder="..." />
+                <marker date="1434486411167" expanded="true" signature="1165:1193" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.coffee" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-38.84" vertical-offset="309" max-vertical-offset="2080">
-              <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.48200837" vertical-offset="0" max-vertical-offset="1760">
+              <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -58,10 +60,10 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1728">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="160" max-vertical-offset="1856">
+              <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
               <folding>
-                <marker date="1434485077895" expanded="true" signature="1088:1112" placeholder="{&quot;id&quot;: 10...}" />
+                <marker date="1434486509803" expanded="true" signature="571:601" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -97,6 +99,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="_overrides.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sass/_overrides.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.8888889" vertical-offset="0" max-vertical-offset="256">
+              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -116,8 +128,10 @@
         <option value="$PROJECT_DIR$/src/html/tpl/main.html" />
         <option value="$PROJECT_DIR$/src/sass/_global.scss" />
         <option value="$PROJECT_DIR$/src/sass/_pages.scss" />
-        <option value="$PROJECT_DIR$/src/coffee/main.coffee" />
+        <option value="$PROJECT_DIR$/src/sass/_overrides.scss" />
         <option value="$PROJECT_DIR$/src/html/index.html" />
+        <option value="$PROJECT_DIR$/dist/js/main.js" />
+        <option value="$PROJECT_DIR$/src/coffee/main.coffee" />
       </list>
     </option>
   </component>
@@ -148,8 +162,8 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
+      <autoscrollToSource ProjectPane="true" />
+      <autoscrollFromSource ProjectPane="true" />
       <sortByType />
     </navigator>
     <panes>
@@ -382,7 +396,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434483543725</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="séquence de pions adverse affichée en debug">
+      <created>1434485249631</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1434485249631</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -427,12 +447,17 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
     <MESSAGE value="gulp works" />
     <MESSAGE value="lignes et fonctions sur la séquence de pions" />
-    <option name="LAST_COMMIT_MESSAGE" value="lignes et fonctions sur la séquence de pions" />
+    <MESSAGE value="séquence de pions adverse affichée en debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="séquence de pions adverse affichée en debug" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -444,8 +469,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1216" max-vertical-offset="3040">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
-            <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
-            <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
+            <marker date="1434486411167" expanded="true" signature="1072:1225" placeholder="..." />
+            <marker date="1434486411167" expanded="true" signature="1165:1193" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -527,8 +552,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1216" max-vertical-offset="3040">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
-            <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
-            <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
+            <marker date="1434486411167" expanded="true" signature="1072:1225" placeholder="..." />
+            <marker date="1434486411167" expanded="true" signature="1165:1193" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -715,14 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sass/_overrides.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1220">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sass/main.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1220">
@@ -744,8 +761,8 @@
         <state vertical-scroll-proportion="-0.8918919" vertical-offset="1056" max-vertical-offset="3040">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1434485172939" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1434485172939" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434486411267" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434486411267" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -782,14 +799,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sass/_global.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="1056">
-          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sass/_pages.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.5555556" vertical-offset="0" max-vertical-offset="384">
@@ -806,32 +815,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/js/main.js">
+    <entry file="file://$PROJECT_DIR$/src/sass/_global.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1728">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <marker date="1434485077895" expanded="true" signature="1088:1112" placeholder="{&quot;id&quot;: 10...}" />
-          </folding>
+        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="1056">
+          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
+    <entry file="file://$PROJECT_DIR$/src/sass/_overrides.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.84" vertical-offset="309" max-vertical-offset="2080">
-          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="14" />
+        <state vertical-scroll-proportion="-0.8888889" vertical-offset="0" max-vertical-offset="256">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/html/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6756757" vertical-offset="1984" max-vertical-offset="4960">
-          <caret line="87" column="22" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
+        <state vertical-scroll-proportion="-11.194445" vertical-offset="1741" max-vertical-offset="5728">
+          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
           <folding>
-            <marker date="1434485172887" expanded="true" signature="1072:1225" placeholder="..." />
-            <marker date="1434485172887" expanded="true" signature="1165:1193" placeholder="..." />
+            <marker date="1434486411167" expanded="true" signature="1072:1225" placeholder="..." />
+            <marker date="1434486411167" expanded="true" signature="1165:1193" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="160" max-vertical-offset="1856">
+          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding>
+            <marker date="1434486509803" expanded="true" signature="571:601" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48200837" vertical-offset="0" max-vertical-offset="1760">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>

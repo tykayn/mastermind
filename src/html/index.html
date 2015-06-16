@@ -43,7 +43,9 @@
         </div>
 
     </h1>
-
+    <h2 class="btn btn-primary">
+        <i class="fa fa-check-circle"></i> Let's play
+    </h2>
     <hr/>
 
     <div class="row-fluid">
@@ -52,24 +54,27 @@
             <!--{{lines}}-->
 
             <hr/>
-            <h2>debug</h2>
-            séquence à trouver:
-            <div class="row" data-toggle="tooltip">
-                <div class="pion-line" ng-repeat="c in sequenceAdverse track by $index">
-                    <div class=" btn btn-primary pull-left pion {{c}}"></div>
+            <div class="well">
+                <h2>debug</h2>
+                séquence à trouver:
+                <div class="row" data-toggle="tooltip">
+                    <div class="pion-line" ng-repeat="c in sequenceAdverse track by $index">
+                        <div class=" btn btn-primary pull-left pion {{c}}"></div>
+                    </div>
                 </div>
             </div>
+
             <div class="row">
-                <h2>à vous de jouer</h2>
-                construisez votre séquence de couleurs:
+                <h2 class="btn btn-primary" ng-click="populateSequence()">à vous de jouer</h2>
+                construisez votre séquence de couleurs en cliquant sur les pions disponibles:
                 <hr/>
-                <div class="row">
+                <div class="row-fluid ">
 
 
-                    <div data-toggle="tooltip"
+                    <div class="text-center" data-toggle="tooltip"
                          data-tooltip="choisissez votre séquence de couleur en cliquant sur les pions">
-                        <div class="pion-line" ng-repeat="c in couleurs track by $index">
-                            <div class=" btn btn-primary pull-left pion {{c}}" ng-click="addColor(c)"></div>
+                        <div class="pion-line " ng-repeat="c in couleurs track by $index">
+                            <div class=" btn btn-primary pion pull-left {{c}}" ng-click="addColor(c)"></div>
                         </div>
                     </div>
 
@@ -77,58 +82,76 @@
                 </div>
                 <div class="row">
                     <div data-toggle="tooltip" data-tooltip="enlevez une couleur en cliquant dessus">
+                        <button ng-show="sequence.length" class="pull-right btn btn-primary">
+                            <i class="fa  fa-trash " ng-click="sequence=[]"></i> vider
+                        </button>
+                        <div class="clearfix"></div>
                         <div class="pion-line" ng-repeat="c in sequence track by $index ">
                             <div class=" btn btn-primary pull-left pion {{c}}" ng-click="deleteColor($index)"></div>
                         </div>
-                        <i class="fa btn btn-primary fa-trash" ng-click="sequence=[]"></i>
+
                     </div>
-                    <h2 class="btn btn-primary" ng-click="addSequence()">
-                        <i class="fa fa-check-circle"></i> valider
-                    </h2>
-                    {{sequence.length}}
+
                 </div>
+                <div class="clearfix"></div>
+                <div class="alert alert-info" ng-show="sequence.length < 5"> il faut choisir 5 pions pour valider la
+                    séquence
+                </div>
+                <h2 ng-hide="sequence.length < 5" class="btn btn-success" ng-click="addSequence()">
+                    <i class="fa fa-check-circle"></i> valider
+                </h2>
 
             </div>
 
         </div>
         <div class="col-lg-9">
             <h2>{{lines.length}} Essais sur 10</h2>
-            <ul>
+            <ul class="unstyled">
+                <li>
+                    <div class="row">
+                        <div class="col-lg-2">Essai</div>
+                        <div class="col-lg-8">
+                            Séquence
+                        </div>
+                        <div class="col-lg-2">
+                            Résultat
+                        </div>
+                    </div>
+                </li>
                 <li ng-repeat="l in lines ">
                     <div class="row">
                         <div class="col-lg-2">{{ l.id }}</div>
                         <div class="col-lg-8">
-                            <div class="pion-line"  ng-repeat="p in l.pions">
+                            <div class="pion-line" ng-repeat="p in l.pions track by $index">
                                 <div class="pull-left pion {{p}}"></div>
                             </div>
                         </div>
-                        <div class="col-lg-2">result{{ result(l.id) }}</div>
+                        <div class="col-lg-2">
+                            <div class="pion-line" ng-repeat="c in result(l.id) track by $index ">
+                                <div class=" btn btn-primary pull-left pion {{c}}"></div>
+                            </div>
+                        </div>
                     </div>
 
                 </li>
             </ul>
         </div>
     </div>
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
 
-    <h2 class="btn btn-primary">
-        <i class="fa fa-check-circle"></i>  Let's play
-    </h2>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="author">
+            <h2>
+                {{demo + ' angular works ! '}}
+            </h2>
+            made by <a href="http://github.com/tykayn">tykayn</a> with the self made yeoman angular-jeej generator.
+            {{demo}}
+            <small>
+                Visit me at <a href="http://twitter.com/tykayn"> <i class="fa fa-twitter"></i> @tykayn</a>
+            </small>
+        </div>
 
-<div class="row">
-    <div class="author">
-        <h2>
-            {{demo + ' angular works ! '}}
-        </h2>
-        made by <a href="http://github.com/tykayn">tykayn</a> with the self made yeoman angular-jeej generator.
-        {{demo}}
-        <small>
-            Visit me at <a href="http://twitter.com/tykayn"> <i class="fa fa-twitter"></i> @tykayn</a>
-        </small>
     </div>
-
-</div>
 </div>
 
 <!-- build:js scripts/plugins.js -->
