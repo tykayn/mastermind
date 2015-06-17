@@ -74,8 +74,8 @@
                     <div class="text-center" data-toggle="tooltip"
                          data-tooltip="choisissez votre séquence de couleur en cliquant sur les pions">
                         <div class="pion-line " ng-repeat="c in couleurs ">
-                            <div class=" btn btn-primary pion pull-left {{c.color}}" ng-click="addColor(c.color)"></div>
-                            c.color
+                            <div class=" btn btn-primary pion pull-left {{c}}" ng-click="addColor(c)"></div>
+                            <!--{{c}}-->
                         </div>
                     </div>
 
@@ -86,21 +86,22 @@
                         <button ng-show="sequence.length" class="pull-right btn btn-primary">
                             <i class="fa  fa-trash " ng-click="sequence={}"></i> vider
                         </button>
+	                    <div class="clearfix"></div>
                         {{sequence}}
                         <div class="clearfix"></div>
                         <div class="pion-line" ng-repeat="c in sequence ">
                             <div class=" btn btn-primary pull-left pion {{c.color}}" ng-click="deleteColor(c.id)"></div>
-                            {{c.color}}
+
                         </div>
 
                     </div>
 
                 </div>
                 <div class="clearfix"></div>
-                <div class="alert alert-info" ng-show="sequence.length < 5"> il faut choisir 5 pions pour valider la
+                <div class="alert alert-info" ng-show="sequence.length < 4"> il faut choisir 4 pions pour valider la
                     séquence
                 </div>
-                <h2 ng-hide="sequence.length < 5" class="btn btn-success" ng-click="addSequence()">
+                <h2 ng-hide="sequence.length < 4" class="btn btn-success" ng-click="addSequence()">
                     <i class="fa fa-check-circle"></i> valider
                 </h2>
 
@@ -131,7 +132,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="pion-line" ng-repeat="c in result(l.id) ">
-                                <div class=" btn btn-primary pull-left pion {{c}}"></div>
+                                <div class=" btn btn-primary pull-left pion {{c.color}}"></div>
                             </div>
                         </div>
                     </div>

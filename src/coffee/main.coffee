@@ -6,19 +6,20 @@ angular.module "myApp", []
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
-  $scope.sequenceAdverse = [{id: 0, color: 'yellow'}, {id: 0, color: 'yellow'}]
+  $scope.sequenceAdverse = [{id: 0, color: 'blue'}, {id: 1, color: 'yellow'}, {id: 2, color: 'red'}, {id: 3, color: 'green'}]
   #  $scope.sequenceAdverse = []
 
   # ajouter à la séquence
   # TODO débug de cycle de digest
   $scope.addSequence = ()->
     console.log('add sequence')
-    lespions = []
-    i = 0
+#    lespions = []
+    lespions = angular.copy($scope.sequence)
     lengthLines = $scope.lines.length
-    for o in $scope.sequence
-      lespions[i] = o
-      i++
+#    i = 0
+#    for o in $scope.sequence
+#      lespions[i] = o
+#      i++
     obj =
       id: lengthLines
       pions: lespions
@@ -28,7 +29,7 @@ angular.module "myApp", []
 
   # ajouter à la séquence
   $scope.populateSequence = ()->
-    $scope.sequence = [{id: 0, color: 'yellow'}, {id: 0, color: 'yellow'}]
+    $scope.sequence = [{id: 0, color: 'blue'}, {id: 1, color: 'yellow'}, {id: 2, color: 'red'}, {id: 3, color: 'green'}]
   #    $scope.sequence = []
 
 
@@ -36,7 +37,13 @@ angular.module "myApp", []
     # si y'a déjà 5 couleurs, enlever la première
     if($scope.sequence.length > 4)
       $scope.sequence.splice(1, 1)
-    $scope.sequence.push({id: $scope.sequence.length, color: color})
+    #changer les id précédents
+    newId = 0
+    for pion in $scope.sequence
+      pion.id = newId
+      newId++
+    newId++
+    $scope.sequence.push({id: newId, color: color})
   # enlever à la séquence
   $scope.deleteColor = (index)->
     $scope.sequence.splice(index, 1)

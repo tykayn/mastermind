@@ -4,25 +4,24 @@
     $scope.sequence = [];
     $scope.sequenceAdverse = [
       {
-        id   : 0,
+        id: 0,
+        color: 'blue'
+      }, {
+        id: 1,
         color: 'yellow'
       }, {
-        id   : 0,
-        color: 'yellow'
+        id: 2,
+        color: 'red'
+      }, {
+        id: 3,
+        color: 'green'
       }
     ];
     $scope.addSequence = function() {
-      var i, j, len, lengthLines, lespions, o, obj, ref;
+      var lengthLines, lespions, obj;
       console.log('add sequence');
-      lespions = [];
-      i = 0;
+      lespions = angular.copy($scope.sequence);
       lengthLines = $scope.lines.length;
-      ref = $scope.sequence;
-      for (j = 0, len = ref.length; j < len; j++) {
-        o = ref[j];
-        lespions[i] = o;
-        i++;
-      }
       obj = {
         id: lengthLines,
         pions: lespions
@@ -34,20 +33,35 @@
     $scope.populateSequence = function() {
       return $scope.sequence = [
         {
-          id   : 0,
+          id: 0,
+          color: 'blue'
+        }, {
+          id: 1,
           color: 'yellow'
         }, {
-          id   : 0,
-          color: 'yellow'
+          id: 2,
+          color: 'red'
+        }, {
+          id: 3,
+          color: 'green'
         }
       ];
     };
     $scope.addColor = function(color) {
+      var i, len, newId, pion, ref;
       if ($scope.sequence.length > 4) {
         $scope.sequence.splice(1, 1);
       }
+      newId = 0;
+      ref = $scope.sequence;
+      for (i = 0, len = ref.length; i < len; i++) {
+        pion = ref[i];
+        pion.id = newId;
+        newId++;
+      }
+      newId++;
       return $scope.sequence.push({
-        id   : $scope.sequence.length,
+        id: newId,
         color: color
       });
     };
@@ -59,7 +73,7 @@
     /*
     évaluer la séquence
     et donner ses stats de réponse
-     TODO
+    TODO
      */
     $scope.result = function(id) {
       return {
