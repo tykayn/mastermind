@@ -6,20 +6,22 @@ angular.module "myApp", []
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
-  $scope.sequenceAdverse = [{id: 0, color: 'blue'}, {id: 1, color: 'yellow'}, {id: 2, color: 'red'}, {id: 3, color: 'green'}]
+  $scope.sequenceAdverse = [{id: 0, color: 'blue'},
+    {id: 1, color: 'yellow'},
+    {id: 2, color: 'red'},
+    {id: 3, color: 'green'}]
   #  $scope.sequenceAdverse = []
 
   # ajouter à la séquence
   # TODO débug de cycle de digest
   $scope.addSequence = ()->
     console.log('add sequence')
-#    lespions = []
+    #    lespions = []
     lespions = angular.copy($scope.sequence)
+    goods = $scope.evaluate(lespions)
     lengthLines = $scope.lines.length
-#    i = 0
-#    for o in $scope.sequence
-#      lespions[i] = o
-#      i++
+
+    $scope.result[lengthLines] = goods
     obj =
       id: lengthLines
       pions: lespions
@@ -35,7 +37,7 @@ angular.module "myApp", []
 
   $scope.addColor = (color)->
     # si y'a déjà 5 couleurs, enlever la première
-    if($scope.sequence.length > 4)
+    if($scope.sequence.length > 3)
       $scope.sequence.splice(1, 1)
     #changer les id précédents
     newId = 0
@@ -57,8 +59,16 @@ angular.module "myApp", []
   et donner ses stats de réponse
   TODO
   ###
-  $scope.result = (id)->
-    pions: ['white', 'white', 'black', 'black']
+  $scope.evaluate = (sequence)->
+    goods = 0
+    for(elem in sequence)
+      if($scope.toFind.indexOf(sequence[elem]) )
+        goods++
+    console.log('goods' , goods)
+    goods
+#    if(goods)
+#      for()
+#    pions: ['white', 'white', 'black', 'black']
   $scope.line = []
   $scope.lines = []
-#    console.log('impressig!')
+#    console.log('impressing!')

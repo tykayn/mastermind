@@ -87,7 +87,7 @@
                             <i class="fa  fa-trash " ng-click="sequence={}"></i> vider
                         </button>
 	                    <div class="clearfix"></div>
-                        {{sequence}}
+                        <!--{{sequence}}-->
                         <div class="clearfix"></div>
                         <div class="pion-line" ng-repeat="c in sequence ">
                             <div class=" btn btn-primary pull-left pion {{c.color}}" ng-click="deleteColor(c.id)"></div>
@@ -131,8 +131,9 @@
                             </div>
                         </div>
                         <div class="col-lg-2">
-                            <div class="pion-line" ng-repeat="c in result(l.id) ">
-                                <div class=" btn btn-primary pull-left pion {{c.color}}"></div>
+                            <div class="pion-line" ng-repeat="r in result">
+                                <div class=" btn btn-primary pull-left pion {{r}}"></div>
+                                {{r}}
                             </div>
                         </div>
                     </div>

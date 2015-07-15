@@ -49,7 +49,7 @@
     };
     $scope.addColor = function(color) {
       var i, len, newId, pion, ref;
-      if ($scope.sequence.length > 4) {
+      if ($scope.sequence.length > 3) {
         $scope.sequence.splice(1, 1);
       }
       newId = 0;
