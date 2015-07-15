@@ -1,5 +1,9 @@
 (function() {
   angular.module("myApp", []).controller("MainCtrl", function($rootScope, $scope) {
+    var conf;
+    conf = {
+      turns: 10
+    };
     $scope.demo = 'WOHOOO';
 
     /*
@@ -19,14 +23,12 @@
       console.log('goods', goods);
       for (j = 0, len = sequence.length; j < len; j++) {
         elem = sequence[j];
-        console.log('elem', elem);
         if ($scope.sequenceAdverse[i] === elem.color) {
           goods++;
         }
         if ($scope.sequenceAdverse.indexOf(elem.color)) {
           nearly++;
         }
-        console.log('goods', goods);
         i++;
       }
       return {
@@ -36,10 +38,10 @@
     };
     $scope.sequence = [];
     $scope.sequenceAdverse = ["blue", "yellow", "red", "green"];
-    $scope.addSequence = function() {
+    $scope.addSequence = function(sequence) {
       var goods, lengthLines, lespions, obj;
       console.log('add sequence');
-      lespions = angular.copy($scope.sequence);
+      lespions = angular.copy(sequence);
       goods = $scope.evaluate(lespions);
       lengthLines = $scope.lines.length;
       $scope.result[lengthLines] = goods;
@@ -51,6 +53,26 @@
       $scope.lines.push(obj);
       console.log('lines après', $scope.lines);
       return goods = $scope.evaluate(lespions);
+    };
+    $scope.addRandomSequence = function() {
+      var seq;
+      seq = $scope.randomSequence();
+      $scope.addSequence(seq);
+      return seq;
+    };
+    $scope.randomSequence = function() {
+      var i, j, obj, randomColor, randomNb, tab;
+      tab = [];
+      for (i = j = 0; j <= 4; i = ++j) {
+        randomNb = Math.random(0, $scope.couleurs.length);
+        randomColor = angular.copy($scope.couleurs[randomNb]);
+        obj = {
+          id: i,
+          color: randomColor
+        };
+        tab.push(obj);
+      }
+      return tab;
     };
     $scope.populateSequence = function() {
       return $scope.sequence = [

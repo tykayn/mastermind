@@ -1,6 +1,10 @@
 # main module
 angular.module "myApp", []
 .controller "MainCtrl", ($rootScope, $scope)->
+
+  conf = {
+    turns : 10
+  }
 #    console.log('MainCtrl launched')
   $scope.demo = 'WOHOOO'
   ###
@@ -17,12 +21,12 @@ angular.module "myApp", []
     i=0
     console.log('goods' , goods)
     for elem in sequence
-      console.log('elem',elem)
+#      console.log('elem',elem)
       if($scope.sequenceAdverse[i] is elem.color)
         goods++
       if($scope.sequenceAdverse.indexOf(elem.color) )
         nearly++
-      console.log('goods' , goods)
+#      console.log('goods' , goods)
       i++
     {goods:goods,
     nearly:nearly}
@@ -32,11 +36,9 @@ angular.module "myApp", []
   $scope.sequenceAdverse = ["blue","yellow","red","green"]
 
   # ajouter à la séquence
-  # TODO débug de cycle de digest
-  $scope.addSequence = ()->
+  $scope.addSequence = (sequence)->
     console.log('add sequence')
-    #    lespions = []
-    lespions = angular.copy($scope.sequence)
+    lespions = angular.copy(sequence)
     goods = $scope.evaluate(lespions)
     lengthLines = $scope.lines.length
 
@@ -48,6 +50,22 @@ angular.module "myApp", []
     $scope.lines.push(obj)
     console.log('lines après', $scope.lines)
     goods = $scope.evaluate(lespions)
+
+  # ajouter une séquence au hasard
+  $scope.addRandomSequence = ()->
+    seq = $scope.randomSequence()
+    $scope.addSequence( seq )
+    seq
+
+  # faire une séquence au hasard
+  $scope.randomSequence = ()->
+    tab = []
+    for i in [0..4]
+      randomNb = Math.random(0, $scope.couleurs.length)
+      randomColor = angular.copy($scope.couleurs[randomNb])
+      obj = {id: i, color: randomColor}
+      tab.push(obj)
+    tab
 
   # ajouter à la séquence
   $scope.populateSequence = ()->

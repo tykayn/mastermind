@@ -92,7 +92,7 @@ gulp.task("hello", function () {
 });
 gulp.task('browser-sync', function () {
     return browserSync.init(null, {
-        open: false,
+        open: true,
         server: {
             baseDir: "./dist"
         }
@@ -119,7 +119,7 @@ gulp.task("coffee2js", function () {
 gulp.task('watch', function () {
     gulp.watch(sources.tests, ['test']);
     gulp.watch(sources.sass, ['sass2css']);
-    gulp.watch(sources.html, ['html']);
+    gulp.watch(sources.htmls, ['html']);
     gulp.watch(sources.coffee, ['coffee2js', 'doc', 'test']);
     gulp.watch(sources.js, ['doc']);
 
