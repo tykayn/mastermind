@@ -50,12 +50,13 @@
 
     <div class="row-fluid">
         <div class="col-lg-3">
-            My main template. Included by angular.
+            <div ng-include="'tpl/menu.html'"></div>
+
             <!--{{lines}}-->
 
             <hr/>
             <div class="well">
-                <h2>debug</h2>
+                <h2>debug </h2>
                 séquence à trouver:
                 <div class="row" data-toggle="tooltip">
                     <div class="pion-line" ng-repeat="c in sequenceAdverse track by $index">
@@ -110,6 +111,9 @@
         </div>
         <div class="col-lg-9">
             <h2>{{lines.length}} Essais sur 10</h2>
+            <!--<div class="well">-->
+                <!--result {{result}}-->
+            <!--</div>-->
             <ul class="unstyled">
                 <li>
                     <div class="row">
@@ -122,7 +126,7 @@
                         </div>
                     </div>
                 </li>
-                <li ng-repeat="l in lines ">
+                <li ng-repeat="l in lines track by $index">
                     <div class="row">
                         <div class="col-lg-2">{{ l.id }}</div>
                         <div class="col-lg-8">
@@ -131,9 +135,10 @@
                             </div>
                         </div>
                         <div class="col-lg-2">
-                            <div class="pion-line" ng-repeat="r in result">
-                                <div class=" btn btn-primary pull-left pion {{r}}"></div>
-                                {{r}}
+                            <div class="pion-line">
+                                <div class=" btn btn-primary pull-left pion {{results[$index]}}"></div>
+                                {{results[$index].nearly}} ; {{results[$index].goods}}
+
                             </div>
                         </div>
                     </div>

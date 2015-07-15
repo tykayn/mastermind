@@ -25,17 +25,25 @@ var testFiles = [
 var sources = {
     tests: "src/tests/*.js",
     sass: "src/sass/*.scss",
-    html: "src/html/**/*.html",
+    html: "src/html/*.html",
+    htmls: "src/html/**/*.html",
     js: "src/scripts/*.js",
     jsAll: "src/scripts/**/*.js",
     coffee: "src/coffee/*.coffee"
 };
 var destinations = {
     sass: "dist/css/",
-    html: "dist/html/",
+    html: "dist/",
     coffee: "dist/coffee/",
     doc: "dist/doc/"
 };
+
+gulp.task("html", function () {
+    console.log("html was changed");
+    gulp.src([sources.html, sources.htmls])
+        .pipe(gulp.dest(destinations.html))
+        .pipe(reload({stream: true}));
+});
 
 /**
  * Run test once and exit
@@ -89,12 +97,6 @@ gulp.task('browser-sync', function () {
             baseDir: "./dist"
         }
     });
-});
-gulp.task("html", function () {
-    console.log("html was changed");
-    gulp.src("./src/html/*.html")
-        .pipe(gulp.dest("./dist/"))
-        .pipe(reload({stream: true}));
 });
 gulp.task("sass2css", function () {
     console.log("style was changed");

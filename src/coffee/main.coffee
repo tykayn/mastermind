@@ -3,14 +3,33 @@ angular.module "myApp", []
 .controller "MainCtrl", ($rootScope, $scope)->
 #    console.log('MainCtrl launched')
   $scope.demo = 'WOHOOO'
+  ###
+  tableau des évaluations pour chaque séquence
+  ###
+  $scope.result = []
+  ###
+    évaluer la séquence
+    et donner ses stats de réponse
+    ###
+  $scope.evaluate = (sequence)->
+    goods = 0
+    nearly = 0
+    i=0
+    console.log('goods' , goods)
+    for elem in sequence
+      console.log('elem',elem)
+      if($scope.sequenceAdverse[i] is elem.color)
+        goods++
+      if($scope.sequenceAdverse.indexOf(elem.color) )
+        nearly++
+      console.log('goods' , goods)
+      i++
+    {goods:goods,
+    nearly:nearly}
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
-  $scope.sequenceAdverse = [{id: 0, color: 'blue'},
-    {id: 1, color: 'yellow'},
-    {id: 2, color: 'red'},
-    {id: 3, color: 'green'}]
-  #  $scope.sequenceAdverse = []
+  $scope.sequenceAdverse = ["blue","yellow","red","green"]
 
   # ajouter à la séquence
   # TODO débug de cycle de digest
@@ -28,6 +47,7 @@ angular.module "myApp", []
     console.log('lines', $scope.lines)
     $scope.lines.push(obj)
     console.log('lines après', $scope.lines)
+    goods = $scope.evaluate(lespions)
 
   # ajouter à la séquence
   $scope.populateSequence = ()->
@@ -54,18 +74,7 @@ angular.module "myApp", []
     'yellow', 'violet', 'green', 'blue', 'red'
   ]
 
-  ###
-  évaluer la séquence
-  et donner ses stats de réponse
-  TODO
-  ###
-  $scope.evaluate = (sequence)->
-    goods = 0
-    for(elem in sequence)
-      if($scope.toFind.indexOf(sequence[elem]) )
-        goods++
-    console.log('goods' , goods)
-    goods
+
 #    if(goods)
 #      for()
 #    pions: ['white', 'white', 'black', 'black']
