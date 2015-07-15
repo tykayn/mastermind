@@ -1,9 +1,13 @@
 # main module
 angular.module "myApp", []
 .controller "MainCtrl", ($rootScope, $scope)->
-
+  ###
+    config globale
+    ###
   conf = {
+    autoRun : 0
     turns : 10
+    sequenceLength : 4
   }
 #    console.log('MainCtrl launched')
   $scope.demo = 'WOHOOO'
@@ -21,12 +25,12 @@ angular.module "myApp", []
     i=0
     console.log('goods' , goods)
     for elem in sequence
-#      console.log('elem',elem)
+      console.log('elem',elem)
       if($scope.sequenceAdverse[i] is elem.color)
         goods++
       if($scope.sequenceAdverse.indexOf(elem.color) )
         nearly++
-#      console.log('goods' , goods)
+      console.log('goods' , goods)
       i++
     {goods:goods,
     nearly:nearly}
@@ -60,8 +64,9 @@ angular.module "myApp", []
   # faire une séquence au hasard
   $scope.randomSequence = ()->
     tab = []
-    for i in [0..4]
-      randomNb = Math.random(0, $scope.couleurs.length)
+    for i in [1..4]
+      randomNb = Math.floor( Math.random()*$scope.couleurs.length )
+      console.log('randomNb' , randomNb)
       randomColor = angular.copy($scope.couleurs[randomNb])
       obj = {id: i, color: randomColor}
       tab.push(obj)

@@ -3,7 +3,7 @@
     <h2 class="btn btn-primary" ng-click="populateSequence()">à vous de jouer</h2>
     <h2 class="btn btn-primary" ng-click="sequence = addRandomSequence()">Random</h2>
     <button ng-show="sequence.length" class="pull-right btn btn-primary">
-        <i class="fa  fa-trash " ng-click="sequence={}"></i> vider
+        <i class="fa  fa-trash " ng-click="sequence=[]"></i> vider
     </button>
     <br/>
     construisez votre séquence de couleurs en cliquant sur les pions disponibles:
@@ -27,7 +27,7 @@
         <div class="clearfix"></div>
         <div class="pion-line" ng-repeat="c in sequence ">
             <div class=" btn btn-primary pull-left pion {{c.color}}" ng-click="deleteColor(c.id)"></div>
-            {{c.color}}
+            <!--{{c.color}}-->
         </div>
 
     </div>

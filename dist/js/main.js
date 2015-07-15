@@ -1,8 +1,14 @@
 (function() {
   angular.module("myApp", []).controller("MainCtrl", function($rootScope, $scope) {
+
+    /*
+      config globale
+     */
     var conf;
     conf = {
-      turns: 10
+      autoRun: 0,
+      turns: 10,
+      sequenceLength: 4
     };
     $scope.demo = 'WOHOOO';
 
@@ -23,12 +29,14 @@
       console.log('goods', goods);
       for (j = 0, len = sequence.length; j < len; j++) {
         elem = sequence[j];
+        console.log('elem', elem);
         if ($scope.sequenceAdverse[i] === elem.color) {
           goods++;
         }
         if ($scope.sequenceAdverse.indexOf(elem.color)) {
           nearly++;
         }
+        console.log('goods', goods);
         i++;
       }
       return {
@@ -63,8 +71,9 @@
     $scope.randomSequence = function() {
       var i, j, obj, randomColor, randomNb, tab;
       tab = [];
-      for (i = j = 0; j <= 4; i = ++j) {
-        randomNb = Math.random(0, $scope.couleurs.length);
+      for (i = j = 1; j <= 4; i = ++j) {
+        randomNb = Math.floor(Math.random() * $scope.couleurs.length);
+        console.log('randomNb', randomNb);
         randomColor = angular.copy($scope.couleurs[randomNb]);
         obj = {
           id: i,
