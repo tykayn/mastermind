@@ -93,10 +93,9 @@
 					<div class="row">
 						<div class="col-lg-2">{{ l.id }}</div>
 						<div class="col-lg-6">
-							<div class="pion-line" ng-repeat="p in l.pions track by $index">
+							<div class="pion-line" ng-repeat="p in l.pions track by $index" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
 								<div
-											class="pull-left pion {{p.color}}"
-											ng-class="{good: sequenceAdverse[p.id] === p.color}"></div>
+											class="pull-left pion {{p.color}}"></div>
 								<!--{{sequenceAdverse[p.id] === p.color}}-->
 							</div>
 						</div>

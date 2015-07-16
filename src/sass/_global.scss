@@ -4,9 +4,14 @@
   width: 2em;
   height: 2em;
   border: solid 5px $black;
-  &.good{
+  .goodpart &{
     border:solid 5px green;
   }
+}
+.goodpart{
+  padding: 0.5em;
+  background: #adff2f;
+  border-radius: 3px;
 }
 
 
