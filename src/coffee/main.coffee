@@ -4,8 +4,9 @@ angular.module "myApp", []
   ###
     config globale
     ###
-  conf = {
-    autoRun : 0
+  $scope.conf = {
+    autoRun : 1
+    debug : 1
     turns : 10
     sequenceLength : 4
   }
@@ -41,10 +42,14 @@ angular.module "myApp", []
 
   # ajouter à la séquence
   $scope.addSequence = (sequence)->
+    lengthLines = $scope.lines.length
+    if(lengthLines>= $scope.conf.turns)
+      console.log('tour max atteint')
+      return false
     console.log('add sequence')
     lespions = angular.copy(sequence)
     goods = $scope.evaluate(lespions)
-    lengthLines = $scope.lines.length
+
 
     $scope.result[lengthLines] = goods
     obj =
@@ -103,4 +108,8 @@ angular.module "myApp", []
 #    pions: ['white', 'white', 'black', 'black']
   $scope.line = []
   $scope.lines = []
-#    console.log('impressing!')
+  # lancer l'autorun
+  if($scope.conf.autoRun)
+    console.log('autoRun')
+    for i in [0..10]
+      $scope.addRandomSequence();

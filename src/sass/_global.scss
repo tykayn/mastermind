@@ -3,9 +3,12 @@
   display: inline-block;
   width: 2em;
   height: 2em;
-//  background: $grey;
   border: solid 5px $black;
+  &.good{
+    border:solid 5px green;
+  }
 }
+
 
 .violet{
   background: $violet;
@@ -26,3 +29,4 @@
 }.black{
   background: $black;
 }
+

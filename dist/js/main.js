@@ -4,9 +4,10 @@
     /*
       config globale
      */
-    var conf;
-    conf = {
-      autoRun: 0,
+    var i, j, results;
+    $scope.conf = {
+      autoRun: 1,
+      debug: 1,
       turns: 10,
       sequenceLength: 4
     };
@@ -48,10 +49,14 @@
     $scope.sequenceAdverse = ["blue", "yellow", "red", "green"];
     $scope.addSequence = function(sequence) {
       var goods, lengthLines, lespions, obj;
+      lengthLines = $scope.lines.length;
+      if (lengthLines >= $scope.conf.turns) {
+        console.log('tour max atteint');
+        return false;
+      }
       console.log('add sequence');
       lespions = angular.copy(sequence);
       goods = $scope.evaluate(lespions);
-      lengthLines = $scope.lines.length;
       $scope.result[lengthLines] = goods;
       obj = {
         id: lengthLines,
@@ -123,7 +128,15 @@
     };
     $scope.couleurs = ['yellow', 'violet', 'green', 'blue', 'red'];
     $scope.line = [];
-    return $scope.lines = [];
+    $scope.lines = [];
+    if ($scope.conf.autoRun) {
+      console.log('autoRun');
+      results = [];
+      for (i = j = 0; j <= 10; i = ++j) {
+        results.push($scope.addRandomSequence());
+      }
+      return results;
+    }
   });
 
 }).call(this);
