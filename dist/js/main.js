@@ -22,19 +22,17 @@ Mastermind.service("AnalysePions", function() {
         };
         this.tree[c] = stats;
       }
-      console.info('IA: tree was made', this.tree);
       return this.tree;
     },
     dumpTree: function() {
       var c, dumpPhrase, j, len, ref;
       dumpPhrase = 'Tree: ';
-      ref = this.tree;
+      ref = Object.keys(this.tree);
       for (j = 0, len = ref.length; j < len; j++) {
         c = ref[j];
         dumpPhrase += ' ' + this.tree[c].name + ' ' + this.tree[c].proba;
-        console.log('@tree[c]', this.tree[c]);
       }
-      console.log(dumpPhrase);
+      return console.log(dumpPhrase);
     },
     setBad: function(sequence) {
       var c, j, len, results;
@@ -96,7 +94,7 @@ Mastermind.controller("MainCtrl", [
     $scope.conf = {
       autoRun: 1,
       debug: 1,
-      turns: 20,
+      turns: 3,
       sequenceLength: 4,
       doubleColors: 1
     };

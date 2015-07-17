@@ -27,16 +27,21 @@ Mastermind.service "AnalysePions", ()->
         triedPositions : 0
       }
       @tree[c] = stats
-    console.info('IA: tree was made',@tree)
+#    console.info('IA: tree was made',@tree)
     @tree
+
+
+
+
   #    faire un rendu lisible de l'arbre en ne donnant que la proba
   dumpTree : ()->
     dumpPhrase = 'Tree: '
-    for c in @tree
+#    console.log('@tree',@tree)
+    for c in Object.keys(@tree)
       dumpPhrase +=  ' '+@tree[c].name+ ' ' + @tree[c].proba
-      console.log('@tree[c]',@tree[c])
+#      console.log('c',c)
     console.log(dumpPhrase)
-    return
+
 #    mettre du bad à toutes les couleurs de la séquence
   setBad : (sequence)->
     console.log('rien de bon, on met du bad')
@@ -91,7 +96,7 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
   $scope.conf = {
     autoRun : 1
     debug : 1
-    turns : 20
+    turns : 3
     sequenceLength : 4
     doubleColors : 1
   }
