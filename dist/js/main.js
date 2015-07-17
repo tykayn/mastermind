@@ -6,10 +6,11 @@
      */
     var i, j, results;
     $scope.conf = {
-      autoRun: 0,
+      autoRun: 1,
       debug: 1,
       turns: 10,
-      sequenceLength: 4
+      sequenceLength: 4,
+      doubleColors: 1
     };
     $scope.demo = 'WOHOOO';
 
@@ -74,17 +75,32 @@
       return seq;
     };
     $scope.randomSequence = function() {
-      var i, j, obj, randomColor, randomNb, tab;
+      var colorList, i, j, k, obj, randomColor, randomNb, tab;
       tab = [];
-      for (i = j = 1; j <= 4; i = ++j) {
-        randomNb = Math.floor(Math.random() * $scope.couleurs.length);
-        console.log('randomNb', randomNb);
-        randomColor = angular.copy($scope.couleurs[randomNb]);
-        obj = {
-          id: i,
-          color: randomColor
-        };
-        tab.push(obj);
+      if ($scope.conf.doubleColors) {
+        colorList = angular.copy($scope.couleurs);
+        for (i = j = 1; j <= 4; i = ++j) {
+          randomNb = Math.floor(Math.random() * colorList.length);
+          console.log('randomNb', randomNb, 'colorList', colorList);
+          randomColor = colorList[randomNb];
+          colorList.splice(randomNb, 1);
+          obj = {
+            id: i,
+            color: randomColor
+          };
+          tab.push(obj);
+        }
+      } else {
+        for (i = k = 1; k <= 4; i = ++k) {
+          randomNb = Math.floor(Math.random() * $scope.couleurs.length);
+          console.log('randomNb', randomNb);
+          randomColor = angular.copy($scope.couleurs[randomNb]);
+          obj = {
+            id: i,
+            color: randomColor
+          };
+          tab.push(obj);
+        }
       }
       return tab;
     };

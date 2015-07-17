@@ -71,47 +71,8 @@
 
         </div>
         <div class="col-lg-9">
-            <h2>{{lines.length}} Essais sur 10</h2>
-            <small class="goodpart" ng-show="conf.debug">debug activé</small>
-            <!--<div class="well">--><!--results {{result}}--><!--</div>-->
-            <ul class="unstyled">
-                <li>
-                    <div class="row">
-                        <div class="col-lg-2">Essai</div>
-                        <div class="col-lg-5">
-                            Séquence
-                        </div>
-                        <div class="col-lg-2">
-                            Mal placés
-                        </div>
-                        <div class="col-lg-2">
-                            Bons
-                        </div>
-                    </div>
-                </li>
-                <li ng-if="conf.debug" ng-repeat="l in lines track by $index">
-                    <div class="row">
-                        <div class="col-lg-2">{{ l.id }}</div>
-                        <div class="col-lg-6">
-                            <div class="pion-line" ng-repeat="p in l.pions track by $index">
-                                <div class="pion-bloc" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
-                                    <div class="pull-left pion {{p.color}}"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="pion-line">
-                                {{result[$index].nearly}}
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="pion-line">
-                                {{result[$index].goods}}
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <div ng-include="'tpl/table.html'"></div>
+
         </div>
     </div>
 

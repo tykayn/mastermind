@@ -5,7 +5,7 @@ angular.module "myApp", []
     config globale
     ###
   $scope.conf = {
-    autoRun : 0
+    autoRun : 1
     debug : 1
     turns : 10
     sequenceLength : 4
@@ -75,7 +75,7 @@ angular.module "myApp", []
       colorList = angular.copy($scope.couleurs)
       for i in [1..4]
         randomNb = Math.floor( Math.random()*colorList.length )
-        console.log('randomNb' , randomNb)
+        console.log('randomNb' , randomNb, 'colorList', colorList)
         randomColor = colorList[randomNb]
         # enlever cette couleur de la liste pour éviter de l'avoir en double
         colorList.splice(randomNb,1)
