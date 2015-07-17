@@ -29,7 +29,8 @@ var sources = {
     htmls: "src/html/**/*.html",
     js: "src/scripts/*.js",
     jsAll: "src/scripts/**/*.js",
-    coffee: "src/coffee/*.coffee"
+    coffee: "src/coffee/*.coffee",
+    coffees: "src/coffee/**/*.coffee"
 };
 var destinations = {
     sass: "dist/css/",
@@ -108,8 +109,8 @@ gulp.task("sass2css", function () {
 });
 gulp.task("coffee2js", function () {
     console.log("coffee was changed");
-    gulp.src("./src/coffee/**/*.coffee")
-        .pipe(coffee())
+    gulp.src([sources.coffee,sources.coffees])
+        .pipe(coffee({bare: true}))
         .pipe(plumber())
         .pipe(gulp.dest("./dist/js/"))
         .pipe(uglify())
@@ -119,7 +120,7 @@ gulp.task("coffee2js", function () {
 gulp.task('watch', function () {
     gulp.watch(sources.tests, ['test']);
     gulp.watch(sources.sass, ['sass2css']);
-    gulp.watch(sources.htmls, ['html']);
+    gulp.watch([sources.htmls, sources.html], ['html']);
     gulp.watch(sources.coffee, ['coffee2js', 'doc', 'test']);
     gulp.watch(sources.js, ['doc']);
 

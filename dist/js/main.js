@@ -1,10 +1,34 @@
-(function() {
-  angular.module("myApp", []).controller("MainCtrl", function($rootScope, $scope) {
+var Mastermind;
+
+Mastermind = angular.module("myApp", []);
+
+Mastermind.service("AnalysePions", function() {
+  console.log('AnalysePions');
+  return {
+    makeTree: function() {
+      this.tree = [];
+      console.info('IA: tree was made', this.tree);
+      return this.tree;
+    },
+    wonder: function(result, sequence) {
+      return console.log('wondering on the result');
+    },
+    upTree: function() {
+      this.tree = ['up'];
+      console.info('IA: tree was updated', this.tree);
+      return this.tree;
+    }
+  };
+});
+
+Mastermind.controller("MainCtrl", [
+  '$rootScope', '$scope', 'AnalysePions', function($rootScope, $scope, IA) {
 
     /*
       config globale
      */
     var i, j, results;
+    IA.makeTree();
     $scope.conf = {
       autoRun: 1,
       debug: 1,
@@ -12,6 +36,7 @@
       sequenceLength: 4,
       doubleColors: 1
     };
+    console.log('MainCtrl launched with ', IA);
     $scope.demo = 'WOHOOO';
 
     /*
@@ -28,17 +53,13 @@
       goods = 0;
       nearly = 0;
       i = 0;
-      console.log('goods', goods);
       for (j = 0, len = sequence.length; j < len; j++) {
         elem = sequence[j];
-        console.log('elem', elem);
         if ($scope.sequenceAdverse[i] === elem.color) {
           goods++;
-        }
-        if ($scope.sequenceAdverse.indexOf(elem.color)) {
+        } else if ($scope.sequenceAdverse.indexOf(elem.color) !== -1) {
           nearly++;
         }
-        console.log('goods', goods);
         i++;
       }
       return {
@@ -55,7 +76,6 @@
         console.log('tour max atteint');
         return false;
       }
-      console.log('add sequence');
       lespions = angular.copy(sequence);
       goods = $scope.evaluate(lespions);
       $scope.result[lengthLines] = goods;
@@ -63,9 +83,7 @@
         id: lengthLines,
         pions: lespions
       };
-      console.log('lines', $scope.lines);
       $scope.lines.push(obj);
-      console.log('lines après', $scope.lines);
       return goods = $scope.evaluate(lespions);
     };
     $scope.addRandomSequence = function() {
@@ -81,7 +99,6 @@
         colorList = angular.copy($scope.couleurs);
         for (i = j = 1; j <= 4; i = ++j) {
           randomNb = Math.floor(Math.random() * colorList.length);
-          console.log('randomNb', randomNb, 'colorList', colorList);
           randomColor = colorList[randomNb];
           colorList.splice(randomNb, 1);
           obj = {
@@ -93,7 +110,6 @@
       } else {
         for (i = k = 1; k <= 4; i = ++k) {
           randomNb = Math.floor(Math.random() * $scope.couleurs.length);
-          console.log('randomNb', randomNb);
           randomColor = angular.copy($scope.couleurs[randomNb]);
           obj = {
             id: i,
@@ -153,6 +169,5 @@
       }
       return results;
     }
-  });
-
-}).call(this);
+  }
+]);

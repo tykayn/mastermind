@@ -3,10 +3,13 @@
 <!--<div class="well">--><!--results {{result}}--><!--</div>-->
 <ul class="unstyled">
     <li>
-        <div class="row">
+        <div class="row fat">
             <div class="col-lg-2">Essai</div>
-            <div class="col-lg-5">
+            <div class="col-lg-3">
                 Séquence
+            </div>
+            <div class="col-lg-3">
+                Analyse
             </div>
             <div class="col-lg-2">
                 Mal placés
@@ -18,10 +21,17 @@
     </li>
     <li ng-if="conf.debug" ng-repeat="l in lines track by $index">
         <div class="row">
-            <div class="col-lg-2">{{ l.id }}</div>
-            <div class="col-lg-6">
+            <div class="col-lg-2">{{ l.id+1 }}</div>
+            <div class="col-lg-3">
                 <div class="pion-line" ng-repeat="p in l.pions track by $index">
                     <div class="pion-bloc" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
+                        <div class="pull-left pion {{p.color}}"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="pion-line" ng-repeat="p in analysis track by $index">
+                    <div class="pion-bloc">
                         <div class="pull-left pion {{p.color}}"></div>
                     </div>
                 </div>
@@ -39,3 +49,17 @@
         </div>
     </li>
 </ul>
+<hr/>
+<div>
+    <h2>Plan d'analyse</h2>
+    <ul>
+        <li>à chaque réponse de séquence, on attribue une probabilité d'être présent, bon et bien placé à chaque couleur entrée.</li>
+        <li>chaque réponse de séquence réévalue l'arbre des chances par couleur.</li>
+        <li>si le score de pions mal placés et bon est faible, on augmente les chances des couleurs pas encore entrées d'être bonnes.</li>
+        <li>le choix des prochaines couleurs se fait selon le plus haut score de couleur parmi l'arbre des chances</li>
+
+    </ul>
+
+
+
+</div>

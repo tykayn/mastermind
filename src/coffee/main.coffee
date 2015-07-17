@@ -1,9 +1,29 @@
 # main module
-angular.module "myApp", []
-.controller "MainCtrl", ($rootScope, $scope)->
+Mastermind = angular.module "myApp", []
+# service pour analyser les séquences
+Mastermind.service "AnalysePions", ()->
+  console.log('AnalysePions')
+  {
+#    faire un arbre des chances par couleur
+  makeTree : ->
+    @tree = []
+    console.info('IA: tree was made',@tree)
+    @tree
+#    attribuer des chances par couleur selon le résultat
+  wonder : (result,sequence)->
+    console.log('wondering on the result')
+  upTree : ->
+    @tree = ['up']
+    console.info('IA: tree was updated',@tree)
+    @tree
+  }
+Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($rootScope, $scope, IA)->
   ###
     config globale
     ###
+
+  IA.makeTree()
+
   $scope.conf = {
     autoRun : 1
     debug : 1
@@ -11,7 +31,7 @@ angular.module "myApp", []
     sequenceLength : 4
     doubleColors : 1
   }
-#    console.log('MainCtrl launched')
+  console.log('MainCtrl launched with ', IA)
   $scope.demo = 'WOHOOO'
   ###
   tableau des évaluations pour chaque séquence
@@ -25,14 +45,14 @@ angular.module "myApp", []
     goods = 0
     nearly = 0
     i=0
-    console.log('goods' , goods)
+#    console.log('goods' , goods)
     for elem in sequence
-      console.log('elem',elem)
+#      console.log('elem',elem)
       if($scope.sequenceAdverse[i] is elem.color)
         goods++
-      if($scope.sequenceAdverse.indexOf(elem.color) )
+      else if($scope.sequenceAdverse.indexOf(elem.color) != -1 )
         nearly++
-      console.log('goods' , goods)
+#      console.log('goods' , goods)
       i++
     {goods:goods,
     nearly:nearly}
@@ -47,7 +67,7 @@ angular.module "myApp", []
     if(lengthLines>= $scope.conf.turns)
       console.log('tour max atteint')
       return false
-    console.log('add sequence')
+#    console.log('add sequence')
     lespions = angular.copy(sequence)
     goods = $scope.evaluate(lespions)
 
@@ -56,9 +76,9 @@ angular.module "myApp", []
     obj =
       id: lengthLines
       pions: lespions
-    console.log('lines', $scope.lines)
+#    console.log('lines', $scope.lines)
     $scope.lines.push(obj)
-    console.log('lines après', $scope.lines)
+#    console.log('lines après', $scope.lines)
     goods = $scope.evaluate(lespions)
 
   # ajouter une séquence au hasard
@@ -75,7 +95,7 @@ angular.module "myApp", []
       colorList = angular.copy($scope.couleurs)
       for i in [1..4]
         randomNb = Math.floor( Math.random()*colorList.length )
-        console.log('randomNb' , randomNb, 'colorList', colorList)
+#        console.log('randomNb' , randomNb, 'colorList', colorList)
         randomColor = colorList[randomNb]
         # enlever cette couleur de la liste pour éviter de l'avoir en double
         colorList.splice(randomNb,1)
@@ -84,7 +104,7 @@ angular.module "myApp", []
     else
       for i in [1..4]
         randomNb = Math.floor( Math.random()*$scope.couleurs.length )
-        console.log('randomNb' , randomNb)
+#        console.log('randomNb' , randomNb)
         randomColor = angular.copy($scope.couleurs[randomNb])
         obj = {id: i, color: randomColor}
         tab.push(obj)
@@ -126,3 +146,4 @@ angular.module "myApp", []
     console.log('autoRun')
     for i in [0..10]
       $scope.addRandomSequence();
+]
