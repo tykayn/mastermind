@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d49b8da-817b-4631-80fa-ed4a0955c428" name="Default" comment="maj readme">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sass/_global.scss" afterPath="$PROJECT_DIR$/src/sass/_global.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" afterPath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/index.html" afterPath="$PROJECT_DIR$/src/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coffee/main.coffee" afterPath="$PROJECT_DIR$/src/coffee/main.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/main.css" afterPath="$PROJECT_DIR$/dist/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/main.js" afterPath="$PROJECT_DIR$/dist/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tpl/menu.html" afterPath="$PROJECT_DIR$/dist/tpl/menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/tpl/menu.html" afterPath="$PROJECT_DIR$/src/html/tpl/menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tpl/table.html" afterPath="$PROJECT_DIR$/dist/tpl/table.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/tpl/table.html" afterPath="$PROJECT_DIR$/src/html/tpl/table.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mastermind.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/html/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41754386" vertical-offset="1572" max-vertical-offset="3776">
-              <caret line="64" column="41" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+            <state vertical-scroll-proportion="-4.35" vertical-offset="1572" max-vertical-offset="3776">
+              <caret line="60" column="28" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
               <folding>
                 <marker date="1437158027209" expanded="true" signature="1072:1230" placeholder="..." />
               </folding>
@@ -80,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="table.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="table.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/html/tpl/table.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.555555" vertical-offset="672" max-vertical-offset="2336">
-              <caret line="34" column="123" selection-start-line="34" selection-start-column="123" selection-end-line="34" selection-end-column="123" />
+            <state vertical-scroll-proportion="0.3243243" vertical-offset="672" max-vertical-offset="2336">
+              <caret line="33" column="84" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -141,9 +130,9 @@
         <option value="$PROJECT_DIR$/src/coffee/services/IA.coffee" />
         <option value="$PROJECT_DIR$/src/sass/_global.scss" />
         <option value="$PROJECT_DIR$/src/html/tpl/menu.html" />
-        <option value="$PROJECT_DIR$/src/html/tpl/table.html" />
         <option value="$PROJECT_DIR$/src/coffee/main.coffee" />
         <option value="$PROJECT_DIR$/src/html/index.html" />
+        <option value="$PROJECT_DIR$/src/html/tpl/table.html" />
       </list>
     </option>
   </component>
@@ -918,14 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/html/tpl/table.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.555555" vertical-offset="672" max-vertical-offset="2336">
-          <caret line="34" column="123" selection-start-line="34" selection-start-column="123" selection-end-line="34" selection-end-column="123" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.362319" vertical-offset="2542" max-vertical-offset="7456">
@@ -944,11 +925,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/html/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41754386" vertical-offset="1572" max-vertical-offset="3776">
-          <caret line="64" column="41" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+        <state vertical-scroll-proportion="-4.35" vertical-offset="1572" max-vertical-offset="3776">
+          <caret line="60" column="28" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
           <folding>
             <marker date="1437158027209" expanded="true" signature="1072:1230" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/html/tpl/table.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3243243" vertical-offset="672" max-vertical-offset="2336">
+          <caret line="33" column="84" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
+          <folding />
         </state>
       </provider>
     </entry>
