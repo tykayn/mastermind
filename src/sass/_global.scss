@@ -8,8 +8,16 @@
     border:solid 5px green;
   }
 }
-.goodpart{
+.pion-bloc{
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+//  border: solid 1px red;
+  float: left;
   padding: 0.5em;
+}
+.goodpart{
+
   background: #adff2f;
   border-radius: 3px;
 }

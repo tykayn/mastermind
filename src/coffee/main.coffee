@@ -5,7 +5,7 @@ angular.module "myApp", []
     config globale
     ###
   $scope.conf = {
-    autoRun : 1
+    autoRun : 0
     debug : 1
     turns : 10
     sequenceLength : 4

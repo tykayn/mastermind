@@ -8,154 +8,129 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-	<!-- build:css({.tmp,app}) styles/main.css -->
-	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
-	<!--<link rel="stylesheet" href="styles/main.css">-->
-	<link rel="stylesheet" href="css/main.css">
-	<!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <!--<link rel="stylesheet" href="styles/main.css">-->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
 </head>
 <body ng-app="myApp">
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please
-	<a href="http://browsehappy.com/">upgrade your browser</a>
-	to improve your experience.
+    <a href="http://browsehappy.com/">upgrade your browser</a>
+    to improve your experience.
 </p><![endif]-->
 <div class="container" ng-controller="MainCtrl">
-	<h1>
-		<i class="fa fa-book fa-3x"></i>
-		Mastermind
-		<div class="pull-right">
-			<div class="pion violet"></div>
-			<div class="pion red"></div>
-			<div class="pion yellow"></div>
-			<div class="pion blue"></div>
-			<div class="pion green"></div>
-			<div class="pion white"></div>
-			<div class="pion black"></div>
-		</div>
+    <h1>
+        <i class="fa fa-book fa-3x"></i>
+        Mastermind
+        <div class="pull-right">
+            <div class="pion violet"></div>
+            <div class="pion red"></div>
+            <div class="pion yellow"></div>
+            <div class="pion blue"></div>
+            <div class="pion green"></div>
+            <div class="pion white"></div>
+            <div class="pion black"></div>
+        </div>
 
-	</h1>
-	<h2 class="btn btn-primary">
-		<i class="fa fa-check-circle"></i>
-		Let's play
-	</h2>
-	<hr/>
+    </h1>
+    <h2 class="btn btn-primary">
+        <i class="fa fa-check-circle"></i>
+        Let's play
+    </h2>
+    <hr/>
 
-	<div class="row-fluid">
-		<div class="col-lg-3">
-			<div ng-include="'tpl/menu.html'"></div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <div ng-include="'tpl/menu.html'"></div>
 
-			<!--{{lines}}-->
+            <!--{{lines}}-->
 
-			<hr/>
-			<div class="well">
-				<h2>debug </h2>
-				séquence à trouver: <br/>
+            <hr/>
+            <div class="well">
+                <h2>debug </h2>
+                séquence à trouver: <br/>
 
-				<div class="row-fluid" data-toggle="tooltip">
-					<div class="pion-line" ng-repeat="c in sequenceAdverse track by $index">
-						<div class=" btn btn-primary pull-left pion {{c}}"></div>
-					</div>
-				</div>
-			</div>
+                <div class="row-fluid" data-toggle="tooltip">
+                    <div class="pion-line" ng-repeat="c in sequenceAdverse track by $index">
+                        <div class=" btn btn-primary pull-left pion {{c}}"></div>
+                    </div>
+                </div>
+            </div>
 
 
-		</div>
-		<div class="col-lg-9">
-			<h2>{{lines.length}} Essais sur 10</h2>
-			<small ng-show="conf.debug">debug activé</small>
-			<!--<div class="well">--><!--results {{result}}--><!--</div>-->
-			<ul class="unstyled">
-				<li>
-					<div class="row">
-						<div class="col-lg-2">Essai</div>
-						<div class="col-lg-5">
-							Séquence
-						</div>
-						<div class="col-lg-2">
-							Mal placés
-						</div>
-						<div class="col-lg-2">
-							Bons
-						</div>
-					</div>
-				</li>
-				<li ng-if="conf.debug" ng-repeat="l in lines track by $index">
-					<div class="row">
-						<div class="col-lg-2">{{ l.id }}</div>
-						<div class="col-lg-6">
-							<div class="pion-line" ng-repeat="p in l.pions track by $index" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
-								<div
-											class="pull-left pion {{p.color}}"></div>
-								<!--{{sequenceAdverse[p.id] === p.color}}-->
-							</div>
-						</div>
-						<div class="col-lg-2">
-							<div class="pion-line">
-								<!--{{result[$index]}}-->
-								{{result[$index].nearly}}
-							</div>
-						</div>
-						<div class="col-lg-2">
-							<div class="pion-line">
-								{{result[$index].goods}}
-							</div>
-						</div>
-					</div>
-				</li>
-				<!--<li ng-repeat="l in lines track by $index">-->
-					<!--<div class="row">-->
-						<!--<div class="col-lg-2">{{ l.id }}</div>-->
-						<!--<div class="col-lg-6">-->
-							<!--<div class="pion-line" ng-repeat="p in l.pions track by $index">-->
-								<!--<div class="pull-left pion {{p.color}}"></div>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="col-lg-2">-->
-							<!--<div class="pion-line">-->
-								<!--&lt;!&ndash;{{result[$index]}}&ndash;&gt;-->
-								<!--{{result[$index].nearly}}-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="col-lg-2">-->
-							<!--<div class="pion-line">-->
-								<!--{{result[$index].goods}}-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</li>-->
-			</ul>
-		</div>
-	</div>
+        </div>
+        <div class="col-lg-9">
+            <h2>{{lines.length}} Essais sur 10</h2>
+            <small class="goodpart" ng-show="conf.debug">debug activé</small>
+            <!--<div class="well">--><!--results {{result}}--><!--</div>-->
+            <ul class="unstyled">
+                <li>
+                    <div class="row">
+                        <div class="col-lg-2">Essai</div>
+                        <div class="col-lg-5">
+                            Séquence
+                        </div>
+                        <div class="col-lg-2">
+                            Mal placés
+                        </div>
+                        <div class="col-lg-2">
+                            Bons
+                        </div>
+                    </div>
+                </li>
+                <li ng-if="conf.debug" ng-repeat="l in lines track by $index">
+                    <div class="row">
+                        <div class="col-lg-2">{{ l.id }}</div>
+                        <div class="col-lg-6">
+                            <div class="pion-line" ng-repeat="p in l.pions track by $index">
+                                <div class="pion-bloc" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
+                                    <div class="pull-left pion {{p.color}}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="pion-line">
+                                {{result[$index].nearly}}
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="pion-line">
+                                {{result[$index].goods}}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-	<div class="clearfix"></div>
-	<div class="row">
-		<div class="author">
-			<h2>
-				{{demo + ' angular works ! '}}
-			</h2>
-			made by
-			<a href="http://github.com/tykayn">tykayn</a>
-			with the self made yeoman angular-jeej generator. {{demo}}
-			<small>
-				Visit me at
-				<a href="http://twitter.com/tykayn">
-					<i class="fa fa-twitter"></i>
-					@tykayn
-				</a>
-			</small>
-		</div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="author">
+            made by
+            <a href="http://github.com/tykayn">tykayn</a>
+            with the self made yeoman angular-jeej generator. {{demo}}
+            <small>
+                Visit me at
+                <a href="http://twitter.com/tykayn">
+                    <i class="fa fa-twitter"></i>
+                    @tykayn
+                </a>
+            </small>
+        </div>
 
-	</div>
+    </div>
 </div>
 
 <!-- build:js scripts/plugins.js -->
