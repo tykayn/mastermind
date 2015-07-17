@@ -9,6 +9,7 @@ angular.module "myApp", []
     debug : 1
     turns : 10
     sequenceLength : 4
+    doubleColors : 1
   }
 #    console.log('MainCtrl launched')
   $scope.demo = 'WOHOOO'
@@ -69,12 +70,24 @@ angular.module "myApp", []
   # faire une séquence au hasard
   $scope.randomSequence = ()->
     tab = []
-    for i in [1..4]
-      randomNb = Math.floor( Math.random()*$scope.couleurs.length )
-      console.log('randomNb' , randomNb)
-      randomColor = angular.copy($scope.couleurs[randomNb])
-      obj = {id: i, color: randomColor}
-      tab.push(obj)
+    # si utiliser des pions de même couleur plusieurs fois est autorisé
+    if $scope.conf.doubleColors
+      colorList = angular.copy($scope.couleurs)
+      for i in [1..4]
+        randomNb = Math.floor( Math.random()*colorList.length )
+        console.log('randomNb' , randomNb)
+        randomColor = colorList[randomNb]
+        # enlever cette couleur de la liste pour éviter de l'avoir en double
+        colorList.splice(randomNb,1)
+        obj = {id: i, color: randomColor}
+        tab.push(obj)
+    else
+      for i in [1..4]
+        randomNb = Math.floor( Math.random()*$scope.couleurs.length )
+        console.log('randomNb' , randomNb)
+        randomColor = angular.copy($scope.couleurs[randomNb])
+        obj = {id: i, color: randomColor}
+        tab.push(obj)
     tab
 
   # ajouter à la séquence
