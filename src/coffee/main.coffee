@@ -4,13 +4,38 @@ Mastermind = angular.module "myApp", []
 Mastermind.service "AnalysePions", ()->
   console.log('AnalysePions')
   {
-#    faire un arbre des chances par couleur
-  makeTree : ->
+  # suggérer une séquence selon le plus haut score de couleur parmi l'arbre des chances
+  suggestSequence : ()->
+  #    faire un arbre des chances par couleur
+  makeTree : (colors)->
     @tree = []
+    # attribuer 1 - 1/nombre de pions max par séquence à toutes les couleurs,
+    # elles sont toutes éligibles à gagner mais il y a plus de couleurs possibles
+    # que de pions par séquence (4 par défaut).
+    for c in colors
+      stats = {
+        proba : 1 - 1/4
+        inGood : 0
+        inNearly : 0
+        bad : 0
+        tried : 0
+        triedPositions : 0
+      }
+      @tree[c] = stats
     console.info('IA: tree was made',@tree)
     @tree
 #    attribuer des chances par couleur selon le résultat
   wonder : (result,sequence)->
+    # si le score de pions mal placés et bon est faible,
+    # on augmente les chances des couleurs pas encore entrées d'être bonnes.
+    if( result.goods is 0 and result.nearly <=2 )
+      # mettre du bad aux couleurs mises
+      # baisser les probas aux couleurs mises
+      # ajouter des chances aux autres couleurs
+
+      return
+    for c in @tree
+
     console.log('wondering on the result')
   upTree : ->
     @tree = ['up']
@@ -22,7 +47,7 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
     config globale
     ###
 
-  IA.makeTree()
+
 
   $scope.conf = {
     autoRun : 1
@@ -45,17 +70,16 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
     goods = 0
     nearly = 0
     i=0
-#    console.log('goods' , goods)
     for elem in sequence
-#      console.log('elem',elem)
       if($scope.sequenceAdverse[i] is elem.color)
         goods++
       else if($scope.sequenceAdverse.indexOf(elem.color) != -1 )
         nearly++
-#      console.log('goods' , goods)
       i++
-    {goods:goods,
+    evaluation = {goods:goods,
     nearly:nearly}
+    IA.wonder(evaluation, sequence)
+    evaluation
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
@@ -134,11 +158,8 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
   $scope.couleurs = [
     'yellow', 'violet', 'green', 'blue', 'red'
   ]
+  IA.makeTree($scope.couleurs)
 
-
-#    if(goods)
-#      for()
-#    pions: ['white', 'white', 'black', 'black']
   $scope.line = []
   $scope.lines = []
   # lancer l'autorun

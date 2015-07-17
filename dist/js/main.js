@@ -5,8 +5,19 @@ Mastermind = angular.module("myApp", []);
 Mastermind.service("AnalysePions", function() {
   console.log('AnalysePions');
   return {
-    makeTree: function() {
+    makeTree: function(colors) {
+      var c, j, len, stats;
       this.tree = [];
+      for (j = 0, len = colors.length; j < len; j++) {
+        c = colors[j];
+        stats = {
+          proba: 1 - 1 / 4,
+          inGood: 0,
+          inNearly: 0,
+          bad: 0
+        };
+        this.tree[c] = stats;
+      }
       console.info('IA: tree was made', this.tree);
       return this.tree;
     },
@@ -28,7 +39,6 @@ Mastermind.controller("MainCtrl", [
       config globale
      */
     var i, j, results;
-    IA.makeTree();
     $scope.conf = {
       autoRun: 1,
       debug: 1,
@@ -49,7 +59,7 @@ Mastermind.controller("MainCtrl", [
       et donner ses stats de réponse
      */
     $scope.evaluate = function(sequence) {
-      var elem, goods, i, j, len, nearly;
+      var elem, evaluation, goods, i, j, len, nearly;
       goods = 0;
       nearly = 0;
       i = 0;
@@ -62,10 +72,12 @@ Mastermind.controller("MainCtrl", [
         }
         i++;
       }
-      return {
+      evaluation = {
         goods: goods,
         nearly: nearly
       };
+      IA.wonder(evaluation, sequence);
+      return evaluation;
     };
     $scope.sequence = [];
     $scope.sequenceAdverse = ["blue", "yellow", "red", "green"];
@@ -159,6 +171,7 @@ Mastermind.controller("MainCtrl", [
       return $scope.sequence.splice(index, 1);
     };
     $scope.couleurs = ['yellow', 'violet', 'green', 'blue', 'red'];
+    IA.makeTree($scope.couleurs);
     $scope.line = [];
     $scope.lines = [];
     if ($scope.conf.autoRun) {
