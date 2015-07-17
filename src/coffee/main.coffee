@@ -4,8 +4,12 @@ Mastermind = angular.module "myApp", []
 Mastermind.service "AnalysePions", ()->
   console.log('AnalysePions')
   {
-  # suggérer une séquence selon le plus haut score de couleur parmi l'arbre des chances
+  # suggérer une séquence
+  # selon les plus hauts score de couleur parmi l'arbre des chances
   suggestSequence : ()->
+    # ranger par proba décroissante
+    # sortir les 4 premiers par défaut
+
   #    faire un arbre des chances par couleur
   makeTree : (colors)->
     @tree = []
@@ -14,6 +18,7 @@ Mastermind.service "AnalysePions", ()->
     # que de pions par séquence (4 par défaut).
     for c in colors
       stats = {
+        name: c
         proba : 1 - 1/4
         inGood : 0
         inNearly : 0
@@ -24,17 +29,51 @@ Mastermind.service "AnalysePions", ()->
       @tree[c] = stats
     console.info('IA: tree was made',@tree)
     @tree
+  #    faire un rendu lisible de l'arbre en ne donnant que la proba
+  dumpTree : ()->
+    dumpPhrase = 'Tree: '
+    for c in @tree
+      dumpPhrase +=  ' '+@tree[c].name+ ' ' + @tree[c].proba
+      console.log('@tree[c]',@tree[c])
+    console.log(dumpPhrase)
+    return
+#    mettre du bad à toutes les couleurs de la séquence
+  setBad : (sequence)->
+    console.log('rien de bon, on met du bad')
+    for c in sequence
+      @tree[c.color].bad++
+      @tree[c.color].proba=0
+#    ajouter de la proba à toutes les couleurs de la séquence
+  addProba : (points)->
+    console.info(@tree)
+    for c in @tree
+
+      @tree[c].proba+=points
 #    attribuer des chances par couleur selon le résultat
   wonder : (result,sequence)->
     # si le score de pions mal placés et bon est faible,
     # on augmente les chances des couleurs pas encore entrées d'être bonnes.
-    if( result.goods is 0 and result.nearly <=2 )
+    if( result.goods is 0 )
+      if(result.nearly is 0)
+      # aucun pion de bon,
       # mettre du bad aux couleurs mises
+        @setBad(sequence)
+        return
+      else if(result.nearly is 0)
+        @addProba(-0.25)
+      # mettre du bad aux couleurs mises
+
       # baisser les probas aux couleurs mises
       # ajouter des chances aux autres couleurs
 
       return
-    for c in @tree
+    else if(result.goods <=2)
+      @addProba(0.5)
+
+    for c in sequence
+#      console.info(c)
+      @tree[c.color].tried++
+      @tree[c.color].triedPositions[c.id]++
 
     console.log('wondering on the result')
   upTree : ->
@@ -50,9 +89,9 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
 
 
   $scope.conf = {
-    autoRun : 1
+    autoRun : 0
     debug : 1
-    turns : 10
+    turns : 20
     sequenceLength : 4
     doubleColors : 1
   }
@@ -78,11 +117,24 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
       i++
     evaluation = {goods:goods,
     nearly:nearly}
+    # teste si on a gagné
+    if(evaluation.goods is $scope.conf.sequenceLength)
+      $scope.won = 1
+      return
+    # teste si on a perdu
+    else if($scope.lines.length is $scope.conf.turns-1)
+      $scope.loose = 1
+      return
+    # autrement le jeu continue
+
     IA.wonder(evaluation, sequence)
+    IA.dumpTree()
     evaluation
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
+  $scope.won = 0 # a t on gagné?
+  $scope.loose = 0 # a t on perdu?
   $scope.sequenceAdverse = ["blue","yellow","red","green"]
 
   # ajouter à la séquence
@@ -166,5 +218,6 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
   if($scope.conf.autoRun)
     console.log('autoRun')
     for i in [0..10]
-      $scope.addRandomSequence();
+      if(!$scope.won)
+        $scope.addRandomSequence();
 ]

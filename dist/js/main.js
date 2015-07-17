@@ -5,23 +5,77 @@ Mastermind = angular.module("myApp", []);
 Mastermind.service("AnalysePions", function() {
   console.log('AnalysePions');
   return {
+    suggestSequence: function() {},
     makeTree: function(colors) {
       var c, j, len, stats;
       this.tree = [];
       for (j = 0, len = colors.length; j < len; j++) {
         c = colors[j];
         stats = {
+          name: c,
           proba: 1 - 1 / 4,
           inGood: 0,
           inNearly: 0,
-          bad: 0
+          bad: 0,
+          tried: 0,
+          triedPositions: 0
         };
         this.tree[c] = stats;
       }
       console.info('IA: tree was made', this.tree);
       return this.tree;
     },
+    dumpTree: function() {
+      var c, dumpPhrase, j, len, ref;
+      dumpPhrase = 'Tree: ';
+      ref = this.tree;
+      for (j = 0, len = ref.length; j < len; j++) {
+        c = ref[j];
+        dumpPhrase += ' ' + this.tree[c].name + ' ' + this.tree[c].proba;
+        console.log('@tree[c]', this.tree[c]);
+      }
+      console.log(dumpPhrase);
+    },
+    setBad: function(sequence) {
+      var c, j, len, results;
+      console.log('rien de bon, on met du bad');
+      results = [];
+      for (j = 0, len = sequence.length; j < len; j++) {
+        c = sequence[j];
+        this.tree[c.color].bad++;
+        results.push(this.tree[c.color].proba = 0);
+      }
+      return results;
+    },
+    addProba: function(points) {
+      var c, j, len, ref, results;
+      console.info(this.tree);
+      ref = this.tree;
+      results = [];
+      for (j = 0, len = ref.length; j < len; j++) {
+        c = ref[j];
+        results.push(this.tree[c].proba += points);
+      }
+      return results;
+    },
     wonder: function(result, sequence) {
+      var c, j, len;
+      if (result.goods === 0) {
+        if (result.nearly === 0) {
+          this.setBad(sequence);
+          return;
+        } else if (result.nearly === 0) {
+          this.addProba(-0.25);
+        }
+        return;
+      } else if (result.goods <= 2) {
+        this.addProba(0.5);
+      }
+      for (j = 0, len = sequence.length; j < len; j++) {
+        c = sequence[j];
+        this.tree[c.color].tried++;
+        this.tree[c.color].triedPositions[c.id]++;
+      }
       return console.log('wondering on the result');
     },
     upTree: function() {
@@ -40,9 +94,9 @@ Mastermind.controller("MainCtrl", [
      */
     var i, j, results;
     $scope.conf = {
-      autoRun: 1,
+      autoRun: 0,
       debug: 1,
-      turns: 10,
+      turns: 20,
       sequenceLength: 4,
       doubleColors: 1
     };
@@ -76,10 +130,20 @@ Mastermind.controller("MainCtrl", [
         goods: goods,
         nearly: nearly
       };
+      if (evaluation.goods === $scope.conf.sequenceLength) {
+        $scope.won = 1;
+        return;
+      } else if ($scope.lines.length === $scope.conf.turns - 1) {
+        $scope.loose = 1;
+        return;
+      }
       IA.wonder(evaluation, sequence);
+      IA.dumpTree();
       return evaluation;
     };
     $scope.sequence = [];
+    $scope.won = 0;
+    $scope.loose = 0;
     $scope.sequenceAdverse = ["blue", "yellow", "red", "green"];
     $scope.addSequence = function(sequence) {
       var goods, lengthLines, lespions, obj;
@@ -178,7 +242,11 @@ Mastermind.controller("MainCtrl", [
       console.log('autoRun');
       results = [];
       for (i = j = 0; j <= 10; i = ++j) {
-        results.push($scope.addRandomSequence());
+        if (!$scope.won) {
+          results.push($scope.addRandomSequence());
+        } else {
+          results.push(void 0);
+        }
       }
       return results;
     }

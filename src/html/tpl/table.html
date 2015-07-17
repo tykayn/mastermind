@@ -1,6 +1,13 @@
 <h2>{{lines.length}} Essais sur 10</h2>
 <small class="goodpart" ng-show="conf.debug">debug activé</small>
-<!--<div class="well">--><!--results {{result}}--><!--</div>-->
+gagné? {{won}}
+perdu? {{loose}}
+<div ng-show="won" class="alert alert-success">
+    WOOT! vous avez gagné!
+</div>
+<div ng-show="loose" class="alert alert-success">
+    SACREBLEU! you loose!!
+</div>
 <ul class="unstyled">
     <li>
         <div class="row fat">
