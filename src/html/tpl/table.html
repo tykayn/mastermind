@@ -30,18 +30,14 @@ perdu? {{loose}}
         <div class="row">
             <div class="col-lg-2">{{ l.id+1 }}</div>
             <div class="col-lg-3">
-                <div class="pion-line" ng-repeat="p in l.pions track by $index">
-                    <div class="pion-bloc" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
-                        <div class="pull-left pion {{p.color}}"></div>
+                <div class="pion-line" >
+                    <div class="pion-bloc" ng-repeat="p in l.pions track by $index" >
+                        <div class="pull-left pion {{p.color}}" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}"></div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
-                <div class="pion-line" ng-repeat="p in analysis track by $index">
-                    <div class="pion-bloc">
-                        <div class="pull-left pion {{p.color}}"></div>
-                    </div>
-                </div>
+
             </div>
             <div class="col-lg-2">
                 <div class="pion-line">

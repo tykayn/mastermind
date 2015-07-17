@@ -94,7 +94,7 @@ Mastermind.controller("MainCtrl", [
      */
     var i, j, results;
     $scope.conf = {
-      autoRun: 0,
+      autoRun: 1,
       debug: 1,
       turns: 20,
       sequenceLength: 4,
@@ -213,9 +213,13 @@ Mastermind.controller("MainCtrl", [
         }
       ];
     };
+    $scope.emptySequence = function() {
+      var sequence;
+      return sequence = [];
+    };
     $scope.addColor = function(color) {
       var j, len, newId, pion, ref;
-      if ($scope.sequence.length > 3) {
+      if ($scope.sequence.length === $scope.conf.sequenceLength) {
         $scope.sequence.splice(1, 1);
       }
       newId = 0;
@@ -232,6 +236,7 @@ Mastermind.controller("MainCtrl", [
       });
     };
     $scope.deleteColor = function(index) {
+      console.log('enlever', index, $scope.sequence[index]);
       return $scope.sequence.splice(index, 1);
     };
     $scope.couleurs = ['yellow', 'violet', 'green', 'blue', 'red'];

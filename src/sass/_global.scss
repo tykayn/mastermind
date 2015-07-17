@@ -8,6 +8,10 @@
     border:solid 5px green;
   }
 }
+.pion-line{
+  min-height:3em;
+  display: block;
+}
 .pion-bloc{
   display: inline-block;
   width: 3em;

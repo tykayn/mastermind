@@ -89,7 +89,7 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
 
 
   $scope.conf = {
-    autoRun : 0
+    autoRun : 1
     debug : 1
     turns : 20
     sequenceLength : 4
@@ -192,9 +192,13 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
   #    $scope.sequence = []
 
 
+  # vider la séquence
+  $scope.emptySequence = ()->
+    sequence=[]
+  # ajouter a la séquence
   $scope.addColor = (color)->
-    # si y'a déjà 5 couleurs, enlever la première
-    if($scope.sequence.length > 3)
+    # si y'a déjà le max de couleurs, enlever la première
+    if($scope.sequence.length is $scope.conf.sequenceLength)
       $scope.sequence.splice(1, 1)
     #changer les id précédents
     newId = 0
@@ -205,6 +209,7 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
     $scope.sequence.push({id: newId, color: color})
   # enlever à la séquence
   $scope.deleteColor = (index)->
+    console.log('enlever', index, $scope.sequence[index])
     $scope.sequence.splice(index, 1)
 
   $scope.couleurs = [
