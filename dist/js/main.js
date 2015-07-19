@@ -69,24 +69,46 @@ Mastermind.service("AnalysePions", function() {
       }
       return results;
     },
+    colorDiff: function(sequence) {
+      var c, colors, diff, j, len, simpleSequence;
+      colors = angular.copy(this.config.couleurs);
+      simpleSequence = [];
+      for (j = 0, len = sequence.length; j < len; j++) {
+        c = sequence[j];
+        simpleSequence.push(c.color);
+      }
+      diff = $(colors).not(simpleSequence);
+      return diff;
+    },
+
+    /*
+     * attribuer des chances par couleur selon le résultat
+     */
     wonder: function(result, sequence) {
-      var c, j, len, results;
+      var c, diff, j, l, len, len1, results;
       if (result.goods === 0) {
         if (result.nearly === 0) {
           this.setBad(sequence);
           return;
         } else if (result.nearly <= this.config.sequenceLength / 2) {
-          this.addProba(0.25);
+          this.addProba(0.5);
         }
         return;
       } else if (result.goods + result.nearly === this.config.sequenceLength) {
-
+        console.info('tous les pions sont bons, mais mal placés');
+        diff = this.colorDiff(sequence);
+        for (j = 0, len = diff.length; j < len; j++) {
+          c = diff[j];
+          this.tree[c].bad++;
+          this.tree[c].proba = 0;
+        }
+        this.addProba(1);
       } else if (result.goods >= 2) {
         this.addProba(0.5);
       }
       results = [];
-      for (j = 0, len = sequence.length; j < len; j++) {
-        c = sequence[j];
+      for (l = 0, len1 = sequence.length; l < len1; l++) {
+        c = sequence[l];
         this.tree[c.color].tried++;
         results.push(this.tree[c.color].triedPositions[c.id]++);
       }
@@ -108,7 +130,7 @@ Mastermind.controller("MainCtrl", [
      */
     var i, j, results;
     $scope.conf = {
-      player: 1,
+      player: 0,
       autoRun: 1,
       debug: 1,
       turns: 10,
@@ -274,6 +296,10 @@ Mastermind.controller("MainCtrl", [
     $scope.deleteColor = function(index) {
       console.log('enlever', index, $scope.sequence[index]);
       return $scope.sequence.splice(index, 1);
+    };
+    $scope.goPlayer = function() {
+      $scope.config.player = 1;
+      return $scope.emptySequence();
     };
     IA.makeTree($scope.couleurs);
     $scope.line = [];

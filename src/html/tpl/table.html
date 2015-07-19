@@ -12,15 +12,17 @@
         recommencer
     </a>
 </div>
+<div ng-show="lines.length">
+    <div ng-show="won" class="alert alert-success">
+        WOOT! vous avez gagné!
+    </div>
+    <div ng-show="loose" class="alert alert-danger">
+        SACREBLEU! you loose!!
+    </div>
+</div>
 
-<div ng-show="won" class="alert alert-success">
-    WOOT! vous avez gagné!
-</div>
-<div ng-show="loose" class="alert alert-danger">
-    SACREBLEU! you loose!!
-</div>
 <ul class="unstyled">
-    <li>
+    <li class="padded-v">
         <div class="row fat">
             <div class="col-lg-2">Essai</div>
             <div class="col-lg-3">

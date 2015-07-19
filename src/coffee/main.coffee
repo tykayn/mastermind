@@ -65,7 +65,19 @@ Mastermind.service "AnalysePions", ()->
     for k in Object.keys(@tree)
       @tree[k].proba += points
       console.info("add v.proba", @tree[k].proba)
-  #    attribuer des chances par couleur selon le résultat
+  # trouver les couleurs qui ne sont pas dans la séquence donnée
+  colorDiff : (sequence)->
+    colors = angular.copy(@config.couleurs)
+    simpleSequence = []
+    for c in sequence
+      simpleSequence.push(c.color)
+    # diff de couleurs
+    diff = $(colors).not(simpleSequence)
+    diff
+
+  ###
+  # attribuer des chances par couleur selon le résultat
+  ###
   wonder: (result, sequence)->
     # si le score de pions mal placés et bon est faible,
     # on augmente les chances des couleurs pas encore entrées d'être bonnes.
@@ -74,18 +86,28 @@ Mastermind.service "AnalysePions", ()->
         # aucun pion de bon,
         # mettre du bad aux couleurs mises
         @setBad(sequence)
+        # ajouter des chances aux autres couleurs
+
         return
       # si ya la moitié des pions de mal placés,
       # c'est que la moitié est bien placée
       else if(result.nearly <= @config.sequenceLength / 2)
-        @addProba(0.25)
-      # mettre du bad aux couleurs mises
+        @addProba(0.5)
 
       # baisser les probas aux couleurs mises
-      # ajouter des chances aux autres couleurs
+
 
       return
+    # tous les pions sont bons, mais mal placés
     else if(result.goods + result.nearly is @config.sequenceLength)
+      console.info('tous les pions sont bons, mais mal placés')
+      # exclure les couleurs en dehors de la séquence
+      diff = @colorDiff(sequence)
+      # mettre à aucune proba sur les couleurs restantes
+      for c in diff
+        @tree[c].bad++
+        @tree[c].proba = 0
+      @addProba(1)
     else if(result.goods >= 2)
       @addProba(0.5)
 
@@ -106,7 +128,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     config globale
     ###
   $scope.conf = {
-    player: 1 #
+    player: 0 # joueurs
     autoRun: 1 # lancer automatiquement les séquences
     debug: 1
     turns: 10
@@ -250,6 +272,10 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     console.log('enlever', index, $scope.sequence[index])
     $scope.sequence.splice(index, 1)
 
+  # config pour joueur sans automatisation
+  $scope.goPlayer = ()->
+    $scope.config.player = 1
+    $scope.emptySequence()
 
   IA.makeTree($scope.couleurs)
 

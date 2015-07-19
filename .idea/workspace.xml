@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d49b8da-817b-4631-80fa-ed4a0955c428" name="Default" comment="maj readme">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tests/spec/app.js" afterPath="$PROJECT_DIR$/src/tests/spec/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" afterPath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/index.html" afterPath="$PROJECT_DIR$/src/html/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coffee/main.coffee" afterPath="$PROJECT_DIR$/src/coffee/main.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/main.js" afterPath="$PROJECT_DIR$/dist/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tpl/menu.html" afterPath="$PROJECT_DIR$/dist/tpl/menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/tpl/menu.html" afterPath="$PROJECT_DIR$/src/html/tpl/menu.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tpl/table.html" afterPath="$PROJECT_DIR$/dist/tpl/table.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/tpl/table.html" afterPath="$PROJECT_DIR$/src/html/tpl/table.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -37,8 +34,8 @@
       <file leaf-file-name="main.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07482993">
-              <caret line="235" column="25" selection-start-line="235" selection-start-column="25" selection-end-line="235" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.40816328">
+              <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -57,10 +54,10 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/html/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.222221">
-              <caret line="57" column="70" selection-start-line="57" selection-start-column="70" selection-end-line="57" selection-end-column="70" />
+            <state vertical-scroll-proportion="-8.75">
+              <caret line="46" column="51" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="51" />
               <folding>
-                <marker date="1437326591597" expanded="true" signature="1072:1230" placeholder="..." />
+                <marker date="1437335537493" expanded="true" signature="1072:1230" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -79,8 +76,8 @@
       <file leaf-file-name="table.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/html/tpl/table.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.6">
-              <caret line="9" column="76" selection-start-line="9" selection-start-column="76" selection-end-line="9" selection-end-column="76" />
+            <state vertical-scroll-proportion="-4.8">
+              <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -111,8 +108,8 @@
         <option value="$PROJECT_DIR$/GulpFile.js" />
         <option value="$PROJECT_DIR$/gulpfile.coffee" />
         <option value="$PROJECT_DIR$/src/tests/spec/app.js" />
-        <option value="$PROJECT_DIR$/src/html/index.html" />
         <option value="$PROJECT_DIR$/src/html/tpl/menu.html" />
+        <option value="$PROJECT_DIR$/src/html/index.html" />
         <option value="$PROJECT_DIR$/src/html/tpl/table.html" />
         <option value="$PROJECT_DIR$/src/coffee/main.coffee" />
       </list>
@@ -881,16 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/html/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.222221">
-          <caret line="57" column="70" selection-start-line="57" selection-start-column="70" selection-end-line="57" selection-end-column="70" />
-          <folding>
-            <marker date="1437326591597" expanded="true" signature="1072:1230" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/html/tpl/menu.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.05">
@@ -899,18 +886,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.75">
+          <caret line="46" column="51" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="51" />
+          <folding>
+            <marker date="1437335537493" expanded="true" signature="1072:1230" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/html/tpl/table.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6">
-          <caret line="9" column="76" selection-start-line="9" selection-start-column="76" selection-end-line="9" selection-end-column="76" />
+        <state vertical-scroll-proportion="-4.8">
+          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07482993">
-          <caret line="235" column="25" selection-start-line="235" selection-start-column="25" selection-end-line="235" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.40816328">
+          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
           <folding />
         </state>
       </provider>
