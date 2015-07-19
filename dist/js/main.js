@@ -150,10 +150,10 @@ Mastermind.controller("MainCtrl", [
       };
       if (evaluation.goods === $scope.conf.sequenceLength) {
         $scope.won = 1;
-        return;
+        return evaluation;
       } else if ($scope.lines.length === $scope.conf.turns - 1) {
         $scope.loose = 1;
-        return;
+        return evaluation;
       }
       IA.wonder(evaluation, sequence);
       IA.dumpTree();
@@ -163,18 +163,36 @@ Mastermind.controller("MainCtrl", [
     $scope.won = 0;
     $scope.loose = 0;
     $scope.sequenceAdverse = ["blue", "yellow", "red", "green"];
+    $scope.gagner = function() {
+      var c, i, j, len, obj, ref;
+      i = 0;
+      ref = $scope.sequenceAdverse;
+      for (j = 0, len = ref.length; j < len; j++) {
+        c = ref[j];
+        obj = {
+          id: i++,
+          color: c
+        };
+        $scope.sequence.push(obj);
+      }
+      return $scope.sequence;
+    };
+    $scope.emptyTable = function() {
+      console.log('emptyTable');
+      return $scope.lines = [];
+    };
     $scope.addSequence = function(sequence) {
-      var goods, lengthLines, lespions, obj;
-      lengthLines = $scope.lines.length;
-      if (lengthLines >= $scope.conf.turns) {
+      var goods, lespions, obj;
+      $scope.lengthLines = $scope.lines.length;
+      if ($scope.lengthLines >= $scope.conf.turns) {
         console.log('tour max atteint');
         return false;
       }
       lespions = angular.copy(sequence);
       goods = $scope.evaluate(lespions);
-      $scope.result[lengthLines] = goods;
+      $scope.result[$scope.lengthLines] = goods;
       obj = {
-        id: lengthLines,
+        id: $scope.lengthLines,
         pions: lespions
       };
       $scope.lines.push(obj);
@@ -232,8 +250,8 @@ Mastermind.controller("MainCtrl", [
       ];
     };
     $scope.emptySequence = function() {
-      var sequence;
-      return sequence = [];
+      $scope.lengthLines = 0;
+      return $scope.sequence = [];
     };
     $scope.addColor = function(color) {
       var j, len, newId, pion, ref;

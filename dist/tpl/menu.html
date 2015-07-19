@@ -1,7 +1,8 @@
 <!--menu de jeu-->
+
 <div class="row-fluid">
     <h2 class="btn btn-primary" ng-click="populateSequence()">à vous de jouer</h2>
-    <h2 class="btn btn-primary" ng-click="sequence = angular.copy(sequenceAdverse)">gagner</h2>
+    <h2 class="btn btn-primary" ng-click="gagner()">gagner</h2>
     <h2 class="btn btn-primary" ng-click="sequence = addRandomSequence()">Random</h2>
     <br/>
     construisez votre séquence de couleurs en cliquant sur les pions disponibles:
@@ -28,7 +29,7 @@
                 <!--{{c.color}}-->
             </div>
         </div>
-        <!--{{sequence}}-->
+        {{sequence}}
 
     </div>
 
@@ -37,13 +38,25 @@
 <div class="alert alert-info" ng-show="sequence.length < 4"> il faut choisir 4 pions pour valider la
     séquence
 </div>
-<h2 ng-hide="sequence.length < 4" class="btn btn-success" ng-click="addSequence(sequence)">
+<h2 ng-hide="sequence.length < 4" class="btn btn-success btn-block" ng-click="addSequence(sequence)">
     <i class="fa fa-check-circle"></i> valider
 </h2>
 <div class="clearfix"></div>
-<div class="row-fluid">
-    <a ng-show="sequence.length" class="pull-right btn btn-primary">
+<div ng-show="sequence.length" class="row-fluid">
+    <a class="pull-left btn btn-primary">
         <i class="fa  fa-trash " ng-click="emptySequence()"></i>
         vider
     </a>
+
+</div>
+<hr/>
+<div class="well">
+    <!--<h2>debug </h2>-->
+    séquence à trouver: <br/>
+
+    <div class="row-fluid pion-line" data-toggle="tooltip">
+        <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
+            <div class=" btn btn-primary pull-left pion {{c}}"></div>
+        </div>
+    </div>
 </div>

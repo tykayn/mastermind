@@ -53,25 +53,9 @@
     <div class="row-fluid">
         <div class="col-lg-3">
             <div ng-include="'tpl/menu.html'"></div>
-
-            <!--{{lines}}-->
-
-            <hr/>
-            <div class="well">
-                <!--<h2>debug </h2>-->
-                séquence à trouver: <br/>
-
-                <div class="row-fluid pion-line" data-toggle="tooltip">
-                    <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
-                        <div class=" btn btn-primary pull-left pion {{c}}"></div>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
         <div class="col-lg-9">
-            <div ng-include="'tpl/table.html'"></div>
+            <div ng-include="'tpl/table.html'" ng-controller="MainCtrl"></div>
 
         </div>
     </div>

@@ -1,7 +1,18 @@
 <h2>{{lines.length}} Essais sur 10</h2>
-<small class="goodpart" ng-show="conf.debug">debug activé</small>
-gagné? {{won}}
-perdu? {{loose}}
+
+<div ng-show="conf.debug">
+    <small class="badge-info badge">debug</small>
+    <span class="badge">gagné? {{won}}</span>
+    <span class="badge">perdu? {{loose}}</span>
+    <span class="badge-info badge" ng-show="conf.autoRun">
+        Autorun
+    </span>
+    <a class="pull-right btn btn-warning" ng-click="emptyTable(); lines = []">
+        <i class="fa  fa-trash " ></i>
+        recommencer
+    </a>
+</div>
+
 <div ng-show="won" class="alert alert-success">
     WOOT! vous avez gagné!
 </div>

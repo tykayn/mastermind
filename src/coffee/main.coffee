@@ -143,11 +143,11 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     # teste si on a gagné
     if(evaluation.goods is $scope.conf.sequenceLength)
       $scope.won = 1
-      return
+      return evaluation
 # teste si on a perdu
     else if($scope.lines.length is $scope.conf.turns - 1)
       $scope.loose = 1
-      return
+      return evaluation
     # autrement le jeu continue
 
     IA.wonder(evaluation, sequence)
@@ -160,10 +160,24 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   $scope.loose = 0 # a t on perdu?
   $scope.sequenceAdverse = ["blue", "yellow", "red", "green"]
 
+  # vider toutes les séquences
+  $scope.gagner = ()->
+    i=0
+    for c in $scope.sequenceAdverse
+      obj = {
+        id : i++
+        color: c
+      }
+      $scope.sequence.push(obj)
+    $scope.sequence
+  # vider toutes les séquences
+  $scope.emptyTable = ()->
+    console.log('emptyTable')
+    $scope.lines=[]
   # ajouter à la séquence
   $scope.addSequence = (sequence)->
-    lengthLines = $scope.lines.length
-    if(lengthLines >= $scope.conf.turns)
+    $scope.lengthLines = $scope.lines.length
+    if($scope.lengthLines >= $scope.conf.turns)
       console.log('tour max atteint')
       return false
     #    console.log('add sequence')
@@ -171,9 +185,9 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     goods = $scope.evaluate(lespions)
 
 
-    $scope.result[lengthLines] = goods
+    $scope.result[$scope.lengthLines] = goods
     obj =
-      id: lengthLines
+      id: $scope.lengthLines
       pions: lespions
     #    console.log('lines', $scope.lines)
     $scope.lines.push(obj)
@@ -217,7 +231,8 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
 
   # vider la séquence
   $scope.emptySequence = ()->
-    sequence = []
+    $scope.lengthLines = 0
+    $scope.sequence = []
   # ajouter a la séquence
   $scope.addColor = (color)->
 # si y'a déjà le max de couleurs, enlever la première

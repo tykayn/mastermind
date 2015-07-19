@@ -16,13 +16,15 @@ describe('Controller: MainCtrl', function () {
     // load the controller's module
     beforeEach(module('myApp'));
 
-    var MainCtrl, scope;
+    var MainCtrl, scope, iaService;
     scope = 1;
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope) {
+    beforeEach(inject(function ($controller, $rootScope, _AnalysePions_) {
         scope = $rootScope.$new();
+        iaService = _AnalysePions_;
         MainCtrl = $controller('MainCtrl', {
-            $scope: scope
+            $scope: scope,
+            IA : iaService
         });
     }));
 
@@ -34,6 +36,9 @@ describe('Controller: MainCtrl', function () {
     });
     it('should have a scope existing', function () {
         expect(scope).toBeTruthy();
+    });
+    xit('should have an IA service existing', function () {
+        expect(iaService).toBeTruthy();
     });
 
 });
