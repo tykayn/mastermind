@@ -5,7 +5,12 @@ Mastermind = angular.module("myApp", []);
 Mastermind.service("AnalysePions", function() {
   console.log('AnalysePions');
   return {
+    config: {},
     suggestSequence: function() {},
+    setConfig: function(obj) {
+      this.config = obj;
+      return console.log('@config', this.config.sequenceLength);
+    },
     makeTree: function(colors) {
       var c, j, len, stats;
       this.tree = [];
@@ -13,12 +18,18 @@ Mastermind.service("AnalysePions", function() {
         c = colors[j];
         stats = {
           name: c,
-          proba: 1 - 1 / 4,
+          proba: 1 - 1 / (this.config.sequenceLength || 4),
           inGood: 0,
           inNearly: 0,
           bad: 0,
           tried: 0,
-          triedPositions: 0
+          triedPositions: {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0
+          }
         };
         this.tree[c] = stats;
       }
@@ -27,6 +38,7 @@ Mastermind.service("AnalysePions", function() {
     dumpTree: function() {
       var c, dumpPhrase, j, len, ref;
       dumpPhrase = 'Tree: ';
+      console.log('@tree', this.tree);
       ref = Object.keys(this.tree);
       for (j = 0, len = ref.length; j < len; j++) {
         c = ref[j];
@@ -46,35 +58,39 @@ Mastermind.service("AnalysePions", function() {
       return results;
     },
     addProba: function(points) {
-      var c, j, len, ref, results;
-      console.info(this.tree);
-      ref = this.tree;
+      var j, k, len, ref, results;
+      console.info("add proba", this.tree);
+      ref = Object.keys(this.tree);
       results = [];
       for (j = 0, len = ref.length; j < len; j++) {
-        c = ref[j];
-        results.push(this.tree[c].proba += points);
+        k = ref[j];
+        this.tree[k].proba += points;
+        results.push(console.info("add v.proba", this.tree[k].proba));
       }
       return results;
     },
     wonder: function(result, sequence) {
-      var c, j, len;
+      var c, j, len, results;
       if (result.goods === 0) {
         if (result.nearly === 0) {
           this.setBad(sequence);
           return;
-        } else if (result.nearly === 0) {
-          this.addProba(-0.25);
+        } else if (result.nearly <= this.config.sequenceLength / 2) {
+          this.addProba(0.25);
         }
         return;
-      } else if (result.goods <= 2) {
+      } else if (result.goods + result.nearly === this.config.sequenceLength) {
+
+      } else if (result.goods >= 2) {
         this.addProba(0.5);
       }
+      results = [];
       for (j = 0, len = sequence.length; j < len; j++) {
         c = sequence[j];
         this.tree[c.color].tried++;
-        this.tree[c.color].triedPositions[c.id]++;
+        results.push(this.tree[c.color].triedPositions[c.id]++);
       }
-      return console.log('wondering on the result');
+      return results;
     },
     upTree: function() {
       this.tree = ['up'];
@@ -95,10 +111,13 @@ Mastermind.controller("MainCtrl", [
       player: 1,
       autoRun: 1,
       debug: 1,
-      turns: 3,
+      turns: 10,
       sequenceLength: 4,
-      doubleColors: 1
+      doubleColors: 1,
+      couleurs: ['yellow', 'violet', 'green', 'blue', 'red']
     };
+    $scope.couleurs = $scope.conf.couleurs;
+    IA.setConfig($scope.conf);
     console.log('MainCtrl launched with ', IA);
     $scope.demo = 'WOHOOO';
 
@@ -168,7 +187,7 @@ Mastermind.controller("MainCtrl", [
       return seq;
     };
     $scope.randomSequence = function() {
-      var colorList, i, j, k, obj, randomColor, randomNb, tab;
+      var colorList, i, j, l, obj, randomColor, randomNb, tab;
       tab = [];
       if ($scope.conf.doubleColors) {
         colorList = angular.copy($scope.couleurs);
@@ -183,7 +202,7 @@ Mastermind.controller("MainCtrl", [
           tab.push(obj);
         }
       } else {
-        for (i = k = 1; k <= 4; i = ++k) {
+        for (i = l = 1; l <= 4; i = ++l) {
           randomNb = Math.floor(Math.random() * $scope.couleurs.length);
           randomColor = angular.copy($scope.couleurs[randomNb]);
           obj = {
@@ -238,7 +257,6 @@ Mastermind.controller("MainCtrl", [
       console.log('enlever', index, $scope.sequence[index]);
       return $scope.sequence.splice(index, 1);
     };
-    $scope.couleurs = ['yellow', 'violet', 'green', 'blue', 'red'];
     IA.makeTree($scope.couleurs);
     $scope.line = [];
     $scope.lines = [];
