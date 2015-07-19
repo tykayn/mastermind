@@ -52,7 +52,6 @@ Mastermind.service "AnalysePions", ()->
   addProba : (points)->
     console.info(@tree)
     for c in @tree
-
       @tree[c].proba+=points
 #    attribuer des chances par couleur selon le résultat
   wonder : (result,sequence)->
@@ -94,7 +93,8 @@ Mastermind.controller "MainCtrl" , [ '$rootScope', '$scope', 'AnalysePions', ($r
 
 
   $scope.conf = {
-    autoRun : 1
+    player : 1 #
+    autoRun : 1 # lancer automatiquement les séquences
     debug : 1
     turns : 3
     sequenceLength : 4

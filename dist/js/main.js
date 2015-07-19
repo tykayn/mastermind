@@ -92,6 +92,7 @@ Mastermind.controller("MainCtrl", [
      */
     var i, j, results;
     $scope.conf = {
+      player: 1,
       autoRun: 1,
       debug: 1,
       turns: 3,

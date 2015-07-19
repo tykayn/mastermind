@@ -72,5 +72,9 @@
     "sinon": "~1.8.0",
     "yeoman-generator": "~0.19.2",
     "yosay": "^1.0.2"
+  },
+  "devDependencies": {
+    "gulp-coffee-istanbul": "^0.7.1",
+    "gulp-load-plugins": "^1.0.0-rc.1"
   }
 }
