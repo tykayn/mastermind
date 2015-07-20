@@ -50,12 +50,12 @@ gulp.task('test', function (done) {
     }, done);
 });
 gulp.task('cover', function (done) {
-    gulp.src([destinations.js])
+    gulp.src([destinations.js, destinations.jsAll])
         .pipe(plugins.istanbul()) // Covering files
         .pipe(gulp.dest('dist/covering'))
-        //.pipe(istanbul.hookRequire()) // Force `require` to return covered files
+        .pipe(plugins.istanbul.hookRequire()) // Force `require` to return covered files
         .on('finish', function () {
-            gulp.src(['test/*.js'])
+            gulp.src(['src/test/**/*.js'])
                 .pipe(plugins.mocha())
                 .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
                 //.pipe(istanbul.enforceThresholds({thresholds: {global: 20}})) // Enforce a coverage of at least 90%
