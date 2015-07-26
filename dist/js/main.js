@@ -5,8 +5,30 @@ Mastermind = angular.module("myApp", []);
 Mastermind.service("AnalysePions", function() {
   console.log('AnalysePions');
   return {
+    suggestedSequence: [],
     config: {},
-    suggestSequence: function() {},
+    suggestSequence: function() {
+      var c, isBadColor, j, laProba, len, probas, ref, sequenceAdviced;
+      probas = [];
+      ref = Object.keys(this.tree);
+      for (j = 0, len = ref.length; j < len; j++) {
+        c = ref[j];
+        laProba = this.tree[c].proba;
+        isBadColor = this.tree[c].bad;
+        if (isBadColor) {
+          continue;
+        }
+        if (!probas[laProba]) {
+          probas[laProba] = [];
+        }
+        probas[laProba].push(this.tree[c].name);
+      }
+      console.log('probas', probas, probas.sort());
+      sequenceAdviced = probas.slice(0, this.config.sequenceLength);
+      console.log('sequenceAdviced', sequenceAdviced);
+      this.suggestedSequence = sequenceAdviced;
+      return sequenceAdviced;
+    },
     setConfig: function(obj) {
       this.config = obj;
       return console.log('@config', this.config.sequenceLength);
@@ -83,7 +105,7 @@ Mastermind.service("AnalysePions", function() {
      * attribuer des chances par couleur selon le résultat
      */
     wonder: function(result, sequence) {
-      var c, diff, j, l, len, len1, results;
+      var c, diff, j, l, len, len1;
       if (result.goods === 0) {
         if (result.nearly === 0) {
           this.setBad(sequence);
@@ -104,13 +126,12 @@ Mastermind.service("AnalysePions", function() {
       } else if (result.goods >= 2) {
         this.addProba(0.5);
       }
-      results = [];
       for (l = 0, len1 = sequence.length; l < len1; l++) {
         c = sequence[l];
         this.tree[c.color].tried++;
-        results.push(this.tree[c.color].triedPositions[c.id]++);
+        this.tree[c.color].triedPositions[c.id]++;
       }
-      return results;
+      return this.suggestSequence();
     },
     upTree: function() {
       this.tree = ['up'];
@@ -175,7 +196,7 @@ Mastermind.controller("MainCtrl", [
         $scope.loose = 1;
         return evaluation;
       }
-      IA.wonder(evaluation, sequence);
+      $scope.sequence = IA.wonder(evaluation, sequence);
       IA.dumpTree();
       return evaluation;
     };

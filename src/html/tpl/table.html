@@ -2,8 +2,8 @@
 
 <div ng-show="conf.debug">
     <small class="badge-info badge">debug</small>
-    <span class="badge">gagné? {{won}}</span>
-    <span class="badge">perdu? {{loose}}</span>
+    <span class="badge badge-success" ng-show="won">gagné</span>
+    <span class="badge badge-warning" ng-show="loose">perdu</span>
     <span class="badge-info badge" ng-show="conf.autoRun">
         Autorun
     </span>
@@ -31,11 +31,17 @@
             <div class="col-lg-3">
                 Analyse
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 Mal placés
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 Bons
+            </div>
+            <div class="col-lg-1">
+                Score
+            </div>
+            <div class="col-lg-1">
+                diff
             </div>
         </div>
     </li>
@@ -52,14 +58,25 @@
             <div class="col-lg-3">
 
             </div>
-            <div class="col-lg-2">
-                <div class="pion-line">
+            <div class="col-lg-1">
+                <div >
                     {{result[$index].nearly}}
                 </div>
             </div>
-            <div class="col-lg-2">
-                <div class="pion-line">
+            <div class="col-lg-1">
+                <div >
                     {{result[$index].goods}}
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div >
+                    {{ (result[$index].nearly * 0.5 + result[$index].goods *1) / 4}}
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div >
+                    TODO
+                    <!--{{ (result[$index].nearly * 0.5 + result[$index].goods *1) / 4}}-->
                 </div>
             </div>
         </div>

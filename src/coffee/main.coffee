@@ -4,16 +4,33 @@ Mastermind = angular.module "myApp", []
 Mastermind.service "AnalysePions", ()->
   console.log('AnalysePions')
   {
+  suggestedSequence : []
 # config à insérer
   config: {}
 # suggérer une séquence
 # selon les plus hauts score de couleur parmi l'arbre des chances
   suggestSequence: ()->
+    probas = []
+    # ranger par proba décroissante
+    # sortir les 4 premiers par défaut
+    for c in Object.keys(@tree)
+      laProba = @tree[c].proba
+      isBadColor = @tree[c].bad
+      if(isBadColor)
+        continue
+      if(!probas[laProba])
+        probas[laProba] = []
+      probas[laProba].push(@tree[c].name)
+    console.log('probas', probas, probas.sort())
+    sequenceAdviced = probas.slice(0,@config.sequenceLength)
+    console.log('sequenceAdviced', sequenceAdviced)
+    @suggestedSequence = sequenceAdviced
+    sequenceAdviced
+# définir la config
   setConfig: (obj)->
     @config = obj
     console.log('@config' , @config.sequenceLength)
-# ranger par proba décroissante
-# sortir les 4 premiers par défaut
+
 
 #    faire un arbre des chances par couleur
   makeTree: (colors)->
@@ -116,6 +133,8 @@ Mastermind.service "AnalysePions", ()->
       @tree[c.color].tried++
       @tree[c.color].triedPositions[c.id]++
 
+    @suggestSequence()
+
 #    console.log('wondering on the result')
   upTree: ->
     @tree = ['up']
@@ -172,7 +191,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
       return evaluation
     # autrement le jeu continue
 
-    IA.wonder(evaluation, sequence)
+    $scope.sequence = IA.wonder(evaluation, sequence)
     IA.dumpTree()
     evaluation
 
@@ -285,5 +304,6 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     console.log('autoRun')
     for i in [0..10]
       if(!$scope.won)
+#        $scope.addSequence(IA.suggestedSequence);
         $scope.addRandomSequence();
 ]
