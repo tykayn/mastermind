@@ -36,15 +36,15 @@ Mastermind.service("AnalysePions", function() {
       return this.tree;
     },
     dumpTree: function() {
-      var c, dumpPhrase, j, len, ref;
+      var c, dumpPhrase, j, len, ref, results;
       dumpPhrase = 'Tree: ';
-      console.log('@tree', this.tree);
       ref = Object.keys(this.tree);
+      results = [];
       for (j = 0, len = ref.length; j < len; j++) {
         c = ref[j];
-        dumpPhrase += ' ' + this.tree[c].name + ' ' + this.tree[c].proba;
+        results.push(dumpPhrase += ' ' + this.tree[c].name + ' ' + this.tree[c].proba);
       }
-      return console.log(dumpPhrase);
+      return results;
     },
     setBad: function(sequence) {
       var c, j, len, results;
@@ -59,13 +59,11 @@ Mastermind.service("AnalysePions", function() {
     },
     addProba: function(points) {
       var j, k, len, ref, results;
-      console.info("add proba", this.tree);
       ref = Object.keys(this.tree);
       results = [];
       for (j = 0, len = ref.length; j < len; j++) {
         k = ref[j];
-        this.tree[k].proba += points;
-        results.push(console.info("add v.proba", this.tree[k].proba));
+        results.push(this.tree[k].proba += points);
       }
       return results;
     },
@@ -130,8 +128,8 @@ Mastermind.controller("MainCtrl", [
      */
     var i, j, results;
     $scope.conf = {
-      player: 0,
-      autoRun: 1,
+      player: 1,
+      autoRun: 0,
       debug: 1,
       turns: 10,
       sequenceLength: 4,
@@ -218,7 +216,8 @@ Mastermind.controller("MainCtrl", [
         pions: lespions
       };
       $scope.lines.push(obj);
-      return goods = $scope.evaluate(lespions);
+      goods = $scope.evaluate(lespions);
+      return goods;
     };
     $scope.addRandomSequence = function() {
       var seq;

@@ -47,11 +47,11 @@ Mastermind.service "AnalysePions", ()->
   #    faire un rendu lisible de l'arbre en ne donnant que la proba
   dumpTree: ()->
     dumpPhrase = 'Tree: '
-    console.log('@tree',@tree)
+#    console.log('@tree',@tree)
     for c in Object.keys(@tree)
       dumpPhrase += ' ' + @tree[c].name + ' ' + @tree[c].proba
     #      console.log('c',c)
-    console.log(dumpPhrase)
+#    console.log(dumpPhrase)
 
   #    mettre du bad à toutes les couleurs de la séquence
   setBad: (sequence)->
@@ -61,10 +61,10 @@ Mastermind.service "AnalysePions", ()->
       @tree[c.color].proba = 0
   #    ajouter de la proba à toutes les couleurs de la séquence
   addProba: (points)->
-    console.info("add proba", @tree)
+#    console.info("add proba", @tree)
     for k in Object.keys(@tree)
       @tree[k].proba += points
-      console.info("add v.proba", @tree[k].proba)
+#      console.info("add v.proba", @tree[k].proba)
   # trouver les couleurs qui ne sont pas dans la séquence donnée
   colorDiff : (sequence)->
     colors = angular.copy(@config.couleurs)
@@ -128,8 +128,8 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     config globale
     ###
   $scope.conf = {
-    player: 0 # joueurs
-    autoRun: 1 # lancer automatiquement les séquences
+    player: 1 # joueurs
+    autoRun: 0 # lancer automatiquement les séquences
     debug: 1
     turns: 10
     sequenceLength: 4
@@ -205,8 +205,6 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     #    console.log('add sequence')
     lespions = angular.copy(sequence)
     goods = $scope.evaluate(lespions)
-
-
     $scope.result[$scope.lengthLines] = goods
     obj =
       id: $scope.lengthLines
@@ -215,6 +213,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     $scope.lines.push(obj)
     #    console.log('lines après', $scope.lines)
     goods = $scope.evaluate(lespions)
+    goods
 
   # ajouter une séquence au hasard
   $scope.addRandomSequence = ()->
