@@ -6,6 +6,7 @@ Mastermind.service("AnalysePions", function() {
   console.log('AnalysePions');
   return {
     suggestedSequence: [],
+    numTour: 0,
     config: {},
     beginBatch: function() {
       var nbBatchs, nbCouleurs, numTourActuel, sequenceAdviced;
@@ -18,8 +19,10 @@ Mastermind.service("AnalysePions", function() {
       return sequenceAdviced;
     },
     suggestSequence: function() {
-      var c, isBadColor, j, laProba, len, probas, ref, sequenceAdviced;
-      if (this.tree.length <= 2) {
+      var c, isBadColor, j, laProba, len, nbBatchs, probas, ref, sequenceAdviced;
+      nbBatchs = this.config.couleurs.length / this.config.sequenceLength;
+      console.info('Batchs', nbBatchs);
+      if (this.numTour <= nbBatchs) {
         return this.beginBatch();
       }
       probas = [];
@@ -119,6 +122,8 @@ Mastermind.service("AnalysePions", function() {
      */
     wonder: function(result, sequence) {
       var c, diff, j, l, len, len1;
+      this.numTour += 1;
+      console.info('numéro de tour', this.numTour);
       if (result.goods === 0) {
         if (result.nearly === 0) {
           this.setBad(sequence);

@@ -5,6 +5,7 @@ Mastermind.service "AnalysePions", ()->
   console.log('AnalysePions')
   {
   suggestedSequence : []
+  numTour : 0
 # config à insérer
   config: {}
 # début de partie, essais pour avoir un max d'infos sur toutes les couleurs
@@ -23,9 +24,17 @@ Mastermind.service "AnalysePions", ()->
   suggestSequence: ()->
 
     # TODO sur les premières séquences, batch
-    if(@tree.length <= 2)
+    nbBatchs = @config.couleurs.length / @config.sequenceLength
+    console.info('Batchs',nbBatchs)
+    if(@numTour <= nbBatchs)
       return @beginBatch()
     probas = []
+    # TODO
+    # comparaison avec les rangées gagnantes
+    #   lister les séquences comportant au moins un bon pion
+    #   comparer les tableaux avec des positions similaires.
+
+    # trouver par proba
     # ranger par proba décroissante
     # sortir les 4 premiers par défaut
     for c in Object.keys(@tree)
@@ -111,6 +120,8 @@ Mastermind.service "AnalysePions", ()->
   # attribuer des chances par couleur selon le résultat
   ###
   wonder: (result, sequence)->
+    @numTour += 1
+    console.info('numéro de tour', @numTour)
     # si le score de pions mal placés et bon est faible,
     # on augmente les chances des couleurs pas encore entrées d'être bonnes.
     if( result.goods is 0 )
