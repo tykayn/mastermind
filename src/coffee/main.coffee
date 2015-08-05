@@ -146,10 +146,11 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   MainCtrl = this
   ###
     config globale
-    ###
+  ###
   $scope.conf = {
     player: 1 # joueurs
     autoRun: 0 # lancer automatiquement les séquences
+    randomGoal: 1 # choisir une séquence adverse aléatoire
     debug: 1
     turns: 10
     sequenceLength: 4
@@ -164,38 +165,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   tableau des évaluations pour chaque séquence
   ###
   $scope.result = []
-  ###
-    évaluer la séquence
-    et donner ses stats de réponse
-    ###
-  $scope.evaluate = (sequence)->
-    goods = 0
-    nearly = 0
-    i = 0
-    for elem in sequence
-      if($scope.sequenceAdverse[i] is elem.color)
-        goods++
-      else if($scope.sequenceAdverse.indexOf(elem.color) != -1 )
-        nearly++
-      i++
-    evaluation = {
-      goods: goods,
-      nearly: nearly
-    }
-    # teste si on a gagné
-    if(evaluation.goods is $scope.conf.sequenceLength)
-      MainCtrl.won = 1
-      console.log('gagné')
-      return evaluation
-    # teste si on a perdu
-    else if(MainCtrl.lines.length is $scope.conf.turns - 1)
-      MainCtrl.loose = 1
-      return evaluation
-    # autrement le jeu continue
 
-    $scope.sequence = IA.wonder(evaluation, sequence)
-    IA.dumpTree()
-    evaluation
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
@@ -224,27 +194,60 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     MainCtrl.lines=[]
 
   # ajouter à la séquence
-  $scope.addSequence = ()->
+  $scope.addSequence = (sequence)->
+    newSeq = angular.copy(sequence)
     if($scope.lengthLines >= $scope.conf.turns)
       console.log('tour max atteint')
       return false
     if(MainCtrl.won)
       console.log('vous avez déjà gagné')
       return false
-    sequence = $scope.sequence
-    console.log('addSequence', sequence)
+#    sequence = angular.copy($scope.sequence)
+    console.log('addSequence', newSeq)
     $scope.lengthLines = MainCtrl.lines.length
 
-    evaluation = $scope.evaluate(sequence)
+    evaluation = $scope.evaluate(newSeq)
     $scope.result[$scope.lengthLines] = evaluation
     obj =
       id: $scope.lengthLines
-      pions: sequence
+      pions: newSeq
 #    console.log('lines', MainCtrl.lines)
     MainCtrl.lines.push(obj)
 #    console.log('lines après', MainCtrl.lines)
     evaluation
 
+  ###
+  évaluer la séquence
+  et donner ses stats de réponse
+  ###
+  $scope.evaluate = (sequence)->
+    goods = 0
+    nearly = 0
+    i = 0
+    for elem in sequence
+      if($scope.sequenceAdverse[i].color is elem.color)
+        goods++
+      else if($scope.sequenceAdverse.indexOf(elem.color) != -1 )
+        nearly++
+      i++
+    evaluation = {
+      goods: goods,
+      nearly: nearly
+    }
+    # teste si on a gagné
+    if(evaluation.goods is $scope.conf.sequenceLength)
+      MainCtrl.won = 1
+      console.log('gagné')
+      return evaluation
+    # teste si on a perdu
+    else if(MainCtrl.lines.length is $scope.conf.turns - 1)
+      MainCtrl.loose = 1
+      return evaluation
+    # autrement le jeu continue
+    if($scope.conf.autoRun)
+      $scope.sequence = angular.copy(IA.wonder(evaluation, sequence))
+      IA.dumpTree()
+    evaluation
   # ajouter une séquence au hasard
   $scope.addRandomSequence = ()->
     seq = $scope.randomSequence()
@@ -280,10 +283,18 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   #    $scope.sequence = []
 
 
+
   # vider la séquence
   $scope.emptySequence = ()->
     $scope.lengthLines = 0
     $scope.sequence = []
+
+  # copier une séquence du tableau d'historique
+  # id : id de ligne dans l'historique
+  $scope.setSequence = (id)->
+    seq = angular.copy(MainCtrl.lines[id].pions)
+    console.log('setSequence', seq)
+    $scope.sequence = seq
 
   # vérif que la couleur n'est pas déjà présente dans la séquence
   $scope.colorUnique =(color)->
@@ -292,13 +303,6 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
         console.log('couleur non unique', color)
         return false
     true
-
-  # copier une séquence du tableau d'historique
-  # id : id de ligne dans l'historique
-  $scope.setSequence = (id)->
-    seq = angular.copy(MainCtrl.lines[id].pions)
-    console.log('setSequence', seq)
-    $scope.sequence = seq
 
   # ajouter a la séquence
   $scope.addColor = (color)->
@@ -333,8 +337,10 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
 
   IA.makeTree($scope.couleurs)
 
-  $scope.line = []
-  $scope.lines = []
+  if($scope.conf.randomGoal)
+    $scope.sequenceAdverse = $scope.randomSequence()
+    console.log('but aléatoire', $scope.sequenceAdverse)
+
   # lancer l'autorun
   if($scope.conf.autoRun)
     console.log('autoRun')

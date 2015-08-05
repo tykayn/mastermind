@@ -25,7 +25,7 @@
 <ul class="unstyled">
     <li class="padded-v">
         <div class="row fat">
-            <div class="col-lg-2">Essai</div>
+            <div class="col-lg-2">ligne</div>
             <div class="col-lg-3">
                 Séquence
             </div>
@@ -49,7 +49,10 @@
     <li ng-if="conf.debug" ng-repeat="l in MainCtrl.lines track by $index">
         <div class="row">
             <div class="col-lg-2" >
-                <button ng-click="setSequence($index)" class="btn btn-info">
+                <button ng-click="setSequence($index)" class="btn btn-info"
+                        data-toggle="tolltip"
+                        title="cliquer pour copier la séquence afin de la reprendre"
+                        data-tooltip="cliquer pour copier la séquence afin de la reprendre">
                     {{ l.id+1 }}
                 </button>
 

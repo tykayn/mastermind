@@ -60,7 +60,7 @@
                 <menu>
                     <div class="row-fluid">
                         <a class="btn btn-primary"
-                           ng-click="populateSequence();addSequence(sequence)">
+                           ng-click="populateSequence()">
                             à vous de jouer
                         </a>
 
@@ -69,10 +69,10 @@
                         <!--gagner-->
                         <!--</h2>-->
 
-                        <!--<h2 class="btn btn-primary"-->
-                        <!--ng-click="addRandomSequence()">-->
-                        <!--Random-->
-                        <!--</h2>-->
+                        <h2 class="btn btn-primary"
+                        ng-click="sequence = randomSequence()">
+                        Random
+                        </h2>
                         <br/>
                         <small>
                             Construisez votre séquence de couleurs en cliquant sur les pions disponibles:
@@ -124,9 +124,8 @@
                     </a>
 
                     <div class="clearfix"></div>
-                    <br>
 
-                    <div ng-show="sequence.length" class="row-fluid">
+                    <div ng-show="sequence.length" class="row-fluid marged-v">
                         <a class="pull-left btn btn-primary">
                             <i class="fa  fa-trash " ng-click="emptySequence()"></i>
                             vider
@@ -134,13 +133,13 @@
 
                     </div>
                     <hr/>
-                    <div class="well" ng-show="debug">
+                    <div class="well" ng-show="conf.debug">
                         <!--<h2>debug </h2>-->
                         séquence à trouver: <br/>
 
                         <div class="row-fluid pion-line" data-toggle="tooltip">
                             <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
-                                <div class=" btn btn-primary pull-left pion {{c}}"></div>
+                                <div class=" btn btn-primary pull-left pion {{c.color}}"></div>
                             </div>
                         </div>
                     </div>

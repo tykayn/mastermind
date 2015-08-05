@@ -152,6 +152,7 @@ Mastermind.controller("MainCtrl", [
     $scope.conf = {
       player: 1,
       autoRun: 0,
+      randomGoal: 1,
       debug: 1,
       turns: 10,
       sequenceLength: 4,
@@ -167,41 +168,6 @@ Mastermind.controller("MainCtrl", [
     tableau des évaluations pour chaque séquence
      */
     $scope.result = [];
-
-    /*
-      évaluer la séquence
-      et donner ses stats de réponse
-     */
-    $scope.evaluate = function(sequence) {
-      var elem, evaluation, goods, i, j, len, nearly;
-      goods = 0;
-      nearly = 0;
-      i = 0;
-      for (j = 0, len = sequence.length; j < len; j++) {
-        elem = sequence[j];
-        if ($scope.sequenceAdverse[i] === elem.color) {
-          goods++;
-        } else if ($scope.sequenceAdverse.indexOf(elem.color) !== -1) {
-          nearly++;
-        }
-        i++;
-      }
-      evaluation = {
-        goods: goods,
-        nearly: nearly
-      };
-      if (evaluation.goods === $scope.conf.sequenceLength) {
-        MainCtrl.won = 1;
-        console.log('gagné');
-        return evaluation;
-      } else if (MainCtrl.lines.length === $scope.conf.turns - 1) {
-        MainCtrl.loose = 1;
-        return evaluation;
-      }
-      $scope.sequence = IA.wonder(evaluation, sequence);
-      IA.dumpTree();
-      return evaluation;
-    };
     $scope.sequence = [];
     $scope.altColors = 0;
     MainCtrl.lines = [];
@@ -228,8 +194,9 @@ Mastermind.controller("MainCtrl", [
       MainCtrl.won = 0;
       return MainCtrl.lines = [];
     };
-    $scope.addSequence = function() {
-      var evaluation, obj, sequence;
+    $scope.addSequence = function(sequence) {
+      var evaluation, newSeq, obj;
+      newSeq = angular.copy(sequence);
       if ($scope.lengthLines >= $scope.conf.turns) {
         console.log('tour max atteint');
         return false;
@@ -238,16 +205,52 @@ Mastermind.controller("MainCtrl", [
         console.log('vous avez déjà gagné');
         return false;
       }
-      sequence = $scope.sequence;
-      console.log('addSequence', sequence);
+      console.log('addSequence', newSeq);
       $scope.lengthLines = MainCtrl.lines.length;
-      evaluation = $scope.evaluate(sequence);
+      evaluation = $scope.evaluate(newSeq);
       $scope.result[$scope.lengthLines] = evaluation;
       obj = {
         id: $scope.lengthLines,
-        pions: sequence
+        pions: newSeq
       };
       MainCtrl.lines.push(obj);
+      return evaluation;
+    };
+
+    /*
+    évaluer la séquence
+    et donner ses stats de réponse
+     */
+    $scope.evaluate = function(sequence) {
+      var elem, evaluation, goods, i, j, len, nearly;
+      goods = 0;
+      nearly = 0;
+      i = 0;
+      for (j = 0, len = sequence.length; j < len; j++) {
+        elem = sequence[j];
+        if ($scope.sequenceAdverse[i].color === elem.color) {
+          goods++;
+        } else if ($scope.sequenceAdverse.indexOf(elem.color) !== -1) {
+          nearly++;
+        }
+        i++;
+      }
+      evaluation = {
+        goods: goods,
+        nearly: nearly
+      };
+      if (evaluation.goods === $scope.conf.sequenceLength) {
+        MainCtrl.won = 1;
+        console.log('gagné');
+        return evaluation;
+      } else if (MainCtrl.lines.length === $scope.conf.turns - 1) {
+        MainCtrl.loose = 1;
+        return evaluation;
+      }
+      if ($scope.conf.autoRun) {
+        $scope.sequence = angular.copy(IA.wonder(evaluation, sequence));
+        IA.dumpTree();
+      }
       return evaluation;
     };
     $scope.addRandomSequence = function() {
@@ -305,6 +308,12 @@ Mastermind.controller("MainCtrl", [
       $scope.lengthLines = 0;
       return $scope.sequence = [];
     };
+    $scope.setSequence = function(id) {
+      var seq;
+      seq = angular.copy(MainCtrl.lines[id].pions);
+      console.log('setSequence', seq);
+      return $scope.sequence = seq;
+    };
     $scope.colorUnique = function(color) {
       var j, len, pion, ref;
       ref = $scope.sequence;
@@ -316,12 +325,6 @@ Mastermind.controller("MainCtrl", [
         }
       }
       return true;
-    };
-    $scope.setSequence = function(id) {
-      var seq;
-      seq = angular.copy(MainCtrl.lines[id].pions);
-      console.log('setSequence', seq);
-      return $scope.sequence = seq;
     };
     $scope.addColor = function(color) {
       var j, len, newId, pion, ref;
@@ -363,8 +366,10 @@ Mastermind.controller("MainCtrl", [
       return $scope.emptySequence();
     };
     IA.makeTree($scope.couleurs);
-    $scope.line = [];
-    $scope.lines = [];
+    if ($scope.conf.randomGoal) {
+      $scope.sequenceAdverse = $scope.randomSequence();
+      console.log('but aléatoire', $scope.sequenceAdverse);
+    }
     if ($scope.conf.autoRun) {
       console.log('autoRun');
       results = [];
