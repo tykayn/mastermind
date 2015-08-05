@@ -25,8 +25,16 @@
 
 </head>
 <body ng-app="myApp">
-<main ng-controller="MainCtrl">
 
+<main ng-controller="MainCtrl">
+    <div class="pull-left" ng-show="MainCtrl.lines.length">
+        <div ng-show="MainCtrl.won" class="alert alert-success">
+            WOOT! vous avez gagné!
+        </div>
+        <div ng-show="MainCtrl.loose && !MainCtrl.won" class="alert alert-danger">
+            SACREBLEU! you loose!!
+        </div>
+    </div>
 
     <!--[if lt IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please
@@ -48,10 +56,7 @@
             </div>
 
         </h1>
-        <div class="btn btn-primary" ng-click="goPlayer()">
-            <i class="fa fa-check-circle"></i>
-            Let's play
-        </div>
+
         <hr/>
 
         <div class="row-fluid">
@@ -59,6 +64,10 @@
                 <!--menu de jeu-->
                 <menu>
                     <div class="row-fluid">
+                        <button class="btn btn-primary" ng-click="goPlayer()">
+                            <i class="fa fa-check-circle"></i>
+                            Let's play
+                        </button>
                         <a class="btn btn-primary"
                            ng-click="populateSequence()">
                             à vous de jouer
@@ -127,15 +136,21 @@
 
                     <div ng-show="sequence.length" class="row-fluid marged-v">
                         <a class="pull-left btn btn-primary">
-                            <i class="fa  fa-trash " ng-click="emptySequence()"></i>
+                            <i class="fa  fa-trash " ng-click="sequence = []"></i>
                             vider
                         </a>
 
                     </div>
-                    <hr/>
+
                     <div class="well" ng-show="conf.debug">
+                        <h2>Config:</h2>
+                        Tours <input class="input" type="number" ng-model="conf.turns" />
+                        <hr/>
+
                         <!--<h2>debug </h2>-->
-                        séquence à trouver: <br/>
+                        <h2>
+                            séquence à trouver:
+                        </h2>
 
                         <div class="row-fluid pion-line" data-toggle="tooltip">
                             <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">

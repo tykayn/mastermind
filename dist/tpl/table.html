@@ -1,4 +1,9 @@
-<h2>{{MainCtrl.lines.length}} Essais sur {{conf.turns}}</h2>
+<h2>{{MainCtrl.lines.length}} Essais sur {{conf.turns}}
+    <a class="pull-right btn btn-warning" ng-click="emptyTable();autoRun()">
+        <i class="fa  fa-trash "></i>
+        recommencer
+    </a>
+</h2>
 
 <div ng-show="conf.debug">
     <small class="badge-info badge">debug</small>
@@ -7,20 +12,10 @@
     <span class="badge-info badge" ng-show="conf.autoRun">
         Autorun
     </span>
-    <a class="pull-right btn btn-warning" ng-click="emptyTable();autoRun()">
-        <i class="fa  fa-trash " ></i>
-        recommencer
-    </a>
+
 </div>
 <div class="clearfix"></div>
-<div ng-show="MainCtrl.lines.length">
-    <div ng-show="MainCtrl.won" class="alert alert-success">
-        WOOT! vous avez gagné!
-    </div>
-    <div ng-show="MainCtrl.loose && !MainCtrl.won" class="alert alert-danger">
-        SACREBLEU! you loose!!
-    </div>
-</div>
+
 
 <ul class="unstyled">
     <li class="padded-v">
@@ -48,7 +43,7 @@
     </li>
     <li ng-if="conf.debug" ng-repeat="l in MainCtrl.lines track by $index">
         <div class="row">
-            <div class="col-lg-2" >
+            <div class="col-lg-2">
                 <button ng-click="setSequence($index)" class="btn btn-info"
                         data-toggle="tolltip"
                         title="cliquer pour copier la séquence afin de la reprendre"
@@ -58,9 +53,10 @@
 
             </div>
             <div class="col-lg-3">
-                <div class="pion-line" >
-                    <div class="pion-bloc" ng-repeat="p in l.pions track by $index" ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}" >
-                        <div class="pull-left pion {{p.color}}" ></div>
+                <div class="pion-line">
+                    <div class="pion-bloc" ng-repeat="p in l.pions track by $index"
+                         ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
+                        <div class="pull-left pion {{p.color}}"></div>
                     </div>
                 </div>
             </div>
@@ -68,7 +64,7 @@
 
             </div>
             <div class="col-lg-1">
-                <div >
+                <div>
                     {{result[$index].nearly}}
                 </div>
             </div>
@@ -78,12 +74,12 @@
                 </div>
             </div>
             <div class="col-lg-1">
-                <div >
+                <div>
                     {{ (result[$index].nearly * 0.5 + result[$index].goods *1) / conf.sequenceLength}}
                 </div>
             </div>
             <div class="col-lg-1">
-                <div >
+                <div>
                     TODO
                     <!--{{ (result[$index].nearly * 0.5 + result[$index].goods *1) / 4}}-->
                 </div>
@@ -92,19 +88,22 @@
     </li>
 </ul>
 <!--<pre>-->
-     <!--{{MainCtrl.lines|json}}-->
+<!--{{MainCtrl.lines|json}}-->
 <!--</pre>-->
 <hr/>
 <div>
     <h2>Plan d'analyse</h2>
     <ul>
-        <li>à chaque réponse de séquence, on attribue une probabilité d'être présent, bon et bien placé à chaque couleur entrée.</li>
+        <li>à chaque réponse de séquence, on attribue une probabilité d'être présent, bon et bien placé à chaque couleur
+            entrée.
+        </li>
         <li>chaque réponse de séquence réévalue l'arbre des chances par couleur.</li>
-        <li>si le score de pions mal placés et bon est faible, on augmente les chances des couleurs pas encore entrées d'être bonnes.</li>
+        <li>si le score de pions mal placés et bon est faible, on augmente les chances des couleurs pas encore entrées
+            d'être bonnes.
+        </li>
         <li>le choix des prochaines couleurs se fait selon le plus haut score de couleur parmi l'arbre des chances</li>
 
     </ul>
-
 
 
 </div>
