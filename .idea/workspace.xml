@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d49b8da-817b-4631-80fa-ed4a0955c428" name="Default" comment="maj readme">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/html/tpl/couleurs.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/html/tpl/menu.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sass/_global.scss" afterPath="$PROJECT_DIR$/src/sass/_global.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" afterPath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/index.html" afterPath="$PROJECT_DIR$/src/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coffee/main.coffee" afterPath="$PROJECT_DIR$/src/coffee/main.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/main.css" afterPath="$PROJECT_DIR$/dist/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/main.js" afterPath="$PROJECT_DIR$/dist/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tpl/table.html" afterPath="$PROJECT_DIR$/dist/tpl/table.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/tpl/table.html" afterPath="$PROJECT_DIR$/src/html/tpl/table.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mastermind.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,10 +49,10 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/html/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45945945">
-              <caret line="164" column="35" selection-start-line="164" selection-start-column="35" selection-end-line="164" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.5793919">
+              <caret line="163" column="85" selection-start-line="163" selection-start-column="85" selection-end-line="163" selection-end-column="85" />
               <folding>
-                <marker date="1438787364378" expanded="true" signature="1147:1305" placeholder="..." />
+                <marker date="1438787407262" expanded="true" signature="1074:1232" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -964,10 +953,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/html/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45945945">
-          <caret line="164" column="35" selection-start-line="164" selection-start-column="35" selection-end-line="164" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.5793919">
+          <caret line="163" column="85" selection-start-line="163" selection-start-column="85" selection-end-line="163" selection-end-column="85" />
           <folding>
-            <marker date="1438787364378" expanded="true" signature="1147:1305" placeholder="..." />
+            <marker date="1438787407262" expanded="true" signature="1074:1232" placeholder="..." />
           </folding>
         </state>
       </provider>

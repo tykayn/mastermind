@@ -26,7 +26,6 @@
 </head>
 <body ng-app="myApp">
 
-<button ng-click="altColors = !altColors">couleurs alternatives</button>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please
     <a href="http://browsehappy.com/">upgrade your browser</a>
@@ -162,7 +161,8 @@
             Configurable</h2>
             <ul class="unstyled">
                 <li>interdire plusieurs fois la même couleur TODO</li>
-                <li>autres couleurs</li>
+                <li>autres couleurs <button ng-click="altColors = !altColors">changer</button>
+                </li>
                 <li>debug</li>
                 <li>mode solo</li>
                 <li>mode autorun</li>
