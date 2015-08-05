@@ -191,10 +191,11 @@ Mastermind.controller("MainCtrl", [
         nearly: nearly
       };
       if (evaluation.goods === $scope.conf.sequenceLength) {
-        $scope.won = 1;
+        MainCtrl.won = 1;
+        console.log('gagné');
         return evaluation;
       } else if ($scope.lines.length === $scope.conf.turns - 1) {
-        $scope.loose = 1;
+        MainCtrl.loose = 1;
         return evaluation;
       }
       $scope.sequence = IA.wonder(evaluation, sequence);
@@ -202,9 +203,10 @@ Mastermind.controller("MainCtrl", [
       return evaluation;
     };
     $scope.sequence = [];
+    $scope.altColors = 0;
     MainCtrl.lines = [];
-    $scope.won = 0;
-    $scope.loose = 0;
+    MainCtrl.won = 0;
+    MainCtrl.loose = 0;
     $scope.sequenceAdverse = ["blue", "yellow", "red", "green"];
     $scope.MainCtrl = MainCtrl;
     $scope.gagner = function() {
@@ -226,7 +228,7 @@ Mastermind.controller("MainCtrl", [
       return MainCtrl.lines = [];
     };
     $scope.addSequence = function() {
-      var goods, lespions, obj, sequence;
+      var evaluation, obj, sequence;
       sequence = $scope.sequence;
       console.log('addSequence', sequence);
       $scope.lengthLines = MainCtrl.lines.length;
@@ -234,18 +236,14 @@ Mastermind.controller("MainCtrl", [
         console.log('tour max atteint');
         return false;
       }
-      lespions = sequence;
-      goods = $scope.evaluate(lespions);
-      $scope.result[$scope.lengthLines] = goods;
+      evaluation = $scope.evaluate(sequence);
+      $scope.result[$scope.lengthLines] = evaluation;
       obj = {
         id: $scope.lengthLines,
-        pions: lespions
+        pions: sequence
       };
-      console.log('lines', MainCtrl.lines);
       MainCtrl.lines.push(obj);
-      console.log('lines après', MainCtrl.lines);
-      goods = $scope.evaluate(lespions);
-      return goods;
+      return evaluation;
     };
     $scope.addRandomSequence = function() {
       var seq;

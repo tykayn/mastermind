@@ -184,11 +184,12 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     }
     # teste si on a gagné
     if(evaluation.goods is $scope.conf.sequenceLength)
-      $scope.won = 1
+      MainCtrl.won = 1
+      console.log('gagné')
       return evaluation
     # teste si on a perdu
     else if($scope.lines.length is $scope.conf.turns - 1)
-      $scope.loose = 1
+      MainCtrl.loose = 1
       return evaluation
     # autrement le jeu continue
 
@@ -198,9 +199,10 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
+  $scope.altColors = 0
   MainCtrl.lines=[]
-  $scope.won = 0 # a t on gagné?
-  $scope.loose = 0 # a t on perdu?
+  MainCtrl.won = 0 # a t on gagné?
+  MainCtrl.loose = 0 # a t on perdu?
   $scope.sequenceAdverse = ["blue", "yellow", "red", "green"]
   $scope.MainCtrl = MainCtrl
 
@@ -228,17 +230,15 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     if($scope.lengthLines >= $scope.conf.turns)
       console.log('tour max atteint')
       return false
-    lespions = sequence
-    goods = $scope.evaluate(lespions)
-    $scope.result[$scope.lengthLines] = goods
+    evaluation = $scope.evaluate(sequence)
+    $scope.result[$scope.lengthLines] = evaluation
     obj =
       id: $scope.lengthLines
-      pions: lespions
-    console.log('lines', MainCtrl.lines)
+      pions: sequence
+#    console.log('lines', MainCtrl.lines)
     MainCtrl.lines.push(obj)
-    console.log('lines après', MainCtrl.lines)
-    goods = $scope.evaluate(lespions)
-    goods
+#    console.log('lines après', MainCtrl.lines)
+    evaluation
 
   # ajouter une séquence au hasard
   $scope.addRandomSequence = ()->

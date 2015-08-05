@@ -2,8 +2,8 @@
 
 <div ng-show="conf.debug">
     <small class="badge-info badge">debug</small>
-    <span class="badge badge-success" ng-show="won">gagné</span>
-    <span class="badge badge-warning" ng-show="loose">perdu</span>
+    <span class="badge badge-success" ng-show="MainCtrl.won">gagné</span>
+    <span class="badge badge-warning" ng-show="MainCtrl.loose">perdu</span>
     <span class="badge-info badge" ng-show="conf.autoRun">
         Autorun
     </span>
@@ -12,11 +12,12 @@
         recommencer
     </a>
 </div>
-<div ng-show="lines.length">
-    <div ng-show="won" class="alert alert-success">
+<div class="clearfix"></div>
+<div ng-show="MainCtrl.lines.length">
+    <div ng-show="MainCtrl.won" class="alert alert-success">
         WOOT! vous avez gagné!
     </div>
-    <div ng-show="loose" class="alert alert-danger">
+    <div ng-show="MainCtrl.loose" class="alert alert-danger">
         SACREBLEU! you loose!!
     </div>
 </div>
