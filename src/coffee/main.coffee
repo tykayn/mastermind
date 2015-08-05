@@ -149,12 +149,12 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   ###
   $scope.conf = {
     player: 1 # joueurs
-    autoRun: 0 # lancer automatiquement les séquences
+    autoRun: 1 # lancer automatiquement les séquences
     randomGoal: 1 # choisir une séquence adverse aléatoire
-    debug: 1
-    turns: 10
-    sequenceLength: 4
-    doubleColors: 1
+    debug: 1 # montrer infos de débug
+    turns: 100 # essais du joueur
+    sequenceLength: 4 # pions par séquence
+    doubleColors: 1 # autoriser les couleurs doubles
     couleurs: ['yellow', 'violet', 'green', 'blue', 'red']
   }
   $scope.couleurs = $scope.conf.couleurs
@@ -196,7 +196,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   # ajouter à la séquence
   $scope.addSequence = (sequence)->
     newSeq = angular.copy(sequence)
-    if($scope.lengthLines >= $scope.conf.turns)
+    if($scope.lengthLines is $scope.conf.turns)
       console.log('tour max atteint')
       return false
     if(MainCtrl.won)
@@ -341,11 +341,16 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     $scope.sequenceAdverse = $scope.randomSequence()
     console.log('but aléatoire', $scope.sequenceAdverse)
 
-  # lancer l'autorun
-  if($scope.conf.autoRun)
+  $scope.autoRun = ()->
+    if(!$scope.conf.autoRun)
+      console.log('autoRun désactivé')
+      return
     console.log('autoRun')
-    for i in [0..10]
+    for i in [1..$scope.conf.turns]
       if(!$scope.won)
 #        $scope.addSequence(IA.suggestedSequence);
         $scope.addRandomSequence();
+  # lancer l'autorun
+  if($scope.conf.autoRun)
+    $scope.autoRun()
 ]

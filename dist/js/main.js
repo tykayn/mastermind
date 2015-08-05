@@ -143,7 +143,7 @@ Mastermind.service("AnalysePions", function() {
 
 Mastermind.controller("MainCtrl", [
   '$rootScope', '$scope', 'AnalysePions', function($rootScope, $scope, IA) {
-    var MainCtrl, i, j, results;
+    var MainCtrl;
     MainCtrl = this;
 
     /*
@@ -151,10 +151,10 @@ Mastermind.controller("MainCtrl", [
      */
     $scope.conf = {
       player: 1,
-      autoRun: 0,
+      autoRun: 1,
       randomGoal: 1,
       debug: 1,
-      turns: 10,
+      turns: 100,
       sequenceLength: 4,
       doubleColors: 1,
       couleurs: ['yellow', 'violet', 'green', 'blue', 'red']
@@ -197,7 +197,7 @@ Mastermind.controller("MainCtrl", [
     $scope.addSequence = function(sequence) {
       var evaluation, newSeq, obj;
       newSeq = angular.copy(sequence);
-      if ($scope.lengthLines >= $scope.conf.turns) {
+      if ($scope.lengthLines === $scope.conf.turns) {
         console.log('tour max atteint');
         return false;
       }
@@ -370,10 +370,15 @@ Mastermind.controller("MainCtrl", [
       $scope.sequenceAdverse = $scope.randomSequence();
       console.log('but aléatoire', $scope.sequenceAdverse);
     }
-    if ($scope.conf.autoRun) {
+    $scope.autoRun = function() {
+      var i, j, ref, results;
+      if (!$scope.conf.autoRun) {
+        console.log('autoRun désactivé');
+        return;
+      }
       console.log('autoRun');
       results = [];
-      for (i = j = 0; j <= 10; i = ++j) {
+      for (i = j = 1, ref = $scope.conf.turns; 1 <= ref ? j <= ref : j >= ref; i = 1 <= ref ? ++j : --j) {
         if (!$scope.won) {
           results.push($scope.addRandomSequence());
         } else {
@@ -381,6 +386,9 @@ Mastermind.controller("MainCtrl", [
         }
       }
       return results;
+    };
+    if ($scope.conf.autoRun) {
+      return $scope.autoRun();
     }
   }
 ]);

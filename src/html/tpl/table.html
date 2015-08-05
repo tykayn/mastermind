@@ -1,4 +1,4 @@
-<h2>{{MainCtrl.lines.length}} Essais sur 10</h2>
+<h2>{{MainCtrl.lines.length}} Essais sur {{conf.turns}}</h2>
 
 <div ng-show="conf.debug">
     <small class="badge-info badge">debug</small>
@@ -7,7 +7,7 @@
     <span class="badge-info badge" ng-show="conf.autoRun">
         Autorun
     </span>
-    <a class="pull-right btn btn-warning" ng-click="emptyTable()">
+    <a class="pull-right btn btn-warning" ng-click="emptyTable();autoRun()">
         <i class="fa  fa-trash " ></i>
         recommencer
     </a>
