@@ -293,6 +293,13 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
         return false
     true
 
+  # copier une séquence du tableau d'historique
+  # id : id de ligne dans l'historique
+  $scope.setSequence = (id)->
+    seq = angular.copy(MainCtrl.lines[id].pions)
+    console.log('setSequence', seq)
+    $scope.sequence = seq
+
   # ajouter a la séquence
   $scope.addColor = (color)->
     if(!$scope.colorUnique(color))

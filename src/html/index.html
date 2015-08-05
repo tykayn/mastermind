@@ -91,19 +91,20 @@
                     </div>
                     <div class="row">
                         <div data-toggle="tooltip"
-                             data-tooltip="enlevez une couleur en cliquant dessus">
+                             data-tooltip="enlevez une couleur en cliquant dessus"
+                                class="well marged-v">
 
                             <div class="clearfix"></div>
                             <!--{{sequence}}-->
                             <div class="clearfix"></div>
-                            <div class="pion-line well marged-v">
+                            <div class="pion-line ">
                                 <div class="pion-bloc" ng-repeat="c in sequence ">
                                     <div class=" btn btn-primary pull-left pion {{c.color}}"
                                          ng-click="deleteColor(c.color)"></div>
                                     <!--{{c.color}}-->
                                 </div>
                             </div>
-                            {{sequence}}
+                            <!--{{sequence}}-->
 
                         </div>
 

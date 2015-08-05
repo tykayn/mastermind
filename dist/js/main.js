@@ -317,6 +317,12 @@ Mastermind.controller("MainCtrl", [
       }
       return true;
     };
+    $scope.setSequence = function(id) {
+      var seq;
+      seq = angular.copy(MainCtrl.lines[id].pions);
+      console.log('setSequence', seq);
+      return $scope.sequence = seq;
+    };
     $scope.addColor = function(color) {
       var j, len, newId, pion, ref;
       if (!$scope.colorUnique(color)) {
