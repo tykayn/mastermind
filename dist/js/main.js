@@ -7,8 +7,21 @@ Mastermind.service("AnalysePions", function() {
   return {
     suggestedSequence: [],
     config: {},
+    beginBatch: function() {
+      var nbBatchs, nbCouleurs, numTourActuel, sequenceAdviced;
+      nbCouleurs = this.config.couleurs.length;
+      nbBatchs = nbCouleurs / this.config.sequenceLength;
+      numTourActuel = this.tree.length;
+      sequenceAdviced = this.config.couleurs.slice(0 + (numTourActuel * this.config.sequenceLength), this.config.sequenceLength);
+      this.suggestedSequence = sequenceAdviced;
+      console.log('beginBatch', nbCouleurs, nbBatchs, sequenceAdviced);
+      return sequenceAdviced;
+    },
     suggestSequence: function() {
       var c, isBadColor, j, laProba, len, probas, ref, sequenceAdviced;
+      if (this.tree.length <= 2) {
+        return this.beginBatch();
+      }
       probas = [];
       ref = Object.keys(this.tree);
       for (j = 0, len = ref.length; j < len; j++) {

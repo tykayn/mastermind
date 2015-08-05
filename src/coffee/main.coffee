@@ -7,9 +7,24 @@ Mastermind.service "AnalysePions", ()->
   suggestedSequence : []
 # config à insérer
   config: {}
+# début de partie, essais pour avoir un max d'infos sur toutes les couleurs
+  beginBatch: ()->
+    # au début, essayer toutes les couleurs
+    nbCouleurs = @config.couleurs.length
+    nbBatchs = nbCouleurs / @config.sequenceLength
+    numTourActuel = @tree.length
+
+    sequenceAdviced = @config.couleurs.slice(0 + (numTourActuel*@config.sequenceLength), @config.sequenceLength)
+    @suggestedSequence = sequenceAdviced
+    console.log('beginBatch',nbCouleurs,nbBatchs,sequenceAdviced)
+    sequenceAdviced
 # suggérer une séquence
 # selon les plus hauts score de couleur parmi l'arbre des chances
   suggestSequence: ()->
+
+    # TODO sur les premières séquences, batch
+    if(@tree.length <= 2)
+      return @beginBatch()
     probas = []
     # ranger par proba décroissante
     # sortir les 4 premiers par défaut
