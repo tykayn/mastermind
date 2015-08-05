@@ -96,14 +96,14 @@
                             <div class="clearfix"></div>
                             <!--{{sequence}}-->
                             <div class="clearfix"></div>
-                            <div class="pion-line">
+                            <div class="pion-line well marged-v">
                                 <div class="pion-bloc" ng-repeat="c in sequence ">
                                     <div class=" btn btn-primary pull-left pion {{c.color}}"
-                                         ng-click="deleteColor(c.id)"></div>
+                                         ng-click="deleteColor(c.color)"></div>
                                     <!--{{c.color}}-->
                                 </div>
                             </div>
-                            <!--{{sequence}}-->
+                            {{sequence}}
 
                         </div>
 
@@ -113,9 +113,11 @@
                         il faut choisir 4 pions pour valider la
                         séquence
                     </div>
-                    <a ng-hide="sequence.length < 4"
-                       class="btn btn-success btn-block"
-                       ng-click="addSequence(sequence)">
+
+                    <a
+                            ng-hide="sequence.length < conf.sequenceLength"
+                            class="btn btn-success btn-block"
+                            ng-click="addSequence(sequence)">
                         <i class="fa fa-check-circle"></i>
                         valider
                     </a>
@@ -141,12 +143,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <h2>{{MainCtrl.lines.length}} Essais sur 10</h2>
-                    <!--<pre>-->
-                    <!--{{MainCtrl.lines|json}}-->
-                    <!--</pre>-->
-
                 </menu>
 
             </div>
@@ -162,7 +158,7 @@
                 <h2>
                     Configurable</h2>
                 <ul class="unstyled">
-                    <li>interdire plusieurs fois la même couleur TODO</li>
+                    <li>interdire plusieurs fois la même couleur</li>
                     <li>autres couleurs
                         <button class="btn btn-info" ng-click="altColors = !altColors">changer</button>
                     </li>

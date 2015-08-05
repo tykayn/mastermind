@@ -188,7 +188,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
       console.log('gagné')
       return evaluation
     # teste si on a perdu
-    else if($scope.lines.length is $scope.conf.turns - 1)
+    else if(MainCtrl.lines.length is $scope.conf.turns - 1)
       MainCtrl.loose = 1
       return evaluation
     # autrement le jeu continue
@@ -220,6 +220,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   # vider toutes les séquences
   $scope.emptyTable = ()->
     console.log('emptyTable')
+    MainCtrl.won=0
     MainCtrl.lines=[]
 
   # ajouter à la séquence
@@ -283,21 +284,39 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   $scope.emptySequence = ()->
     $scope.lengthLines = 0
     $scope.sequence = []
+
+  # vérif que la couleur n'est pas déjà présente dans la séquence
+  $scope.colorUnique =(color)->
+    for pion in $scope.sequence
+      if(pion.color is color)
+        console.log('couleur non unique', color)
+        return false
+    true
+
   # ajouter a la séquence
   $scope.addColor = (color)->
-# si y'a déjà le max de couleurs, enlever la première
+    if(!$scope.colorUnique(color))
+#      $scope.deleteColor(color)
+      return false
+    # si y'a déjà le max de couleurs, enlever la première
     if($scope.sequence.length is $scope.conf.sequenceLength)
-      $scope.sequence.splice(1, 1)
+      $scope.sequence.splice(0, 1)
     #changer les id précédents
     newId = 0
     for pion in $scope.sequence
       pion.id = newId
       newId++
-    newId++
+#    newId++
     $scope.sequence.push({id: newId, color: color})
   # enlever à la séquence
-  $scope.deleteColor = (index)->
-    console.log('enlever', index, $scope.sequence[index])
+  $scope.deleteColor = (color)->
+    counter = 0
+    for pion in $scope.sequence
+      if(pion.color is color)
+        index = counter
+        lepion = pion
+      counter++
+    console.log('enlever', color, index,$scope.sequence[index])
     $scope.sequence.splice(index, 1)
 
   # config pour joueur sans automatisation

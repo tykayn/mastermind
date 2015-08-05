@@ -194,7 +194,7 @@ Mastermind.controller("MainCtrl", [
         MainCtrl.won = 1;
         console.log('gagné');
         return evaluation;
-      } else if ($scope.lines.length === $scope.conf.turns - 1) {
+      } else if (MainCtrl.lines.length === $scope.conf.turns - 1) {
         MainCtrl.loose = 1;
         return evaluation;
       }
@@ -225,6 +225,7 @@ Mastermind.controller("MainCtrl", [
     };
     $scope.emptyTable = function() {
       console.log('emptyTable');
+      MainCtrl.won = 0;
       return MainCtrl.lines = [];
     };
     $scope.addSequence = function() {
@@ -304,10 +305,25 @@ Mastermind.controller("MainCtrl", [
       $scope.lengthLines = 0;
       return $scope.sequence = [];
     };
+    $scope.colorUnique = function(color) {
+      var j, len, pion, ref;
+      ref = $scope.sequence;
+      for (j = 0, len = ref.length; j < len; j++) {
+        pion = ref[j];
+        if (pion.color === color) {
+          console.log('couleur non unique', color);
+          return false;
+        }
+      }
+      return true;
+    };
     $scope.addColor = function(color) {
       var j, len, newId, pion, ref;
+      if (!$scope.colorUnique(color)) {
+        return false;
+      }
       if ($scope.sequence.length === $scope.conf.sequenceLength) {
-        $scope.sequence.splice(1, 1);
+        $scope.sequence.splice(0, 1);
       }
       newId = 0;
       ref = $scope.sequence;
@@ -316,14 +332,24 @@ Mastermind.controller("MainCtrl", [
         pion.id = newId;
         newId++;
       }
-      newId++;
       return $scope.sequence.push({
         id: newId,
         color: color
       });
     };
-    $scope.deleteColor = function(index) {
-      console.log('enlever', index, $scope.sequence[index]);
+    $scope.deleteColor = function(color) {
+      var counter, index, j, len, lepion, pion, ref;
+      counter = 0;
+      ref = $scope.sequence;
+      for (j = 0, len = ref.length; j < len; j++) {
+        pion = ref[j];
+        if (pion.color === color) {
+          index = counter;
+          lepion = pion;
+        }
+        counter++;
+      }
+      console.log('enlever', color, index, $scope.sequence[index]);
       return $scope.sequence.splice(index, 1);
     };
     $scope.goPlayer = function() {
