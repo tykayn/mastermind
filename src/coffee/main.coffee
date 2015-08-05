@@ -224,12 +224,16 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
 
   # ajouter à la séquence
   $scope.addSequence = ()->
-    sequence = $scope.sequence
-    console.log('addSequence', sequence)
-    $scope.lengthLines = MainCtrl.lines.length
     if($scope.lengthLines >= $scope.conf.turns)
       console.log('tour max atteint')
       return false
+    if(MainCtrl.won)
+      console.log('vous avez déjà gagné')
+      return false
+    sequence = $scope.sequence
+    console.log('addSequence', sequence)
+    $scope.lengthLines = MainCtrl.lines.length
+
     evaluation = $scope.evaluate(sequence)
     $scope.result[$scope.lengthLines] = evaluation
     obj =
