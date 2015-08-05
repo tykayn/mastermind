@@ -17,7 +17,7 @@
     <div ng-show="MainCtrl.won" class="alert alert-success">
         WOOT! vous avez gagné!
     </div>
-    <div ng-show="MainCtrl.loose" class="alert alert-danger">
+    <div ng-show="MainCtrl.loose && !MainCtrl.won" class="alert alert-danger">
         SACREBLEU! you loose!!
     </div>
 </div>

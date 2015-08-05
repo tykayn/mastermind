@@ -154,10 +154,10 @@ Mastermind.controller("MainCtrl", [
       autoRun: 1,
       randomGoal: 1,
       debug: 1,
-      turns: 100,
+      turns: 12,
       sequenceLength: 4,
       doubleColors: 1,
-      couleurs: ['yellow', 'violet', 'green', 'blue', 'red']
+      couleurs: ['yellow', 'violet', 'green', 'blue', 'red', 'orange', 'white', 'fuschia']
     };
     $scope.couleurs = $scope.conf.couleurs;
     IA.setConfig($scope.conf);

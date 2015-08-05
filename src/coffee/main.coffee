@@ -152,10 +152,10 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     autoRun: 1 # lancer automatiquement les séquences
     randomGoal: 1 # choisir une séquence adverse aléatoire
     debug: 1 # montrer infos de débug
-    turns: 100 # essais du joueur
+    turns: 12 # essais du joueur
     sequenceLength: 4 # pions par séquence
     doubleColors: 1 # autoriser les couleurs doubles
-    couleurs: ['yellow', 'violet', 'green', 'blue', 'red']
+    couleurs: ['yellow', 'violet', 'green', 'blue', 'red','orange','white','fuschia']
   }
   $scope.couleurs = $scope.conf.couleurs
   IA.setConfig($scope.conf)
