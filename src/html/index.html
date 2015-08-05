@@ -52,16 +52,119 @@
 
     <div class="row-fluid">
         <div class="col-lg-3">
-            <div ng-include="'tpl/menu.html'"></div>
+            <!--menu de jeu-->
+            <menu>
+                <div class="row-fluid">
+                    <a class="btn btn-primary"
+                       ng-click="populateSequence();addSequence(sequence)">
+                        à vous de jouer
+                    </a>
+
+                    <!--<h2 class="btn btn-primary"-->
+                    <!--ng-click="gagner()">-->
+                    <!--gagner-->
+                    <!--</h2>-->
+
+                    <!--<h2 class="btn btn-primary"-->
+                    <!--ng-click="addRandomSequence()">-->
+                    <!--Random-->
+                    <!--</h2>-->
+                    <br/>
+                    <small>
+                        Construisez votre séquence de couleurs en cliquant sur les pions disponibles:
+                    </small>
+
+                    <div class="row">
+                        <div class="text-center" data-toggle="tooltip"
+                             data-tooltip="choisissez votre séquence de couleur en cliquant sur les pions">
+                            <div class="pion-line">
+                                <div class="pion-bloc" ng-repeat="c in couleurs ">
+                                    <div class=" btn btn-primary pion pull-left {{c}}" ng-click="addColor(c)"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div data-toggle="tooltip"
+                         data-tooltip="enlevez une couleur en cliquant dessus">
+
+                        <div class="clearfix"></div>
+                        <!--{{sequence}}-->
+                        <div class="clearfix"></div>
+                        <div class="pion-line">
+                            <div class="pion-bloc" ng-repeat="c in sequence ">
+                                <div class=" btn btn-primary pull-left pion {{c.color}}"
+                                     ng-click="deleteColor(c.id)"></div>
+                                <!--{{c.color}}-->
+                            </div>
+                        </div>
+                        <!--{{sequence}}-->
+
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="alert alert-info" ng-show="sequence.length < 4">
+                    il faut choisir 4 pions pour valider la
+                    séquence
+                </div>
+                <a ng-hide="sequence.length < 4"
+                   class="btn btn-success btn-block"
+                   ng-click="addSequence(sequence)">
+                    <i class="fa fa-check-circle"></i>
+                    valider
+                </a>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div ng-show="sequence.length" class="row-fluid">
+                    <a class="pull-left btn btn-primary">
+                        <i class="fa  fa-trash " ng-click="emptySequence()"></i>
+                        vider
+                    </a>
+
+                </div>
+                <hr/>
+                <div class="well" ng-show="debug">
+                    <!--<h2>debug </h2>-->
+                    séquence à trouver: <br/>
+
+                    <div class="row-fluid pion-line" data-toggle="tooltip">
+                        <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
+                            <div class=" btn btn-primary pull-left pion {{c}}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>{{MainCtrl.lines.length}} Essais sur 10</h2>
+                    <!--<pre>-->
+                         <!--{{MainCtrl.lines|json}}-->
+                    <!--</pre>-->
+
+            </menu>
+
         </div>
         <div class="col-lg-9">
-            <div ng-include="'tpl/table.html'" ng-controller="MainCtrl"></div>
+            <div ng-include="'tpl/table.html'"></div>
 
         </div>
     </div>
 
     <div class="clearfix"></div>
     <div class="row">
+        <section>
+            <h2>
+            Configurable</h2>
+            <ul class="unstyled">
+                <li>interdire plusieurs fois la même couleur TODO</li>
+                <li>autres couleurs TODO</li>
+                <li>debug</li>
+                <li>mode solo</li>
+                <li>mode autorun</li>
+            </ul>
+        </section>
         <div class="author">
             made by
             <a href="http://github.com/tykayn">tykayn</a>

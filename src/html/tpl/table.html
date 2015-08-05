@@ -1,4 +1,4 @@
-<h2>{{lines.length}} Essais sur 10</h2>
+<h2>{{MainCtrl.lines.length}} Essais sur 10</h2>
 
 <div ng-show="conf.debug">
     <small class="badge-info badge">debug</small>
@@ -7,7 +7,7 @@
     <span class="badge-info badge" ng-show="conf.autoRun">
         Autorun
     </span>
-    <a class="pull-right btn btn-warning" ng-click="emptyTable(); lines = []">
+    <a class="pull-right btn btn-warning" ng-click="emptyTable()">
         <i class="fa  fa-trash " ></i>
         recommencer
     </a>
@@ -45,7 +45,7 @@
             </div>
         </div>
     </li>
-    <li ng-if="conf.debug" ng-repeat="l in lines track by $index">
+    <li ng-if="conf.debug" ng-repeat="l in MainCtrl.lines track by $index">
         <div class="row">
             <div class="col-lg-2">{{ l.id+1 }}</div>
             <div class="col-lg-3">
@@ -82,6 +82,9 @@
         </div>
     </li>
 </ul>
+<!--<pre>-->
+     <!--{{MainCtrl.lines|json}}-->
+<!--</pre>-->
 <hr/>
 <div>
     <h2>Plan d'analyse</h2>

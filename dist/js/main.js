@@ -143,11 +143,12 @@ Mastermind.service("AnalysePions", function() {
 
 Mastermind.controller("MainCtrl", [
   '$rootScope', '$scope', 'AnalysePions', function($rootScope, $scope, IA) {
+    var MainCtrl, i, j, results;
+    MainCtrl = this;
 
     /*
       config globale
      */
-    var i, j, results;
     $scope.conf = {
       player: 1,
       autoRun: 0,
@@ -201,9 +202,11 @@ Mastermind.controller("MainCtrl", [
       return evaluation;
     };
     $scope.sequence = [];
+    MainCtrl.lines = [];
     $scope.won = 0;
     $scope.loose = 0;
     $scope.sequenceAdverse = ["blue", "yellow", "red", "green"];
+    $scope.MainCtrl = MainCtrl;
     $scope.gagner = function() {
       var c, i, j, len, obj, ref;
       i = 0;
@@ -220,23 +223,27 @@ Mastermind.controller("MainCtrl", [
     };
     $scope.emptyTable = function() {
       console.log('emptyTable');
-      return $scope.lines = [];
+      return MainCtrl.lines = [];
     };
-    $scope.addSequence = function(sequence) {
-      var goods, lespions, obj;
-      $scope.lengthLines = $scope.lines.length;
+    $scope.addSequence = function() {
+      var goods, lespions, obj, sequence;
+      sequence = $scope.sequence;
+      console.log('addSequence', sequence);
+      $scope.lengthLines = MainCtrl.lines.length;
       if ($scope.lengthLines >= $scope.conf.turns) {
         console.log('tour max atteint');
         return false;
       }
-      lespions = angular.copy(sequence);
+      lespions = sequence;
       goods = $scope.evaluate(lespions);
       $scope.result[$scope.lengthLines] = goods;
       obj = {
         id: $scope.lengthLines,
         pions: lespions
       };
-      $scope.lines.push(obj);
+      console.log('lines', MainCtrl.lines);
+      MainCtrl.lines.push(obj);
+      console.log('lines après', MainCtrl.lines);
       goods = $scope.evaluate(lespions);
       return goods;
     };
