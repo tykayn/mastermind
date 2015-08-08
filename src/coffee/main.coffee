@@ -82,10 +82,17 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     goods = 0
     nearly = 0
     i = 0
+    couleursAdverses = []
+    # faire un tableau de chaines
+    for elem in $scope.sequenceAdverse
+      couleursAdverses.push(elem.color)
+
+    console.log('___________ couleursAdverses',couleursAdverses)
     for elem in sequence
-      if($scope.sequenceAdverse[i].color is elem.color)
+      console.log('___________ elem',elem.color, couleursAdverses.indexOf(elem.color) )
+      if(couleursAdverses[i] is elem.color)
         goods++
-      else if($scope.sequenceAdverse.indexOf(elem.color) != -1 )
+      else if(couleursAdverses.indexOf(elem.color) != -1)
         nearly++
       i++
     evaluation = {

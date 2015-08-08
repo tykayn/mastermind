@@ -79,15 +79,23 @@ Mastermind.controller("MainCtrl", [
     et donner ses stats de réponse
      */
     $scope.evaluate = function(sequence) {
-      var elem, evaluation, goods, i, j, len, nearly;
+      var couleursAdverses, elem, evaluation, goods, i, j, k, len, len1, nearly, ref;
       goods = 0;
       nearly = 0;
       i = 0;
-      for (j = 0, len = sequence.length; j < len; j++) {
-        elem = sequence[j];
-        if ($scope.sequenceAdverse[i].color === elem.color) {
+      couleursAdverses = [];
+      ref = $scope.sequenceAdverse;
+      for (j = 0, len = ref.length; j < len; j++) {
+        elem = ref[j];
+        couleursAdverses.push(elem.color);
+      }
+      console.log('___________ couleursAdverses', couleursAdverses);
+      for (k = 0, len1 = sequence.length; k < len1; k++) {
+        elem = sequence[k];
+        console.log('___________ elem', elem.color, couleursAdverses.indexOf(elem.color));
+        if (couleursAdverses[i] === elem.color) {
           goods++;
-        } else if ($scope.sequenceAdverse.indexOf(elem.color) !== -1) {
+        } else if (couleursAdverses.indexOf(elem.color) !== -1) {
           nearly++;
         }
         i++;
