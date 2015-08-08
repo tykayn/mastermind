@@ -7,10 +7,10 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   ###
   $scope.conf = {
     player: 1 # joueurs
-    autoRun: 1 # lancer automatiquement les séquences
+    autoRun: 0 # lancer automatiquement les séquences
     randomGoal: 1 # choisir une séquence adverse aléatoire
     debug: 1 # montrer infos de débug
-    turns: 4 # essais du joueur
+    turns: 12 # essais du joueur
     sequenceLength: 4 # pions par séquence
     doubleColors: 1 # autoriser les couleurs doubles
     couleurs: ['yellow', 'violet', 'green', 'blue', 'red','orange','white','fuschia']

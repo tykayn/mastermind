@@ -8,10 +8,10 @@ Mastermind.controller("MainCtrl", [
      */
     $scope.conf = {
       player: 1,
-      autoRun: 1,
+      autoRun: 0,
       randomGoal: 1,
       debug: 1,
-      turns: 4,
+      turns: 12,
       sequenceLength: 4,
       doubleColors: 1,
       couleurs: ['yellow', 'violet', 'green', 'blue', 'red', 'orange', 'white', 'fuschia']
