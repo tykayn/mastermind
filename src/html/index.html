@@ -43,16 +43,21 @@
     </p><![endif]-->
     <div class="container">
         <h1>
-            <i class="fa fa-book fa-3x"></i>
+            <i class="fa fa-book fa-2x"></i>
             Mastermind
             <div class="pull-right">
-                <div class="pion violet"></div>
-                <div class="pion red"></div>
-                <div class="pion yellow"></div>
-                <div class="pion blue"></div>
-                <div class="pion green"></div>
-                <div class="pion white"></div>
-                <div class="pion black"></div>
+                <div class="pion-line">
+                    <div class="pion-bloc clickable" ng-repeat="c in couleurs ">
+                        <div class=" pion {{c}}" ng-click="addColor(c)"></div>
+                    </div>
+                </div>
+                <!--<div class="pion violet"></div>-->
+                <!--<div class="pion red"></div>-->
+                <!--<div class="pion yellow"></div>-->
+                <!--<div class="pion blue"></div>-->
+                <!--<div class="pion green"></div>-->
+                <!--<div class="pion white"></div>-->
+                <!--<div class="pion black"></div>-->
             </div>
 
         </h1>
@@ -64,14 +69,18 @@
                 <!--menu de jeu-->
                 <menu>
                     <div class="row-fluid">
-                        <button class="btn btn-primary" ng-click="goPlayer()">
-                            <i class="fa fa-check-circle"></i>
-                            Let's play
-                        </button>
-                        <a class="btn btn-primary"
-                           ng-click="populateSequence()">
-                            à vous de jouer
-                        </a>
+                        <button class="btn btn-primary" data-toggle="collapse" data-target="#regles">
+                            <i class="fa fa-question-circle"></i>
+                            règles du jeu</button>
+
+                        <!--<button class="btn btn-primary" ng-click="goPlayer()">-->
+                            <!--<i class="fa fa-check-circle"></i>-->
+                            <!--Let's play-->
+                        <!--</button>-->
+                        <!--<a class="btn btn-primary"-->
+                           <!--ng-click="populateSequence()">-->
+                            <!--à vous de jouer-->
+                        <!--</a>-->
 
                         <!--<h2 class="btn btn-primary"-->
                         <!--ng-click="gagner()">-->
@@ -102,7 +111,7 @@
                         <div data-toggle="tooltip"
                              data-tooltip="enlevez une couleur en cliquant dessus"
                                 class="well marged-v">
-
+Votre combinaison: {{sequence.length}} pions
                             <div class="clearfix"></div>
                             <!--{{sequence}}-->
                             <div class="clearfix"></div>
@@ -136,32 +145,49 @@
 
                     <div ng-show="sequence.length" class="row-fluid marged-v">
                         <a class="pull-left btn btn-primary">
-                            <i class="fa  fa-trash " ng-click="sequence = []"></i>
+                            <i class="fa fa-trash" ng-click="sequence = []"></i>
                             vider
                         </a>
 
                     </div>
 
                     <div class="well" ng-show="conf.debug">
+                        <!--<h2>debug </h2>-->
+                        <h3>
+                            séquence à trouver:
+                        </h3>
+                        <button data-toggle="collapse" data-target="#reponse_sequence_adverse">montrer</button>
+
+                        <div id="reponse_sequence_adverse"class="collapse">
+                            <div class="row-fluid pion-line" data-toggle="tooltip">
+                                <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
+                                    <div class=" btn btn-primary pull-left pion {{c.color}}"></div>
+                                </div>
+                            </div>
+                        </div>
                         <h2>Config:</h2>
                         Tours <input class="input" type="number" ng-model="conf.turns" />
                         <hr/>
 
-                        <!--<h2>debug </h2>-->
-                        <h2>
-                            séquence à trouver:
-                        </h2>
-
-                        <div class="row-fluid pion-line" data-toggle="tooltip">
-                            <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
-                                <div class=" btn btn-primary pull-left pion {{c.color}}"></div>
-                            </div>
-                        </div>
                     </div>
                 </menu>
 
             </div>
             <div class="col-lg-9">
+                <div id="regles" class="collapse">
+                    <h2>Règles du jeu du Mastermind</h2>
+                    <h3>
+                        Saurez vous déduire la bonne combinaison de couleurs avant le dernier tour?
+                    </h3>
+                    Essayez des combinaisons en cliquant sur celles du menu de gauche, puis appuyez sur le bouton pour valider.<br/>
+                    à chaque tour, vous recevez une réponse vous indiquant le nombre de pions de bonne couleur bien placés, le nombre de pions de bonne couleur mais mal placés.<br/>
+                    Vous devez en déduire si vous avez des pions n'appartenant pas du tout à la séquence à trouver.<br/>
+                    En regardant les séquences précédentes et les scores qu'elles vous ont rapporté, vous pouvez deviner si une couleur a été mal placée par tâtonnements.
+                    <br>
+                    Une partie peut durer une dizaine de minute environ pour les débutants.<br>
+                    Que la force de l'esprit soit avec vous.
+
+                </div>
                 <div ng-include="'tpl/table.html'"></div>
 
             </div>
