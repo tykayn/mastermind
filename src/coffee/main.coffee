@@ -14,20 +14,30 @@ Mastermind.service "AnalysePions", ()->
     nbCouleurs = @config.couleurs.length
     nbBatchs = nbCouleurs / @config.sequenceLength
     numTourActuel = @tree.length
-
-    sequenceAdviced = @config.couleurs.slice(0 + (numTourActuel*@config.sequenceLength), @config.sequenceLength)
+    sequenceAdviced = []
+    splitting = @config.couleurs.slice(0 + (@numTour*@config.sequenceLength), @config.sequenceLength)
+    i = 0
+    for pion in splitting
+      obj = {
+        id: i
+        color: pion
+      }
+      i++
+      sequenceAdviced.push(obj)
     @suggestedSequence = sequenceAdviced
-    console.log('beginBatch',nbCouleurs,nbBatchs,sequenceAdviced)
+    console.log('========= beginBatch',nbCouleurs,nbBatchs)
+
     sequenceAdviced
 # suggérer une séquence
 # selon les plus hauts score de couleur parmi l'arbre des chances
   suggestSequence: ()->
-
+    console.info('------------ suggestSequence')
     # TODO sur les premières séquences, batch
     nbBatchs = @config.couleurs.length / @config.sequenceLength
-    console.info('Batchs',nbBatchs)
+    console.info('------------ Batchs',nbBatchs)
     if(@numTour <= nbBatchs)
-      return @beginBatch()
+      @suggestedSequence = @beginBatch()
+      return @suggestedSequence
     probas = []
     # TODO
     # comparaison avec les rangées gagnantes
@@ -58,6 +68,7 @@ Mastermind.service "AnalysePions", ()->
 
 #    faire un arbre des chances par couleur
   makeTree: (colors)->
+    console.info('----- construction de l\'arbre' )
     @tree = []
     # attribuer 1 - 1/nombre de pions max par séquence à toutes les couleurs,
     # elles sont toutes éligibles à gagner mais il y a plus de couleurs possibles
@@ -96,7 +107,7 @@ Mastermind.service "AnalysePions", ()->
 
   #    mettre du bad à toutes les couleurs de la séquence
   setBad: (sequence)->
-    console.log('rien de bon, on met du bad')
+    console.log('rien de bon, on met du bad',sequence)
     for c in sequence
       @tree[c.color].bad++
       @tree[c.color].proba = 0
@@ -159,8 +170,8 @@ Mastermind.service "AnalysePions", ()->
       @tree[c.color].tried++
       @tree[c.color].triedPositions[c.id]++
 
-    @suggestSequence()
-
+    retour = @suggestSequence()
+    retour
 #    console.log('wondering on the result')
   upTree: ->
     @tree = ['up']
@@ -178,7 +189,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     autoRun: 1 # lancer automatiquement les séquences
     randomGoal: 1 # choisir une séquence adverse aléatoire
     debug: 1 # montrer infos de débug
-    turns: 12 # essais du joueur
+    turns: 2 # essais du joueur
     sequenceLength: 4 # pions par séquence
     doubleColors: 1 # autoriser les couleurs doubles
     couleurs: ['yellow', 'violet', 'green', 'blue', 'red','orange','white','fuschia']
@@ -367,15 +378,21 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     $scope.sequenceAdverse = $scope.randomSequence()
     console.log('but aléatoire', $scope.sequenceAdverse)
 
+  # gestion de l'autorun
+  # avec méthodes pour suggérer une séquence
+  # TODO mettre en place la combinaison suggérée
   $scope.autoRun = ()->
     if(!$scope.conf.autoRun)
       console.log('autoRun désactivé')
       return
-    console.log('autoRun')
+    console.log('autoRun pour '+$scope.conf.turns+' tours')
+    #        $scope.addRandomSequence();
     for i in [1..$scope.conf.turns]
       if(!$scope.won)
-#        $scope.addSequence(IA.suggestedSequence);
-        $scope.addRandomSequence();
+        suggestion = IA.suggestSequence()
+        console.log('suggestion',suggestion)
+        $scope.addSequence(suggestion);
+
   # lancer l'autorun
   if($scope.conf.autoRun)
     $scope.autoRun()

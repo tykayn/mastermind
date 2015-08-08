@@ -9,21 +9,34 @@ Mastermind.service("AnalysePions", function() {
     numTour: 0,
     config: {},
     beginBatch: function() {
-      var nbBatchs, nbCouleurs, numTourActuel, sequenceAdviced;
+      var i, j, len, nbBatchs, nbCouleurs, numTourActuel, obj, pion, sequenceAdviced, splitting;
       nbCouleurs = this.config.couleurs.length;
       nbBatchs = nbCouleurs / this.config.sequenceLength;
       numTourActuel = this.tree.length;
-      sequenceAdviced = this.config.couleurs.slice(0 + (numTourActuel * this.config.sequenceLength), this.config.sequenceLength);
+      sequenceAdviced = [];
+      splitting = this.config.couleurs.slice(0 + (this.numTour * this.config.sequenceLength), this.config.sequenceLength);
+      i = 0;
+      for (j = 0, len = splitting.length; j < len; j++) {
+        pion = splitting[j];
+        obj = {
+          id: i,
+          color: pion
+        };
+        i++;
+        sequenceAdviced.push(obj);
+      }
       this.suggestedSequence = sequenceAdviced;
-      console.log('beginBatch', nbCouleurs, nbBatchs, sequenceAdviced);
+      console.log('========= beginBatch', nbCouleurs, nbBatchs);
       return sequenceAdviced;
     },
     suggestSequence: function() {
       var c, isBadColor, j, laProba, len, nbBatchs, probas, ref, sequenceAdviced;
+      console.info('------------ suggestSequence');
       nbBatchs = this.config.couleurs.length / this.config.sequenceLength;
-      console.info('Batchs', nbBatchs);
+      console.info('------------ Batchs', nbBatchs);
       if (this.numTour <= nbBatchs) {
-        return this.beginBatch();
+        this.suggestedSequence = this.beginBatch();
+        return this.suggestedSequence;
       }
       probas = [];
       ref = Object.keys(this.tree);
@@ -51,6 +64,7 @@ Mastermind.service("AnalysePions", function() {
     },
     makeTree: function(colors) {
       var c, j, len, stats;
+      console.info('----- construction de l\'arbre');
       this.tree = [];
       for (j = 0, len = colors.length; j < len; j++) {
         c = colors[j];
@@ -86,7 +100,7 @@ Mastermind.service("AnalysePions", function() {
     },
     setBad: function(sequence) {
       var c, j, len, results;
-      console.log('rien de bon, on met du bad');
+      console.log('rien de bon, on met du bad', sequence);
       results = [];
       for (j = 0, len = sequence.length; j < len; j++) {
         c = sequence[j];
@@ -121,7 +135,7 @@ Mastermind.service("AnalysePions", function() {
      * attribuer des chances par couleur selon le résultat
      */
     wonder: function(result, sequence) {
-      var c, diff, j, l, len, len1;
+      var c, diff, j, l, len, len1, retour;
       this.numTour += 1;
       console.info('numéro de tour', this.numTour);
       if (result.goods === 0) {
@@ -149,7 +163,8 @@ Mastermind.service("AnalysePions", function() {
         this.tree[c.color].tried++;
         this.tree[c.color].triedPositions[c.id]++;
       }
-      return this.suggestSequence();
+      retour = this.suggestSequence();
+      return retour;
     },
     upTree: function() {
       this.tree = ['up'];
@@ -172,7 +187,7 @@ Mastermind.controller("MainCtrl", [
       autoRun: 1,
       randomGoal: 1,
       debug: 1,
-      turns: 12,
+      turns: 2,
       sequenceLength: 4,
       doubleColors: 1,
       couleurs: ['yellow', 'violet', 'green', 'blue', 'red', 'orange', 'white', 'fuschia']
@@ -389,16 +404,18 @@ Mastermind.controller("MainCtrl", [
       console.log('but aléatoire', $scope.sequenceAdverse);
     }
     $scope.autoRun = function() {
-      var i, j, ref, results;
+      var i, j, ref, results, suggestion;
       if (!$scope.conf.autoRun) {
         console.log('autoRun désactivé');
         return;
       }
-      console.log('autoRun');
+      console.log('autoRun pour ' + $scope.conf.turns + ' tours');
       results = [];
       for (i = j = 1, ref = $scope.conf.turns; 1 <= ref ? j <= ref : j >= ref; i = 1 <= ref ? ++j : --j) {
         if (!$scope.won) {
-          results.push($scope.addRandomSequence());
+          suggestion = IA.suggestSequence();
+          console.log('suggestion', suggestion);
+          results.push($scope.addSequence(suggestion));
         } else {
           results.push(void 0);
         }
