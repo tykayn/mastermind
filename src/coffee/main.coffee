@@ -151,8 +151,11 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
 
   # vider la séquence
   $scope.emptySequence = ()->
+    console.info('vider la séquence')
     $scope.lengthLines = 0
     $scope.sequence = []
+    MainCtrl.lengthLines = 0
+    MainCtrl.sequence = []
 
   # copier une séquence du tableau d'historique
   # id : id de ligne dans l'historique

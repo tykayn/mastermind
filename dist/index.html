@@ -71,15 +71,16 @@
                     <div class="row-fluid">
                         <button class="btn btn-primary" data-toggle="collapse" data-target="#regles">
                             <i class="fa fa-question-circle"></i>
-                            règles du jeu</button>
+                            règles du jeu
+                        </button>
 
                         <!--<button class="btn btn-primary" ng-click="goPlayer()">-->
-                            <!--<i class="fa fa-check-circle"></i>-->
-                            <!--Let's play-->
+                        <!--<i class="fa fa-check-circle"></i>-->
+                        <!--Let's play-->
                         <!--</button>-->
                         <!--<a class="btn btn-primary"-->
-                           <!--ng-click="populateSequence()">-->
-                            <!--à vous de jouer-->
+                        <!--ng-click="populateSequence()">-->
+                        <!--à vous de jouer-->
                         <!--</a>-->
 
                         <!--<h2 class="btn btn-primary"-->
@@ -88,8 +89,8 @@
                         <!--</h2>-->
 
                         <h2 class="btn btn-primary"
-                        ng-click="sequence = randomSequence()">
-                        Random
+                            ng-click="sequence = randomSequence()">
+                            Random
                         </h2>
                         <br/>
                         <small>
@@ -110,8 +111,8 @@
                     <div class="row">
                         <div data-toggle="tooltip"
                              data-tooltip="enlevez une couleur en cliquant dessus"
-                                class="well marged-v">
-Votre combinaison: {{sequence.length}} pions
+                             class="well marged-v">
+                            Votre combinaison: {{sequence.length}} pions
                             <div class="clearfix"></div>
                             <!--{{sequence}}-->
                             <div class="clearfix"></div>
@@ -123,29 +124,29 @@ Votre combinaison: {{sequence.length}} pions
                                 </div>
                             </div>
                             <!--{{sequence}}-->
-
+                            <hr>
+                            <a
+                                    ng-hide="sequence.length < conf.sequenceLength"
+                                    class="btn btn-success btn-block"
+                                    ng-click="addSequence(sequence)">
+                                <i class="fa fa-check-circle"></i>
+                                valider
+                            </a>
                         </div>
 
                     </div>
-                    <div class="clearfix"></div>
+
                     <div class="alert alert-info" ng-show="sequence.length < 4">
                         il faut choisir 4 pions pour valider la
                         séquence
                     </div>
 
-                    <a
-                            ng-hide="sequence.length < conf.sequenceLength"
-                            class="btn btn-success btn-block"
-                            ng-click="addSequence(sequence)">
-                        <i class="fa fa-check-circle"></i>
-                        valider
-                    </a>
 
                     <div class="clearfix"></div>
 
                     <div ng-show="sequence.length" class="row-fluid marged-v">
                         <a class="pull-left btn btn-primary">
-                            <i class="fa fa-trash" ng-click="sequence = []"></i>
+                            <i class="fa fa-trash" ng-click="MainCtrl.emptySequence()"></i>
                             vider
                         </a>
 
@@ -158,7 +159,7 @@ Votre combinaison: {{sequence.length}} pions
                         </h3>
                         <button data-toggle="collapse" data-target="#reponse_sequence_adverse">montrer</button>
 
-                        <div id="reponse_sequence_adverse"class="collapse">
+                        <div id="reponse_sequence_adverse" class="collapse">
                             <div class="row-fluid pion-line" data-toggle="tooltip">
                                 <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
                                     <div class=" btn btn-primary pull-left pion {{c.color}}"></div>
@@ -166,7 +167,7 @@ Votre combinaison: {{sequence.length}} pions
                             </div>
                         </div>
                         <h2>Config:</h2>
-                        Tours <input class="input" type="number" ng-model="conf.turns" />
+                        Tours <input class="input" type="number" ng-model="conf.turns"/>
                         <hr/>
 
                     </div>
@@ -176,13 +177,17 @@ Votre combinaison: {{sequence.length}} pions
             <div class="col-lg-9">
                 <div id="regles" class="collapse">
                     <h2>Règles du jeu du Mastermind</h2>
+
                     <h3>
                         Saurez vous déduire la bonne combinaison de couleurs avant le dernier tour?
                     </h3>
-                    Essayez des combinaisons en cliquant sur celles du menu de gauche, puis appuyez sur le bouton pour valider.<br/>
-                    à chaque tour, vous recevez une réponse vous indiquant le nombre de pions de bonne couleur bien placés, le nombre de pions de bonne couleur mais mal placés.<br/>
+                    Essayez des combinaisons en cliquant sur celles du menu de gauche, puis appuyez sur le bouton pour
+                    valider.<br/>
+                    à chaque tour, vous recevez une réponse vous indiquant le nombre de pions de bonne couleur bien
+                    placés, le nombre de pions de bonne couleur mais mal placés.<br/>
                     Vous devez en déduire si vous avez des pions n'appartenant pas du tout à la séquence à trouver.<br/>
-                    En regardant les séquences précédentes et les scores qu'elles vous ont rapporté, vous pouvez deviner si une couleur a été mal placée par tâtonnements.
+                    En regardant les séquences précédentes et les scores qu'elles vous ont rapporté, vous pouvez deviner
+                    si une couleur a été mal placée par tâtonnements.
                     <br>
                     Une partie peut durer une dizaine de minute environ pour les débutants.<br>
                     Que la force de l'esprit soit avec vous.
@@ -211,7 +216,9 @@ Votre combinaison: {{sequence.length}} pions
                     <div class="col-lg-6">
                         TODO dans l'autorun:
                         <ul>
-                            <li>déduction des positions gagnantes en comparant avec emplacements similaires de pions les lignes comportant du bon score.</li>
+                            <li>déduction des positions gagnantes en comparant avec emplacements similaires de pions les
+                                lignes comportant du bon score.
+                            </li>
                             <li>la coloration de l'arrière plan pour les bons pions a réparer.</li>
                         </ul>
 
@@ -223,7 +230,9 @@ Votre combinaison: {{sequence.length}} pions
                                 on augmente les chances des couleurs pas encore entrées
                                 d'être bonnes.
                             </li>
-                            <li>le choix des prochaines couleurs se fait selon le plus haut score de couleur parmi l'arbre des chances</li>
+                            <li>le choix des prochaines couleurs se fait selon le plus haut score de couleur parmi
+                                l'arbre des chances
+                            </li>
                         </ul>
                         fait:
                         <ul>
@@ -235,7 +244,6 @@ Votre combinaison: {{sequence.length}} pions
                         </ul>
                     </div>
                 </div>
-
 
 
                 <h2>

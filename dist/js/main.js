@@ -170,8 +170,11 @@ Mastermind.controller("MainCtrl", [
       ];
     };
     $scope.emptySequence = function() {
+      console.info('vider la séquence');
       $scope.lengthLines = 0;
-      return $scope.sequence = [];
+      $scope.sequence = [];
+      MainCtrl.lengthLines = 0;
+      return MainCtrl.sequence = [];
     };
     $scope.setSequence = function(id) {
       var seq;
