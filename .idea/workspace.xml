@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d49b8da-817b-4631-80fa-ed4a0955c428" name="Default" comment="maj readme">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GulpFile.js" afterPath="$PROJECT_DIR$/GulpFile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" afterPath="$PROJECT_DIR$/dist/doc/doc/main-documentation/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coffee/main.coffee" afterPath="$PROJECT_DIR$/src/coffee/main.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/main.js" afterPath="$PROJECT_DIR$/dist/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mastermind.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +27,8 @@
       <file leaf-file-name="main.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46258503">
-              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.5170068">
+              <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -52,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/dist/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="312" column="20" selection-start-line="312" selection-start-column="20" selection-end-line="312" selection-end-column="20" />
+              <caret line="323" column="20" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -557,17 +553,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/coffee/main.coffee</url>
-          <line>233</line>
+          <line>235</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/coffee/main.coffee</url>
-          <line>186</line>
+          <line>188</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/coffee/main.coffee</url>
-          <line>383</line>
+          <line>385</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
@@ -923,7 +919,7 @@
     <entry file="file://$PROJECT_DIR$/dist/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="312" column="20" selection-start-line="312" selection-start-column="20" selection-end-line="312" selection-end-column="20" />
+          <caret line="323" column="20" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -938,8 +934,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/coffee/main.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46258503">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.5170068">
+          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
           <folding />
         </state>
       </provider>

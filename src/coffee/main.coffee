@@ -15,7 +15,9 @@ Mastermind.service "AnalysePions", ()->
     nbBatchs = nbCouleurs / @config.sequenceLength
     numTourActuel = @tree.length
     sequenceAdviced = []
-    splitting = @config.couleurs.slice(0 + (@numTour*@config.sequenceLength), @config.sequenceLength)
+    start = ((@numTour)*@config.sequenceLength)
+    end = @config.sequenceLength+ ((@numTour)*@config.sequenceLength)
+    splitting = @config.couleurs.slice(start, end)
     i = 0
     for pion in splitting
       obj = {

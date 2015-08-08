@@ -9,12 +9,14 @@ Mastermind.service("AnalysePions", function() {
     numTour: 0,
     config: {},
     beginBatch: function() {
-      var i, j, len, nbBatchs, nbCouleurs, numTourActuel, obj, pion, sequenceAdviced, splitting;
+      var end, i, j, len, nbBatchs, nbCouleurs, numTourActuel, obj, pion, sequenceAdviced, splitting, start;
       nbCouleurs = this.config.couleurs.length;
       nbBatchs = nbCouleurs / this.config.sequenceLength;
       numTourActuel = this.tree.length;
       sequenceAdviced = [];
-      splitting = this.config.couleurs.slice(0 + (this.numTour * this.config.sequenceLength), this.config.sequenceLength);
+      start = this.numTour * this.config.sequenceLength;
+      end = this.config.sequenceLength + (this.numTour * this.config.sequenceLength);
+      splitting = this.config.couleurs.slice(start, end);
       i = 0;
       for (j = 0, len = splitting.length; j < len; j++) {
         pion = splitting[j];
