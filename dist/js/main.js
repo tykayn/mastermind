@@ -41,6 +41,7 @@ Mastermind.service("AnalysePions", function() {
         return this.suggestedSequence;
       }
       probas = [];
+      console.log('************* TODO sequenceAdviced');
       ref = Object.keys(this.tree);
       for (j = 0, len = ref.length; j < len; j++) {
         c = ref[j];
@@ -56,7 +57,7 @@ Mastermind.service("AnalysePions", function() {
       }
       console.log('probas', probas, probas.sort());
       sequenceAdviced = probas.slice(0, this.config.sequenceLength);
-      console.log('sequenceAdviced', sequenceAdviced);
+      console.log('sequenceAdviced', this.config.sequenceLength, sequenceAdviced);
       this.suggestedSequence = sequenceAdviced;
       return sequenceAdviced;
     },
@@ -157,8 +158,11 @@ Mastermind.service("AnalysePions", function() {
           this.tree[c].proba = 0;
         }
         this.addProba(1);
-      } else if (result.goods >= 2) {
-        this.addProba(0.5);
+        if (result.goods >= 2) {
+          this.addProba(0.5);
+        }
+      } else {
+
       }
       for (l = 0, len1 = sequence.length; l < len1; l++) {
         c = sequence[l];
@@ -189,7 +193,7 @@ Mastermind.controller("MainCtrl", [
       autoRun: 1,
       randomGoal: 1,
       debug: 1,
-      turns: 2,
+      turns: 4,
       sequenceLength: 4,
       doubleColors: 1,
       couleurs: ['yellow', 'violet', 'green', 'blue', 'red', 'orange', 'white', 'fuschia']
@@ -401,31 +405,34 @@ Mastermind.controller("MainCtrl", [
       return $scope.emptySequence();
     };
     IA.makeTree($scope.couleurs);
-    if ($scope.conf.randomGoal) {
-      $scope.sequenceAdverse = $scope.randomSequence();
-      console.log('but aléatoire', $scope.sequenceAdverse);
-    }
-    $scope.autoRun = function() {
-      var i, j, ref, results, suggestion;
-      if (!$scope.conf.autoRun) {
-        console.log('autoRun désactivé');
-        return;
+    $scope.init = function() {
+      if ($scope.conf.randomGoal) {
+        $scope.sequenceAdverse = $scope.randomSequence();
+        console.log('but aléatoire', $scope.sequenceAdverse);
       }
-      console.log('autoRun pour ' + $scope.conf.turns + ' tours');
-      results = [];
-      for (i = j = 1, ref = $scope.conf.turns; 1 <= ref ? j <= ref : j >= ref; i = 1 <= ref ? ++j : --j) {
-        if (!$scope.won) {
-          suggestion = IA.suggestSequence();
-          console.log('suggestion', suggestion);
-          results.push($scope.addSequence(suggestion));
-        } else {
-          results.push(void 0);
+      $scope.autoRun = function() {
+        var i, j, ref, results, suggestion;
+        if (!$scope.conf.autoRun) {
+          console.log('autoRun désactivé');
+          return;
         }
+        console.log('autoRun pour ' + $scope.conf.turns + ' tours');
+        results = [];
+        for (i = j = 1, ref = $scope.conf.turns; 1 <= ref ? j <= ref : j >= ref; i = 1 <= ref ? ++j : --j) {
+          if (!$scope.won) {
+            suggestion = IA.suggestSequence();
+            console.log('suggestion', suggestion);
+            results.push($scope.addSequence(suggestion));
+          } else {
+            results.push(void 0);
+          }
+        }
+        return results;
+      };
+      if ($scope.conf.autoRun) {
+        return $scope.autoRun();
       }
-      return results;
     };
-    if ($scope.conf.autoRun) {
-      return $scope.autoRun();
-    }
+    return $scope.init();
   }
 ]);

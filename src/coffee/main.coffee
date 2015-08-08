@@ -45,7 +45,7 @@ Mastermind.service "AnalysePions", ()->
     # comparaison avec les rangées gagnantes
     #   lister les séquences comportant au moins un bon pion
     #   comparer les tableaux avec des positions similaires.
-
+    console.log('************* TODO sequenceAdviced')
     # trouver par proba
     # ranger par proba décroissante
     # sortir les 4 premiers par défaut
@@ -59,14 +59,13 @@ Mastermind.service "AnalysePions", ()->
       probas[laProba].push(@tree[c].name)
     console.log('probas', probas, probas.sort())
     sequenceAdviced = probas.slice(0,@config.sequenceLength)
-    console.log('sequenceAdviced', sequenceAdviced)
+    console.log('sequenceAdviced', @config.sequenceLength, sequenceAdviced)
     @suggestedSequence = sequenceAdviced
     sequenceAdviced
 # définir la config
   setConfig: (obj)->
     @config = obj
     console.log('@config' , @config.sequenceLength)
-
 
 #    faire un arbre des chances par couleur
   makeTree: (colors)->
@@ -94,9 +93,6 @@ Mastermind.service "AnalysePions", ()->
       @tree[c] = stats
     #    console.info('IA: tree was made',@tree)
     @tree
-
-
-
 
   #    faire un rendu lisible de l'arbre en ne donnant que la proba
   dumpTree: ()->
@@ -150,9 +146,6 @@ Mastermind.service "AnalysePions", ()->
       else if(result.nearly <= @config.sequenceLength / 2)
         @addProba(0.5)
 
-      # baisser les probas aux couleurs mises
-
-
       return
     # tous les pions sont bons, mais mal placés
     else if(result.goods + result.nearly is @config.sequenceLength)
@@ -164,8 +157,10 @@ Mastermind.service "AnalysePions", ()->
         @tree[c].bad++
         @tree[c].proba = 0
       @addProba(1)
-    else if(result.goods >= 2)
-      @addProba(0.5)
+      if(result.goods >= 2)
+        @addProba(0.5)
+    # autrement, il y a au moins un pion à sortir
+    else
 
     for c in sequence
 #      console.info(c)
@@ -191,7 +186,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     autoRun: 1 # lancer automatiquement les séquences
     randomGoal: 1 # choisir une séquence adverse aléatoire
     debug: 1 # montrer infos de débug
-    turns: 2 # essais du joueur
+    turns: 4 # essais du joueur
     sequenceLength: 4 # pions par séquence
     doubleColors: 1 # autoriser les couleurs doubles
     couleurs: ['yellow', 'violet', 'green', 'blue', 'red','orange','white','fuschia']
@@ -376,26 +371,30 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
 
   IA.makeTree($scope.couleurs)
 
-  if($scope.conf.randomGoal)
-    $scope.sequenceAdverse = $scope.randomSequence()
-    console.log('but aléatoire', $scope.sequenceAdverse)
+  $scope.init = ->
+    if($scope.conf.randomGoal)
+      $scope.sequenceAdverse = $scope.randomSequence()
+      console.log('but aléatoire', $scope.sequenceAdverse)
 
-  # gestion de l'autorun
-  # avec méthodes pour suggérer une séquence
-  # TODO mettre en place la combinaison suggérée
-  $scope.autoRun = ()->
-    if(!$scope.conf.autoRun)
-      console.log('autoRun désactivé')
-      return
-    console.log('autoRun pour '+$scope.conf.turns+' tours')
-    #        $scope.addRandomSequence();
-    for i in [1..$scope.conf.turns]
-      if(!$scope.won)
-        suggestion = IA.suggestSequence()
-        console.log('suggestion',suggestion)
-        $scope.addSequence(suggestion);
+    # gestion de l'autorun
+    # avec méthodes pour suggérer une séquence
+    # TODO mettre en place la combinaison suggérée
+    $scope.autoRun = ()->
+      if(!$scope.conf.autoRun)
+        console.log('autoRun désactivé')
+        return
+      console.log('autoRun pour '+$scope.conf.turns+' tours')
+      #        $scope.addRandomSequence();
+      for i in [1..$scope.conf.turns]
+        if(!$scope.won)
+          suggestion = IA.suggestSequence()
+          console.log('suggestion',suggestion)
+          $scope.addSequence(suggestion);
 
-  # lancer l'autorun
-  if($scope.conf.autoRun)
-    $scope.autoRun()
+    # lancer l'autorun
+    if($scope.conf.autoRun)
+      $scope.autoRun()
+  # démarrer tout
+  $scope.init()
+
 ]
