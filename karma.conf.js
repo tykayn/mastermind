@@ -17,6 +17,7 @@ module.exports = function(config) {
             'dist/bower_components/jquery/dist/jquery.min.js',
             'dist/bower_components/angularjs/angular.js',
             'dist/bower_components/angular-mocks/angular-mocks.js',
+            'dist/js/lib/ng-drag-n-drop.js',
             'dist/js/app.js',
             'dist/js/services/IA.js',
             'dist/js/main.js',

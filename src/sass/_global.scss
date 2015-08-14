@@ -1,9 +1,16 @@
+main{
+  margin-top: 2em;
+}
 .pion{
   border-radius: 100%;
   display: inline-block;
   width: 2em;
   height: 2em;
   border: solid 5px $black;
+  &.fat{
+    width: 4em;
+    height: 4em;
+  }
   .goodpart &{
     border:solid 5px green;
   }
