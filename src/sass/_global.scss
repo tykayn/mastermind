@@ -1,5 +1,10 @@
+body{
+  background: $grey;
+}
 main{
-  margin-top: 2em;
+  margin: 1em 0;
+  padding: 2em 0;
+  background: $white;
 }
 .pion{
   border-radius: 100%;
@@ -25,7 +30,7 @@ main{
   height: 3em;
 //  border: solid 1px red;
   float: left;
-  padding: 0.5em;
+  padding: 0.25em 0 0 ;
   .pion{
     width: 2.5em;
     height: 2.5em;
@@ -36,7 +41,12 @@ main{
   background: #adff2f;
   border-radius: 3px;
 }
-
+.row-hoverable{
+  padding: 0.5em 0;
+  &:hover{
+    background : $grey;
+  }
+}
 .violet{
   background: $violet;
 }

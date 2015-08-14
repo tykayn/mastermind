@@ -10,7 +10,7 @@ Mastermind.controller("MainCtrl", [
       player: 1,
       autoRun: 0,
       randomGoal: 1,
-      debug: 1,
+      debug: 0,
       turns: 12,
       sequenceLength: 4,
       doubleColors: 1,
@@ -54,7 +54,7 @@ Mastermind.controller("MainCtrl", [
     $scope.addSequence = function(sequence) {
       var evaluation, newSeq, obj;
       newSeq = angular.copy(sequence);
-      if ($scope.lengthLines === $scope.conf.turns) {
+      if ($scope.lengthLines === $scope.conf.turns - 1) {
         console.log('tour max atteint');
         return false;
       }

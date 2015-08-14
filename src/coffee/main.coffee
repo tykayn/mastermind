@@ -9,7 +9,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
     player: 1 # joueurs
     autoRun: 0 # lancer automatiquement les séquences
     randomGoal: 1 # choisir une séquence adverse aléatoire
-    debug: 1 # montrer infos de débug
+    debug: 0 # montrer infos de débug
     turns: 12 # essais du joueur
     sequenceLength: 4 # pions par séquence
     doubleColors: 1 # autoriser les couleurs doubles
@@ -54,7 +54,7 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   # ajouter à la séquence
   $scope.addSequence = (sequence)->
     newSeq = angular.copy(sequence)
-    if($scope.lengthLines is $scope.conf.turns)
+    if($scope.lengthLines is $scope.conf.turns-1)
       console.log('tour max atteint')
       return false
     if(MainCtrl.won)
