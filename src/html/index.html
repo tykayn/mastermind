@@ -27,14 +27,9 @@
 <body ng-app="myApp">
 
 <main ng-controller="MainCtrl">
-    <div class="pull-left" ng-show="MainCtrl.lines.length">
-        <div ng-show="MainCtrl.won" class="alert alert-success">
-            WOOT! vous avez gagné!
-        </div>
-        <div ng-show="MainCtrl.loose && !MainCtrl.won" class="alert alert-danger">
-            SACREBLEU! you loose!!
-        </div>
-    </div>
+    <div ng-include="'tpl/gameover_bataille.html'"></div>
+
+
 
     <!--[if lt IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please
@@ -42,25 +37,33 @@
         to improve your experience.
     </p><![endif]-->
     <div class="container">
-        <h1>
-            <i class="fa fa-book fa-2x"></i>
-            Mastermind
-            <div class="pull-right">
-                <div class="pion-line">
-                    <div class="pion-bloc clickable" ng-repeat="c in couleurs ">
-                        <div class=" pion {{c}}" ng-click="addColor(c)"></div>
+        <div class="row-fluid">
+            <div class="col-lg-4">
+                <div class="pull-left">
+                    <div class="pion-line">
+                        <div class="pion-bloc clickable" ng-repeat="c in couleurs.slice(0,4) ">
+                            <div class="fat pion {{c}}" ng-click="addColor(c)"></div>
+                        </div>
                     </div>
                 </div>
-                <!--<div class="pion violet"></div>-->
-                <!--<div class="pion red"></div>-->
-                <!--<div class="pion yellow"></div>-->
-                <!--<div class="pion blue"></div>-->
-                <!--<div class="pion green"></div>-->
-                <!--<div class="pion white"></div>-->
-                <!--<div class="pion black"></div>-->
-            </div>
 
-        </h1>
+            </div>
+            <div class="col-lg-4">
+                <h1>
+                    Mastermind
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <div class="pull-right">
+                    <div class="pion-line">
+                        <div class="pion-bloc clickable" ng-repeat="c in couleurs.slice(4,8) ">
+                            <div class="fat pion {{c}}" ng-click="addColor(c)"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <hr/>
 
@@ -69,10 +72,8 @@
                 <!--menu de jeu-->
                 <menu>
                     <div class="row-fluid">
-                        <button class="btn btn-primary" data-toggle="collapse" data-target="#regles">
-                            <i class="fa fa-question-circle"></i>
-                            règles du jeu
-                        </button>
+
+                        <div ng-include="'tpl/rules_bataille.html'"></div>
 
                         <!--<button class="btn btn-primary" ng-click="goPlayer()">-->
                         <!--<i class="fa fa-check-circle"></i>-->
@@ -153,12 +154,7 @@
                     </div>
 
                     <div class="well" ng-show="conf.debug">
-                        <!--<h2>debug </h2>-->
-                        <h3>
-                            séquence à trouver:
-                        </h3>
-                        <button data-toggle="collapse" data-target="#reponse_sequence_adverse">montrer</button>
-
+                        <button data-toggle="collapse" data-target="#reponse_sequence_adverse">montrer la solution</button>
                         <div id="reponse_sequence_adverse" class="collapse">
                             <div class="row-fluid pion-line" data-toggle="tooltip">
                                 <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
@@ -175,89 +171,15 @@
 
             </div>
             <div class="col-lg-9">
-                <div id="regles" class="collapse">
-                    <h2>Règles du jeu du Mastermind</h2>
 
-                    <h3>
-                        Saurez vous déduire la bonne combinaison de couleurs avant le dernier tour?
-                    </h3>
-                    Essayez des combinaisons en cliquant sur celles du menu de gauche, puis appuyez sur le bouton pour
-                    valider.<br/>
-                    à chaque tour, vous recevez une réponse vous indiquant le nombre de pions de bonne couleur bien
-                    placés, le nombre de pions de bonne couleur mais mal placés.<br/>
-                    Vous devez en déduire si vous avez des pions n'appartenant pas du tout à la séquence à trouver.<br/>
-                    En regardant les séquences précédentes et les scores qu'elles vous ont rapporté, vous pouvez deviner
-                    si une couleur a été mal placée par tâtonnements.
-                    <br>
-                    Une partie peut durer une dizaine de minute environ pour les débutants.<br>
-                    Que la force de l'esprit soit avec vous.
-
-                </div>
                 <div ng-include="'tpl/table.html'"></div>
-
             </div>
         </div>
 
         <div class="clearfix"></div>
         <div class="row">
-            <section>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>à faire:</h2>
-                    </div>
-                    <div class="col-lg-6">
-                        TODO dans le mode solo
-                        <ul>
-                            <li>retour des pions mal placés ne fonctionne pas</li>
-                            <li>faciliter le changement de couleurs par drag and drop</li>
-                            <li>"vider la séquence" à réparer</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        TODO dans l'autorun:
-                        <ul>
-                            <li>déduction des positions gagnantes en comparant avec emplacements similaires de pions les
-                                lignes comportant du bon score.
-                            </li>
-                            <li>la coloration de l'arrière plan pour les bons pions a réparer.</li>
-                        </ul>
+            <div ng-include="'tpl/notes.html'"></div>
 
-                        <h6>Plan d'analyse</h6>
-                        <ul>
-
-
-                            <li>si le score de pions mal placés et bon est faible,
-                                on augmente les chances des couleurs pas encore entrées
-                                d'être bonnes.
-                            </li>
-                            <li>le choix des prochaines couleurs se fait selon le plus haut score de couleur parmi
-                                l'arbre des chances
-                            </li>
-                        </ul>
-                        fait:
-                        <ul>
-                            <li>à chaque réponse de séquence, on attribue une probabilité d'être présent,
-                                bon et bien placé à chaque couleur
-                                entrée.
-                            </li>
-                            <li>chaque réponse de séquence réévalue l'arbre des chances par couleur.</li>
-                        </ul>
-                    </div>
-                </div>
-
-
-                <h2>
-                    Configurables:</h2>
-                <ul class="unstyled">
-                    <li>interdire plusieurs fois la même couleur</li>
-                    <li>autres couleurs
-                        <button class="btn btn-info" ng-click="altColors = !altColors">changer</button>
-                    </li>
-                    <li>debug</li>
-                    <li>mode solo</li>
-                    <li>mode autorun</li>
-                </ul>
-            </section>
             <div class="author">
                 made by
                 <a href="http://github.com/tykayn">tykayn</a>
@@ -276,6 +198,7 @@
     <div ng-include="'tpl/couleurs.html'"></div>
 </main>
 <!-- build:js scripts/plugins.js -->
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angularjs/angular.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -284,6 +207,7 @@
 <!-- build:js scripts/**.js --><!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="js/lib/ng-drag-n-drop.js"></script>
 <script src="js/app.js"></script>
 <script src="js/services/IA.js"></script>
 <script src="js/main.js"></script>

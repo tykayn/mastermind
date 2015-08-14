@@ -1,3 +1,3 @@
 var Mastermind;
 
-Mastermind = angular.module("myApp", []);
+Mastermind = angular.module("myApp", ['dndLists']);
