@@ -21,11 +21,8 @@
     <li class="padded-v">
         <div class="row fat">
             <div class="col-lg-2">ligne</div>
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 Séquence
-            </div>
-            <div class="col-lg-3">
-                Analyse
             </div>
             <div class="col-lg-1">
                 Mal placés
@@ -33,12 +30,12 @@
             <div class="col-lg-1">
                 Bons
             </div>
-            <div class="col-lg-1">
-                Score
-            </div>
-            <div class="col-lg-1">
-                diff
-            </div>
+            <!--<div class="col-lg-1">-->
+                <!--Score-->
+            <!--</div>-->
+            <!--<div class="col-lg-1">-->
+                <!--diff-->
+            <!--</div>-->
         </div>
     </li>
     <li ng-if="conf.debug" ng-repeat="l in MainCtrl.lines track by $index">
@@ -52,16 +49,13 @@
                 </button>
 
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="pion-line">
                     <div class="pion-bloc" ng-repeat="p in l.pions track by $index"
                          ng-class="{goodpart: sequenceAdverse[p.id -1] === p.color}">
                         <div class="pull-left pion {{p.color}}"></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-
             </div>
             <div class="col-lg-1">
                 <div>
@@ -73,17 +67,17 @@
                     {{result[$index].goods}}
                 </div>
             </div>
-            <div class="col-lg-1">
-                <div>
-                    {{ (result[$index].nearly * 0.5 + result[$index].goods *1) / conf.sequenceLength}}
-                </div>
-            </div>
-            <div class="col-lg-1">
-                <div>
-                    TODO
-                    <!--{{ (result[$index].nearly * 0.5 + result[$index].goods *1) / 4}}-->
-                </div>
-            </div>
+            <!--<div class="col-lg-1">-->
+                <!--<div>-->
+                    <!--{{ (result[$index].nearly * 0.5 + result[$index].goods *1) / conf.sequenceLength}}-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-lg-1">-->
+                <!--<div>-->
+                    <!--TODO-->
+                    <!--&lt;!&ndash;{{ (result[$index].nearly * 0.5 + result[$index].goods *1) / 4}}&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </li>
 </ul>
