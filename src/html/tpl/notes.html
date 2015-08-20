@@ -1,0 +1,64 @@
+<section>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                <button class="btn btn-info" data-toggle="collapse" data-target="#collapseTODO">
+                    à faire:
+                </button>
+
+            </h2>
+        </div>
+        <div id="collapseTODO" class="collapse">
+            <div class="col-lg-6">
+                TODO dans le mode solo
+                <ul>
+                    <li>retour des pions mal placés ne fonctionne pas</li>
+                    <li>faciliter le changement de couleurs par drag and drop</li>
+                    <li>"vider la séquence" à réparer</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                TODO dans l'autorun:
+                <ul>
+                    <li>déduction des positions gagnantes en comparant avec emplacements similaires de pions les
+                        lignes comportant du bon score.
+                    </li>
+                    <li>la coloration de l'arrière plan pour les bons pions a réparer.</li>
+                </ul>
+
+                <h6>Plan d'analyse</h6>
+                <ul>
+
+
+                    <li>si le score de pions mal placés et bon est faible,
+                        on augmente les chances des couleurs pas encore entrées
+                        d'être bonnes.
+                    </li>
+                    <li>le choix des prochaines couleurs se fait selon le plus haut score de couleur parmi
+                        l'arbre des chances
+                    </li>
+                </ul>
+                fait:
+                <ul>
+                    <li>à chaque réponse de séquence, on attribue une probabilité d'être présent,
+                        bon et bien placé à chaque couleur
+                        entrée.
+                    </li>
+                    <li>chaque réponse de séquence réévalue l'arbre des chances par couleur.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <h2>
+        Configurables:</h2>
+    <ul class="unstyled">
+        <li>interdire plusieurs fois la même couleur</li>
+        <li>autres couleurs
+            <button class="btn btn-info" ng-click="altColors = !altColors">changer</button>
+        </li>
+        <li>debug</li>
+        <li>mode solo</li>
+        <li>mode autorun</li>
+    </ul>
+</section>

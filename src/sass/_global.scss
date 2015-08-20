@@ -1,9 +1,21 @@
+body{
+  background: $grey;
+}
+main{
+  margin: 1em 0;
+  padding: 2em 0;
+  background: $white;
+}
 .pion{
   border-radius: 100%;
   display: inline-block;
   width: 2em;
   height: 2em;
   border: solid 5px $black;
+  &.fat{
+    width: 4em;
+    height: 4em;
+  }
   .goodpart &{
     border:solid 5px green;
   }
@@ -18,14 +30,23 @@
   height: 3em;
 //  border: solid 1px red;
   float: left;
-  padding: 0.5em;
+  padding: 0.25em 0 0 ;
+  .pion{
+    width: 2.5em;
+    height: 2.5em;
+  }
 }
 .goodpart{
 
   background: #adff2f;
   border-radius: 3px;
 }
-
+.row-hoverable{
+  padding: 0.5em 0;
+  &:hover{
+    background : $grey;
+  }
+}
 .violet{
   background: $violet;
 }
@@ -42,10 +63,21 @@
   background: $red;
 }.white{
   background: $white;
-}.black{
+}
+.black{
   background: $black;
+}
+.orange{
+  background: $orange;
+}
+.fuschia{
+  background: $fuschia;
 }
 
 .fat{
   font-weight: 800;
+}
+
+.nice{
+  color: $green;
 }

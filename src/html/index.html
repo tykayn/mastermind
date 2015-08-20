@@ -22,63 +22,192 @@
     <!--<link rel="stylesheet" href="styles/main.css">-->
     <link rel="stylesheet" href="css/main.css">
     <!-- endbuild -->
+
 </head>
 <body ng-app="myApp">
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please
-    <a href="http://browsehappy.com/">upgrade your browser</a>
-    to improve your experience.
-</p><![endif]-->
-<div class="container" ng-controller="MainCtrl">
-    <h1>
-        <i class="fa fa-book fa-3x"></i>
-        Mastermind
-        <div class="pull-right">
-            <div class="pion violet"></div>
-            <div class="pion red"></div>
-            <div class="pion yellow"></div>
-            <div class="pion blue"></div>
-            <div class="pion green"></div>
-            <div class="pion white"></div>
-            <div class="pion black"></div>
+
+<main ng-controller="MainCtrl">
+    <div ng-include="'tpl/gameover_bataille.html'"></div>
+
+
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a>
+        to improve your experience.
+    </p><![endif]-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="pull-left">
+                    <div class="pion-line">
+                        <div class="pion-bloc clickable" ng-repeat="c in couleurs.slice(0,4) ">
+                            <div class="fat pion {{c}}" ng-click="addColor(c)"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <h1 class="text-center">
+                    Mastermind
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <div class="pull-right">
+                    <div class="pion-line">
+                        <div class="pion-bloc clickable" ng-repeat="c in couleurs.slice(4,8) ">
+                            <div class="fat pion {{c}}" ng-click="addColor(c)"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </h1>
-    <div class="btn btn-primary" ng-click="goPlayer()">
-        <i class="fa fa-check-circle"></i>
-        Let's play
+
+        <hr/>
+
+        <div class="row-fluid">
+            <div class="col-lg-5">
+                <!--menu de jeu-->
+                <menu>
+                    <div class="row-fluid">
+<!--{{sequenceAdverse}}-->
+                        <div ng-include="'tpl/rules_bataille.html'"></div>
+
+                        <!--<button class="btn btn-primary" ng-click="goPlayer()">-->
+                        <!--<i class="fa fa-check-circle"></i>-->
+                        <!--Let's play-->
+                        <!--</button>-->
+                        <!--<a class="btn btn-primary"-->
+                        <!--ng-click="populateSequence()">-->
+                        <!--à vous de jouer-->
+                        <!--</a>-->
+
+                        <!--<button class="btn btn-primary"-->
+                                <!--ng-click="gagner();sequence = angular.copy(sequenceAdverse)">-->
+                            <!--gagner-->
+                        <!--</button>-->
+                        <button class="btn btn-primary" data-toggle="collapse" data-target="#regles">
+                            <i class="fa fa-question-circle"></i>
+                            règles du jeu
+                        </button>
+                        <button class="btn btn-primary"
+                                ng-click="sequence = randomSequence(); addSequence(sequence)">
+                            Random
+                        </button>
+                        <br/>
+                        <!--<small>-->
+                            <!--Construisez votre séquence de couleurs en cliquant sur les pions disponibles:-->
+                        <!--</small>-->
+
+                        <div class="row" >
+                            <div class="text-center" data-toggle="tooltip"
+                                 data-tooltip="choisissez votre séquence de couleur en cliquant sur les pions">
+                                <div class="pion-line">
+                                    <div class="pion-bloc"
+                                         dnd-draggable="c"
+                                         dnd-effect-allowed="move"
+                                         dnd-moved="couleurs.splice($index, 1)"
+                                         ng-repeat="c in couleurs "
+                                            >
+                                        <div class=" btn btn-primary pion pull-left {{c}}" ng-click="addColor(c)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div data-toggle="tooltip"
+                             data-tooltip="enlevez une couleur en cliquant dessus"
+                             class="well marged-v">
+                            Votre combinaison: {{sequence.length}} pions sur {{conf.sequenceLength}}
+                            <div class="clearfix"></div>
+                            <!--{{sequence}}-->
+                            <div class="clearfix"></div>
+                            <!--séquence choisie par le joueur-->
+                            <div class="pion-line " dnd-list="sequence">
+                                <div class="pion-bloc" ng-repeat="c in sequence ">
+                                    <div class=" btn btn-primary pull-left pion {{c.color}}"
+                                         ng-click="deleteColor(c.color)"></div>
+                                    <!--{{c.color}}-->
+                                </div>
+                            </div>
+                            <!--{{sequence}}-->
+                            <hr>
+                            <a
+                                    ng-hide="sequence.length < conf.sequenceLength"
+                                    class="btn btn-success btn-block"
+                                    ng-click="addSequence(sequence)">
+                                <i class="fa fa-check-circle"></i>
+                                valider
+                            </a>
+                        </div>
+                        <div class="alert alert-info" ng-show="sequence.length < 4">
+                            il faut choisir 4 pions pour valider la
+                            séquence
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div ng-show="sequence.length" class="row-fluid marged-v">
+                        <a class="pull-left btn btn-primary">
+                            <i class="fa fa-trash" ng-click="sequence = []"></i>
+                            vider
+                        </a>
+
+                    </div>
+
+                    <div class="well" ng-show="conf.debug">
+                        <button data-toggle="collapse" data-target="#reponse_sequence_adverse">montrer la solution
+                        </button>
+                        <div id="reponse_sequence_adverse" class="collapse">
+                            <div class="row-fluid pion-line" data-toggle="tooltip">
+                                <div class="pion-bloc" ng-repeat="c in sequenceAdverse track by $index">
+                                    <div class=" btn btn-primary pull-left pion {{c.color}}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>Config:</h2>
+                        Tours <input class="input" type="number" ng-model="conf.turns"/>
+                        <hr/>
+
+                    </div>
+                </menu>
+
+            </div>
+            <div class="col-lg-7">
+
+                <div ng-include="'tpl/table.html'"></div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div ng-include="'tpl/notes.html'"></div>
+
+            <div class="author">
+                made by
+                <a href="http://github.com/tykayn">tykayn</a>
+                with the self made yeoman angular-jeej generator. {{demo}}
+                <small>
+                    Visit me at
+                    <a href="http://twitter.com/tykayn">
+                        <i class="fa fa-twitter"></i>
+                        @tykayn
+                    </a>
+                </small>
+            </div>
+
+        </div>
     </div>
-    <hr/>
-
-    <div class="row-fluid">
-        <div class="col-lg-3">
-            <div ng-include="'tpl/menu.html'"></div>
-        </div>
-        <div class="col-lg-9">
-            <div ng-include="'tpl/table.html'" ng-controller="MainCtrl"></div>
-
-        </div>
-    </div>
-
-    <div class="clearfix"></div>
-    <div class="row">
-        <div class="author">
-            made by
-            <a href="http://github.com/tykayn">tykayn</a>
-            with the self made yeoman angular-jeej generator. {{demo}}
-            <small>
-                Visit me at
-                <a href="http://twitter.com/tykayn">
-                    <i class="fa fa-twitter"></i>
-                    @tykayn
-                </a>
-            </small>
-        </div>
-
-    </div>
-</div>
-
+    <div ng-include="'tpl/couleurs.html'"></div>
+</main>
 <!-- build:js scripts/plugins.js -->
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angularjs/angular.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -87,11 +216,13 @@
 <!-- build:js scripts/**.js --><!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-
+<script src="js/lib/ng-drag-n-drop.js"></script>
+<script src="js/app.js"></script>
 <script src="js/services/IA.js"></script>
 <script src="js/main.js"></script>
 <!-- endbuild --><!--[if lt IE 9]>
 <script src="bower_components/es5-shim/es5-shim.js"></script>
 <script src="bower_components/json3/lib/json3.min.js"></script><![endif]-->
+
 </body>
 </html>

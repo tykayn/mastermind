@@ -9,10 +9,12 @@ $dark: darken(mix($main-color, $grey), 70%);
 $light-main: mix($main-color, $white);
 
 $red: #CB2738;
-$green: #5BCA26;
-$blue: #5088FF;
-$yellow: #FFDC6E;
-$violet: #843AE0;
+$green: #6acd8b;
+$blue: #50afff;
+$yellow: #ffd551;
+$violet: #8650ff;
+$orange: #ff8c10;
+$fuschia: #e086d4;
 
 // overrides of libraries vars
 $default: mix($white, $grey);

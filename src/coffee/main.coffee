@@ -1,159 +1,19 @@
-# main module
-Mastermind = angular.module "myApp", []
-# service pour analyser les séquences
-Mastermind.service "AnalysePions", ()->
-  console.log('AnalysePions')
-  {
-  suggestedSequence : []
-# config à insérer
-  config: {}
-# suggérer une séquence
-# selon les plus hauts score de couleur parmi l'arbre des chances
-  suggestSequence: ()->
-    probas = []
-    # ranger par proba décroissante
-    # sortir les 4 premiers par défaut
-    for c in Object.keys(@tree)
-      laProba = @tree[c].proba
-      isBadColor = @tree[c].bad
-      if(isBadColor)
-        continue
-      if(!probas[laProba])
-        probas[laProba] = []
-      probas[laProba].push(@tree[c].name)
-    console.log('probas', probas, probas.sort())
-    sequenceAdviced = probas.slice(0,@config.sequenceLength)
-    console.log('sequenceAdviced', sequenceAdviced)
-    @suggestedSequence = sequenceAdviced
-    sequenceAdviced
-# définir la config
-  setConfig: (obj)->
-    @config = obj
-    console.log('@config' , @config.sequenceLength)
 
-
-#    faire un arbre des chances par couleur
-  makeTree: (colors)->
-    @tree = []
-    # attribuer 1 - 1/nombre de pions max par séquence à toutes les couleurs,
-    # elles sont toutes éligibles à gagner mais il y a plus de couleurs possibles
-    # que de pions par séquence (4 par défaut).
-    for c in colors
-      stats = {
-        name: c
-        proba: 1 - 1 / (@config.sequenceLength || 4)
-        inGood: 0
-        inNearly: 0
-        bad: 0
-        tried: 0
-        triedPositions: {
-          0:0
-          1:0
-          2:0
-          3:0
-          4:0
-        }
-      }
-      @tree[c] = stats
-    #    console.info('IA: tree was made',@tree)
-    @tree
-
-
-
-
-  #    faire un rendu lisible de l'arbre en ne donnant que la proba
-  dumpTree: ()->
-    dumpPhrase = 'Tree: '
-    console.log('@tree',@tree)
-    for c in Object.keys(@tree)
-      dumpPhrase += ' ' + @tree[c].name + ' ' + @tree[c].proba
-    #      console.log('c',c)
-    console.log(dumpPhrase)
-
-  #    mettre du bad à toutes les couleurs de la séquence
-  setBad: (sequence)->
-    console.log('rien de bon, on met du bad')
-    for c in sequence
-      @tree[c.color].bad++
-      @tree[c.color].proba = 0
-  #    ajouter de la proba à toutes les couleurs de la séquence
-  addProba: (points)->
-    console.info("add proba", @tree)
-    for k in Object.keys(@tree)
-      @tree[k].proba += points
-      console.info("add v.proba", @tree[k].proba)
-  # trouver les couleurs qui ne sont pas dans la séquence donnée
-  colorDiff : (sequence)->
-    colors = angular.copy(@config.couleurs)
-    simpleSequence = []
-    for c in sequence
-      simpleSequence.push(c.color)
-    # diff de couleurs
-    diff = $(colors).not(simpleSequence)
-    diff
-
-  ###
-  # attribuer des chances par couleur selon le résultat
-  ###
-  wonder: (result, sequence)->
-    # si le score de pions mal placés et bon est faible,
-    # on augmente les chances des couleurs pas encore entrées d'être bonnes.
-    if( result.goods is 0 )
-      if(result.nearly is 0)
-        # aucun pion de bon,
-        # mettre du bad aux couleurs mises
-        @setBad(sequence)
-        # ajouter des chances aux autres couleurs
-
-        return
-      # si ya la moitié des pions de mal placés,
-      # c'est que la moitié est bien placée
-      else if(result.nearly <= @config.sequenceLength / 2)
-        @addProba(0.5)
-
-      # baisser les probas aux couleurs mises
-
-
-      return
-    # tous les pions sont bons, mais mal placés
-    else if(result.goods + result.nearly is @config.sequenceLength)
-      console.info('tous les pions sont bons, mais mal placés')
-      # exclure les couleurs en dehors de la séquence
-      diff = @colorDiff(sequence)
-      # mettre à aucune proba sur les couleurs restantes
-      for c in diff
-        @tree[c].bad++
-        @tree[c].proba = 0
-      @addProba(1)
-    else if(result.goods >= 2)
-      @addProba(0.5)
-
-    for c in sequence
-#      console.info(c)
-      @tree[c.color].tried++
-      @tree[c.color].triedPositions[c.id]++
-
-    @suggestSequence()
-
-#    console.log('wondering on the result')
-  upTree: ->
-    @tree = ['up']
-    console.info('IA: tree was updated', @tree)
-    @tree
-  }
 Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($rootScope, $scope, IA)->
 
+  MainCtrl = this
   ###
     config globale
-    ###
+  ###
   $scope.conf = {
-    player: 0 # joueurs
-    autoRun: 1 # lancer automatiquement les séquences
-    debug: 1
-    turns: 10
-    sequenceLength: 4
-    doubleColors: 1
-    couleurs: ['yellow', 'violet', 'green', 'blue', 'red']
+    player: 1 # joueurs
+    autoRun: 0 # lancer automatiquement les séquences
+    randomGoal: 1 # choisir une séquence adverse aléatoire
+    debug: 0 # montrer infos de débug
+    turns: 12 # essais du joueur
+    sequenceLength: 4 # pions par séquence
+    doubleColors: 1 # autoriser les couleurs doubles
+    couleurs: ['yellow', 'violet', 'green', 'blue', 'red','orange','white','fuschia']
   }
   $scope.couleurs = $scope.conf.couleurs
   IA.setConfig($scope.conf)
@@ -163,43 +23,16 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   tableau des évaluations pour chaque séquence
   ###
   $scope.result = []
-  ###
-    évaluer la séquence
-    et donner ses stats de réponse
-    ###
-  $scope.evaluate = (sequence)->
-    goods = 0
-    nearly = 0
-    i = 0
-    for elem in sequence
-      if($scope.sequenceAdverse[i] is elem.color)
-        goods++
-      else if($scope.sequenceAdverse.indexOf(elem.color) != -1 )
-        nearly++
-      i++
-    evaluation = {
-      goods: goods,
-      nearly: nearly
-    }
-    # teste si on a gagné
-    if(evaluation.goods is $scope.conf.sequenceLength)
-      $scope.won = 1
-      return evaluation
-# teste si on a perdu
-    else if($scope.lines.length is $scope.conf.turns - 1)
-      $scope.loose = 1
-      return evaluation
-    # autrement le jeu continue
 
-    $scope.sequence = IA.wonder(evaluation, sequence)
-    IA.dumpTree()
-    evaluation
 
   # construction d'une séquence à ajouter
   $scope.sequence = []
-  $scope.won = 0 # a t on gagné?
-  $scope.loose = 0 # a t on perdu?
+  $scope.altColors = 0
+  MainCtrl.lines=[]
+  MainCtrl.won = 0 # a t on gagné?
+  MainCtrl.loose = 0 # a t on perdu?
   $scope.sequenceAdverse = ["blue", "yellow", "red", "green"]
+  $scope.MainCtrl = MainCtrl
 
   # vider toutes les séquences
   $scope.gagner = ()->
@@ -211,30 +44,75 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
       }
       $scope.sequence.push(obj)
     $scope.sequence
+
   # vider toutes les séquences
   $scope.emptyTable = ()->
     console.log('emptyTable')
-    $scope.lines=[]
+    MainCtrl.won=0
+    MainCtrl.lines=[]
+
   # ajouter à la séquence
   $scope.addSequence = (sequence)->
-    $scope.lengthLines = $scope.lines.length
-    if($scope.lengthLines >= $scope.conf.turns)
+    newSeq = angular.copy(sequence)
+    if($scope.lengthLines is $scope.conf.turns-1)
       console.log('tour max atteint')
       return false
-    #    console.log('add sequence')
-    lespions = angular.copy(sequence)
-    goods = $scope.evaluate(lespions)
+    if(MainCtrl.won)
+      console.log('vous avez déjà gagné')
+      return false
+#    sequence = angular.copy($scope.sequence)
+    console.log('addSequence', newSeq)
+    $scope.lengthLines = MainCtrl.lines.length
 
-
-    $scope.result[$scope.lengthLines] = goods
+    evaluation = $scope.evaluate(newSeq)
+    $scope.result[$scope.lengthLines] = evaluation
     obj =
       id: $scope.lengthLines
-      pions: lespions
-    #    console.log('lines', $scope.lines)
-    $scope.lines.push(obj)
-    #    console.log('lines après', $scope.lines)
-    goods = $scope.evaluate(lespions)
+      pions: newSeq
+#    console.log('lines', MainCtrl.lines)
+    MainCtrl.lines.push(obj)
+#    console.log('lines après', MainCtrl.lines)
+    evaluation
 
+  ###
+  évaluer la séquence
+  et donner ses stats de réponse
+  ###
+  $scope.evaluate = (sequence)->
+    goods = 0
+    nearly = 0
+    i = 0
+    couleursAdverses = []
+    # faire un tableau de chaines
+    for elem in $scope.sequenceAdverse
+      couleursAdverses.push(elem.color)
+
+    console.log('___________ couleursAdverses',couleursAdverses)
+    for elem in sequence
+      console.log('___________ elem',elem.color, couleursAdverses.indexOf(elem.color) )
+      if(couleursAdverses[i] is elem.color)
+        goods++
+      else if(couleursAdverses.indexOf(elem.color) != -1)
+        nearly++
+      i++
+    evaluation = {
+      goods: goods,
+      nearly: nearly
+    }
+    # teste si on a gagné
+    if(evaluation.goods is $scope.conf.sequenceLength)
+      MainCtrl.won = 1
+      console.log('gagné')
+      return evaluation
+    # teste si on a perdu
+    else if(MainCtrl.lines.length is $scope.conf.turns - 1)
+      MainCtrl.loose = 1
+      return evaluation
+    # autrement le jeu continue
+    if($scope.conf.autoRun)
+      $scope.sequence = angular.copy(IA.wonder(evaluation, sequence))
+      IA.dumpTree()
+    evaluation
   # ajouter une séquence au hasard
   $scope.addRandomSequence = ()->
     seq = $scope.randomSequence()
@@ -270,25 +148,54 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
   #    $scope.sequence = []
 
 
+
   # vider la séquence
   $scope.emptySequence = ()->
+    console.info('vider la séquence')
     $scope.lengthLines = 0
     $scope.sequence = []
+    MainCtrl.lengthLines = 0
+    MainCtrl.sequence = []
+
+  # copier une séquence du tableau d'historique
+  # id : id de ligne dans l'historique
+  $scope.setSequence = (id)->
+    seq = angular.copy(MainCtrl.lines[id].pions)
+    console.log('setSequence', seq)
+    $scope.sequence = seq
+
+  # vérif que la couleur n'est pas déjà présente dans la séquence
+  $scope.colorUnique =(color)->
+    for pion in $scope.sequence
+      if(pion.color is color)
+        console.log('couleur non unique', color)
+        return false
+    true
+
   # ajouter a la séquence
   $scope.addColor = (color)->
-# si y'a déjà le max de couleurs, enlever la première
+    if(!$scope.colorUnique(color))
+#      $scope.deleteColor(color)
+      return false
+    # si y'a déjà le max de couleurs, enlever la première
     if($scope.sequence.length is $scope.conf.sequenceLength)
-      $scope.sequence.splice(1, 1)
+      $scope.sequence.splice(0, 1)
     #changer les id précédents
     newId = 0
     for pion in $scope.sequence
       pion.id = newId
       newId++
-    newId++
+#    newId++
     $scope.sequence.push({id: newId, color: color})
   # enlever à la séquence
-  $scope.deleteColor = (index)->
-    console.log('enlever', index, $scope.sequence[index])
+  $scope.deleteColor = (color)->
+    counter = 0
+    for pion in $scope.sequence
+      if(pion.color is color)
+        index = counter
+        lepion = pion
+      counter++
+    console.log('enlever', color, index,$scope.sequence[index])
     $scope.sequence.splice(index, 1)
 
   # config pour joueur sans automatisation
@@ -298,13 +205,30 @@ Mastermind.controller "MainCtrl", ['$rootScope', '$scope', 'AnalysePions', ($roo
 
   IA.makeTree($scope.couleurs)
 
-  $scope.line = []
-  $scope.lines = []
-  # lancer l'autorun
-  if($scope.conf.autoRun)
-    console.log('autoRun')
-    for i in [0..10]
-      if(!$scope.won)
-#        $scope.addSequence(IA.suggestedSequence);
-        $scope.addRandomSequence();
+  $scope.init = ->
+    if($scope.conf.randomGoal)
+      $scope.sequenceAdverse = $scope.randomSequence()
+      console.log('but aléatoire', $scope.sequenceAdverse)
+
+    # gestion de l'autorun
+    # avec méthodes pour suggérer une séquence
+    # TODO mettre en place la combinaison suggérée
+    $scope.autoRun = ()->
+      if(!$scope.conf.autoRun)
+        console.log('autoRun désactivé')
+        return
+      console.log('autoRun pour '+$scope.conf.turns+' tours')
+      #        $scope.addRandomSequence();
+      for i in [1..$scope.conf.turns]
+        if(!$scope.won)
+          suggestion = IA.suggestSequence()
+          console.log('suggestion',suggestion)
+          $scope.addSequence(suggestion);
+
+    # lancer l'autorun
+    if($scope.conf.autoRun)
+      $scope.autoRun()
+  # démarrer tout
+  $scope.init()
+
 ]

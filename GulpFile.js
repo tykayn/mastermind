@@ -9,6 +9,8 @@ var gulp = require("gulp"),
     reload = browserSync.reload,
     karma = require('karma').server,
     documentation = require('documentation');
+var istanbul = require('gulp-istanbul');
+var mocha = require('gulp-mocha');
 
 // paths
 var testFiles = [
@@ -20,6 +22,7 @@ var sources = {
     sass: "src/sass/*.scss",
     html: "src/html/*.html",
     htmls: "src/html/**/*.html",
+    tests: "src/tests/**/*.js",
     js: "src/scripts/*.js",
     jsAll: "src/scripts/**/*.js",
     coffee: "src/coffee/*.coffee",
@@ -50,15 +53,15 @@ gulp.task('test', function (done) {
     }, done);
 });
 gulp.task('cover', function (done) {
-    gulp.src([destinations.js, destinations.jsAll])
-        .pipe(plugins.istanbul()) // Covering files
-        .pipe(gulp.dest('dist/covering'))
-        .pipe(plugins.istanbul.hookRequire()) // Force `require` to return covered files
+    console.log('destinations',destinations.js+'main.js');
+    gulp.src([sources.jsAll, destinations.js+'main.js'])
+        .pipe(istanbul()) // Covering files
+        .pipe(istanbul.hookRequire()) // Force `require` to return covered files
         .on('finish', function () {
-            gulp.src(['src/test/**/*.js'])
-                .pipe(plugins.mocha())
-                .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
-                //.pipe(istanbul.enforceThresholds({thresholds: {global: 20}})) // Enforce a coverage of at least 90%
+            gulp.src([sources.tests])
+                .pipe(mocha())
+                .pipe(istanbul.writeReports()) // Creating the reports after tests runned
+                .pipe(istanbul.enforceThresholds({thresholds: {global: 20}})) // Enforce a coverage of at least 90%
                 .on('end', done);
         });
 });

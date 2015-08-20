@@ -1,0 +1,13 @@
+<div class="pull-left" ng-show="MainCtrl.lines.length">
+    <div ng-show="MainCtrl.won" class="alert alert-success">
+        <img class="padded" src="img/clap.gif" alt="clap">
+        <br>
+        <h1>
+        WOOT! vous avez gagné!
+        </h1>
+        <img class="padded" src="http://www.placecage.com/gif/284/196" alt="clap">
+    </div>
+    <div ng-show="MainCtrl.loose && !MainCtrl.won" class="alert alert-danger">
+        SACREBLEU! you loose!!
+    </div>
+</div>
