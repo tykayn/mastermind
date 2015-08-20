@@ -131,6 +131,6 @@ gulp.task('doc', function () {
         .pipe(plugins.jsdoc(destinations.doc + 'doc/main-documentation'))
         .pipe(reload({stream: true}));
 });
-gulp.task("default", ["coffee2js", "sass2css", "lint", "html", "browser-sync", "watch", "tdd", "doc"], function () {
+gulp.task("default", ["coffee2js", "sass2css", "lint", "html", "browser-sync", "watch", "tdd"], function () {
     console.log("spartiiiii");
 });
